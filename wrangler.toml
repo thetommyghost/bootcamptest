@@ -1,18 +1,13 @@
-# wrangler.toml — Cloudflare Pages config for the Bootcamp Interactive Map
+# wrangler.toml — Cloudflare Pages config for kawader-bootcamp-app
+# Live: https://kawader-bootcamp-app.pages.dev
 #
-# Trainee setup: see docs/deployment.md. Replace the CHANGE_ME values below.
-#
-# Quick reminder:
-#   1. npx wrangler pages project create <your-project-name> --production-branch main
-#   2. npx wrangler kv:namespace create NOTES_KV
-#   3. Paste the namespace `id` here, then `npm run deploy`.
+# This project was provisioned 2026-05-22. The KV namespace is bound below.
+# If you want a fresh KV namespace (e.g. for a fork), see docs/deployment.md.
 
-name = "CHANGE_ME-your-pages-project-name"   # e.g. "bootcamp-map-trainee"
+name = "kawader-bootcamp-app"
 pages_build_output_dir = "."
 compatibility_date = "2025-04-01"
 
 [[kv_namespaces]]
 binding = "NOTES_KV"
-id = "CHANGE_ME-kv-namespace-id-from-wrangler-output"
-# Optional preview namespace (only if you want a separate preview env):
-# preview_id = "CHANGE_ME-preview-namespace-id"
+id = "e31b5b7202814dba8700b3e8d8b55b7c"  # title in dashboard: BOOTCAMP_APP_NOTES

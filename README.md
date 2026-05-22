@@ -1,85 +1,80 @@
-# Bootcamp Interactive Map & Game
+# kawader-bootcamp-app
 
-<div dir="rtl" lang="ar">
+KAWADER Bootcamp 2026 — an interactive map, a scouting tool, and (work in progress) the **in-camp app** participants and team will use throughout the August 2026 camp at the Edward Said Cultural Institute in Birzeit.
 
-## أهلاً وسهلاً
+## Where we are
 
-هذا المشروع هو الخريطة التفاعلية وتجربة اللعب المرافقة لمعسكر كوادر السينمائي 2026، والذي سيُعقد في مؤسّسة إدوارد سعيد الثقافية في بيرزيت. الهدف من المشروع تمكين المشاركين في المعسكر من استكشاف الموقع بصرياً قبل وصولهم، التعرّف على الفضاءات الـ18 التي ستحتضن النشاطات، وتسجيل ملاحظاتهم الجماعية حول كل فضاء.
+What's in this repo today is a polished foundation: a satellite map and a canvas-based venue twin with shared notes. It works, it's accessible, it ships at Lighthouse 99 / 96 / 100 / 100. But it's a **scouting tool**. The next chapter is turning it into the tool a camper opens on their phone every day in August, the tool a mentor uses to see where the cohort is at, the tool that becomes the camper's portfolio at the end.
 
-تم تطوير المشروع على ثلاثة إصدارات (v1، v2، v3) خلال شهر أيار 2026، ووصل حالياً إلى نسخة v3 Round 4. النسخة الإنتاجية الحالية تعمل على شبكة كلاودفلير عبر الرابط الموجود في قسم Live URLs أدناه.
+The trainee picking this up is a collaborator on that next chapter, not a maintainer of what already exists.
 
-دورك في هذه المرحلة هو استلام المشروع، فهم بنيته، وإكمال المهام المؤجّلة الموثّقة في `docs/first-tasks.md`. لا حاجة لمعرفة سابقة بأطر العمل الحديثة (React/Vue) لأنّ المشروع مبنيٌّ بـ HTML/CSS/JavaScript خام بدون أي خطوة بناء. ابدأ بقراءة `AGENTS.md` ثم `docs/gotchas.md`، وبعدها افتح اللعبة محلياً عبر الأمر في قسم Quick Start.
+## Live URLs
 
-</div>
+| | |
+|---|---|
+| **Production (current scouting tool)** | https://kawasist-internal.pages.dev/bootcamp-scout/edward-said/ |
+| **This project's staging** | https://kawader-bootcamp-app.pages.dev (provisioned 2026-05-22, deploys from `main`) |
+| **GitHub repo** | https://github.com/management-art/kawader-bootcamp-app |
+| **Notion brief** | https://www.notion.so/Bootcamp-Interactive-Map-Game-Trainee-Handoff-368ce6a70d69812c8469c77369784236 |
 
----
+## What this folder is
 
-## English overview
+A self-contained, git-initialized working copy of the project. ~86 MB on disk (assets included so it runs offline with zero setup). Everything you need to read, run, modify, and deploy.
 
-This is the interactive scouting map and venue-twin game for **KAWADER Film Camp 2026**, held at the Edward Said Cultural Institute in Birzeit. Campers explore the 18 activity zones visually, drop collaborative notes per zone, and orient themselves before arriving on site.
+| Path | What |
+|---|---|
+| `src/map/index.html` | Leaflet satellite map with 18 zones + 86 photos |
+| `src/simulation/index.html` | Canvas-based venue twin (walk around with WASD, drop notes) |
+| `assets/` | Photos, mockups, satellite tiles, venue art, audio |
+| `functions/api/notes/index.js` | Cloudflare Pages Function (shared notes API) |
+| `tools/bootcamp-scout/` | Python helpers (regenerate venue background, mockups) |
+| `tests/smoke.mjs` | Playwright skeleton |
+| `docs/` | Project intelligence (read these) |
+| `AGENTS.md` | Brief for any AI coding agent opened on the repo |
 
-You're picking up a **fully-shipped V3 Round 4** build (Lighthouse 99/96/100/100). The job is **maintain + extend**, not start over.
+## Where to go in the docs
+
+| File | When |
+|---|---|
+| `AGENTS.md` | Opening the repo in OpenCode or another AI editor. Sets up the agent. |
+| `docs/directions.md` | Thinking about what to build next. The creative-space doc. |
+| `docs/anchor-tasks.md` | Want a concrete thing to chew on while you find your footing. |
+| `docs/architecture.md` | How map + simulation + notes fit together today. |
+| `docs/gotchas.md` | Before touching the avatar walk cycle or anything sprite-related. |
+| `docs/deployment.md` | How the existing Cloudflare project + KV are wired. |
+| `docs/notes-schema.md` | The API shape if you're extending the notes layer. |
+| `docs/planning/` | Original v1 → v3 R4 planning archive. Historical context. |
 
 ## Quick start
 
 ```bash
-# 1. Serve the folder
-cd /Users/Kawader/Kawader/Handoffs/bootcamp-interactive-map
+git clone https://github.com/management-art/kawader-bootcamp-app.git
+cd kawader-bootcamp-app
 python3 -m http.server 8765
-
-# 2. Open in browser
-open http://127.0.0.1:8765/src/simulation/index.html   # the game
-open http://127.0.0.1:8765/src/map/index.html          # the map
-
-# 3. Walk around: WASD or arrow keys. Click any waypoint to teleport.
-# 4. Drop a team note: press N
+open http://127.0.0.1:8765/src/simulation/index.html
 ```
 
-> **Note:** The shared notes feature talks to `/api/notes`, which only runs in production. Locally, notes save to `localStorage` only — that's expected.
+Walk around with WASD. Click waypoints to teleport. Press `N` to drop a note.
 
-## Live URLs (current production, owned by Ameer)
+> Local notes save to `localStorage` only. The Cloudflare KV sync only kicks in when running on the live URL.
 
-- **Map:** https://kawasist-internal.pages.dev/bootcamp-scout/edward-said/
-- **Simulation / game:** https://kawasist-internal.pages.dev/bootcamp-scout/edward-said/simulation/
+## Deploying
 
-Your own deploy (created in `docs/deployment.md`) will live at a separate Cloudflare Pages URL.
+```bash
+npm install
+npx wrangler login        # one-time, opens browser
+npm run deploy            # = wrangler pages deploy . --project-name kawader-bootcamp-app
+```
 
-## What's in this folder
-
-| Path | What |
-|---|---|
-| `src/` | The two HTML apps (map + simulation). Single-file, no build step. |
-| `assets/` | All photos, mockups, satellite tiles, venue art, audio (~86 MB). |
-| `functions/` | One Cloudflare Pages Function for shared notes (KV-backed). |
-| `tools/` | Python scripts that regenerate venue background + mockups. |
-| `tests/` | Playwright smoke test skeleton. |
-| `docs/` | **Read these.** Architecture, deployment, gotchas, first tasks, planning archive. |
-| `AGENTS.md` | Brief for your coding agent. Read first when starting a coding session. |
-| `CHANGELOG.md` | Version history v1 → v3 R4. |
-
-## Where to go next
-
-1. **`AGENTS.md`** — Tells your AI agent what it needs to know.
-2. **`docs/gotchas.md`** — Bugs we already paid for. Don't repeat them.
-3. **`docs/architecture.md`** — How map + simulation + notes fit together.
-4. **`docs/first-tasks.md`** — Three starter tasks ranked easy → harder.
-5. **`docs/deployment.md`** — When you're ready to push your own version live.
+The Cloudflare Pages project + KV namespace are already provisioned. `wrangler.toml` is filled in. First deploy publishes to `https://kawader-bootcamp-app.pages.dev`.
 
 ## Contact
 
-- **Project owner:** Ameer Zabaneh
-- **Email:** management@kawader-cine.com · info@kawader-cine.com
-- **Notion handoff page (bilingual):** _added below after the page is created_
-
-## Notion handoff page
-
-https://www.notion.so/Bootcamp-Interactive-Map-Game-Trainee-Handoff-368ce6a70d69812c8469c77369784236
-
-Bilingual (Arabic narrative + English technical). The Notion page is the project's outward-facing brief; this README is the engineer-facing one.
+**Ameer Zabaneh** · management@kawader-cine.com · info@kawader-cine.com
 
 ## License & credits
 
-- Avatar sprite: OpenGameArt.org "2D RPG Character Walk Spritesheet" (CC0). See `src/simulation/assets/CREDITS.md`.
-- Ambient audio: Freesound.org CC0 tracks. See `assets/audio/CREDITS.md`.
+- Avatar sprite: OpenGameArt.org (CC0). See `src/simulation/assets/CREDITS.md`.
+- Ambient audio: Freesound.org (CC0). See `assets/audio/CREDITS.md`.
 - Scout photos + mockups: KAWADER Art Productions, 2026.
-- Map tiles: Esri World Imagery (educational/non-commercial). Switch tile provider before any external launch.
+- Map tiles: Esri World Imagery (educational/non-commercial). Swap before any external launch.

@@ -1,6 +1,14 @@
 # Changelog
 
-All notable changes to the Bootcamp Interactive Map & Game.
+All notable changes to kawader-bootcamp-app.
+
+## Project graduation — 2026-05-22
+
+Scope shift from "scouting twin" to "in-camp app for August 2026". Folder + GitHub repo + Cloudflare Pages project renamed to `kawader-bootcamp-app`. Notion brief restructured. `docs/directions.md` introduced as the open creative-space doc. `docs/first-tasks.md` replaced by `docs/anchor-tasks.md` (2 anchors instead of 3 prescribed). Foundation (v3 Round 4) preserved unchanged; v4 work begins from here.
+
+- New GitHub repo: https://github.com/management-art/kawader-bootcamp-app
+- New Cloudflare Pages project: https://kawader-bootcamp-app.pages.dev
+- New KV namespace: `BOOTCAMP_APP_NOTES` (id `e31b5b7202814dba8700b3e8d8b55b7c`, bound as `NOTES_KV`)
 
 ## v3 Round 4 — 2026-05-14
 

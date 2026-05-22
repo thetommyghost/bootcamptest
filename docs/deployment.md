@@ -1,165 +1,94 @@
-# Deployment guide
+# Deployment
 
-This walks you through setting up **your own** Cloudflare Pages project from scratch. You'll get a unique URL (e.g. `bootcamp-map-trainee.pages.dev`) that you control, separate from the production URL.
+The Cloudflare Pages project, KV namespace, and GitHub repo are all already provisioned. Deploying is one command.
 
-## One-time setup (~15 minutes)
+## What's wired up
 
-### Step 1 — Install wrangler
+| Resource | Value |
+|---|---|
+| GitHub repo | https://github.com/management-art/kawader-bootcamp-app (private) |
+| Cloudflare Pages project | `kawader-bootcamp-app` |
+| Staging URL | https://kawader-bootcamp-app.pages.dev |
+| KV namespace title | `BOOTCAMP_APP_NOTES` |
+| KV namespace id | `e31b5b7202814dba8700b3e8d8b55b7c` |
+| KV binding in code | `env.NOTES_KV` |
 
-```bash
-npm install     # installs wrangler from package.json devDependencies
-npx wrangler --version
-# Expected: wrangler 3.x or 4.x
-```
+The KV id is already in `wrangler.toml`. You don't need to set anything up.
 
-If `npm install` complains, install wrangler globally instead:
-
-```bash
-npm install -g wrangler
-wrangler --version
-```
-
-### Step 2 — Log into Cloudflare
+## Deploying
 
 ```bash
-npx wrangler login
+npm install                  # one-time, installs wrangler + playwright
+npx wrangler login           # one-time, opens browser to authenticate
+npm run deploy               # = wrangler pages deploy . --project-name kawader-bootcamp-app
 ```
 
-A browser tab opens. Approve. Ameer will have invited you to the Kawader Cloudflare team (or given you a personal account) — pick that one. Verify:
+Each deploy gets a unique preview URL (`<hash>.kawader-bootcamp-app.pages.dev`) and updates the production alias.
+
+## Verifying
+
+After your first deploy:
 
 ```bash
-npx wrangler whoami
+curl -s https://kawader-bootcamp-app.pages.dev/src/simulation/index.html | head -3
 ```
 
-### Step 3 — Create the Pages project
+Then open the simulation in a browser, press `N`, drop a note. Refresh — the note should still be there. If it isn't, the KV binding in the Cloudflare dashboard might not be linked. Check **Pages → kawader-bootcamp-app → Settings → Functions → KV namespace bindings** and confirm `NOTES_KV` points to namespace id `e31b5b7202814dba8700b3e8d8b55b7c`.
 
-Pick a project name. Suggestion: `bootcamp-map-<yourname>` so it doesn't collide with the production project.
+> Cloudflare requires KV bindings to be set in both `wrangler.toml` **and** the dashboard for Pages Functions. The first deploy auto-creates this binding from `wrangler.toml`. If it doesn't, set it manually once.
+
+## Local development
+
+Two options:
 
 ```bash
-npx wrangler pages project create bootcamp-map-trainee --production-branch main
+# Static-only (notes save to localStorage, no KV sync)
+python3 -m http.server 8765
+open http://127.0.0.1:8765/src/simulation/index.html
+
+# Full stack with KV emulator (notes round-trip the function)
+npx wrangler pages dev . --kv NOTES_KV
+# then open http://localhost:8788/src/simulation/index.html
 ```
 
-Note the output URL — that's your live preview address.
-
-### Step 4 — Create the KV namespace for notes
-
-```bash
-npx wrangler kv:namespace create NOTES_KV
-```
-
-Output looks like:
-
-```
-🌀 Creating namespace with title "bootcamp-interactive-map-NOTES_KV"
-✨ Success!
-Add the following to your configuration file:
-[[kv_namespaces]]
-binding = "NOTES_KV"
-id = "abc123def456..."
-```
-
-**Copy that `id` value.** You'll plug it into `wrangler.toml` next.
-
-### Step 5 — Update `wrangler.toml`
-
-Open `wrangler.toml` in the repo root. Replace the `CHANGE_ME` markers:
-
-```toml
-name = "bootcamp-map-trainee"                # ← your project name from Step 3
-pages_build_output_dir = "."
-compatibility_date = "2025-04-01"
-
-[[kv_namespaces]]
-binding = "NOTES_KV"
-id = "abc123def456..."                       # ← from Step 4 output
-```
-
-Optional: also create a preview namespace if you want a separate `preview` environment:
-
-```bash
-npx wrangler kv:namespace create NOTES_KV --preview
-# then add: preview_id = "xyz789..." under [[kv_namespaces]]
-```
-
-### Step 6 — Deploy
-
-```bash
-npm run deploy
-# = npx wrangler pages deploy . --project-name bootcamp-map-trainee
-```
-
-You'll get a URL like `https://abc1234.bootcamp-map-trainee.pages.dev`. The `.pages.dev` root URL is your stable production alias.
-
-### Step 7 — Verify the deploy
-
-Open your URL and walk through:
-
-```
-https://bootcamp-map-trainee.pages.dev/src/simulation/index.html
-```
-
-Test that:
-- Avatar walks (WASD)
-- Click teleports
-- Press N → note saves (check Cloudflare dashboard → Workers KV → your namespace → workspace key `edward-said`)
-- Refresh — note is still there (proves KV round-trip worked, not just `localStorage`)
-
-If the `N` note doesn't survive a refresh, your KV binding isn't wired. Check:
-
-```bash
-npx wrangler pages deployment list --project-name bootcamp-map-trainee
-# Then in the Cloudflare dashboard: Pages → your project → Settings → Functions → KV namespace bindings
-# Ensure NOTES_KV is bound to your namespace ID.
-```
-
-## Day-to-day workflow
-
-After the one-time setup, deploying is one command:
-
-```bash
-npm run deploy
-```
-
-Each deploy gets a unique preview URL (`<commit-hash>.bootcamp-map-trainee.pages.dev`) and updates the production alias.
+`wrangler pages dev` is the right choice when you're debugging anything involving `/api/notes`.
 
 ## Rolling back
 
 ```bash
-npx wrangler pages deployment list --project-name bootcamp-map-trainee
-# Pick a previous deployment hash
-npx wrangler pages deployment tail <deployment-id>
+npx wrangler pages deployment list --project-name kawader-bootcamp-app
 ```
 
-Or use the Cloudflare dashboard → Pages → your project → "Rollback" button.
+Pick a previous deployment hash and use the Cloudflare dashboard's Rollback button on it.
 
-## Custom domain (optional, deferred)
+## Custom domain (optional)
 
-If you want `map.bootcamp.kawader-cine.com` instead of `.pages.dev`:
+If you want `bootcamp.kawader-cine.com` instead of `.pages.dev`:
 
-1. Cloudflare dashboard → your project → Custom domains → Add.
-2. Add a CNAME record pointing to `bootcamp-map-trainee.pages.dev`.
+1. Cloudflare dashboard → Pages → kawader-bootcamp-app → Custom domains → Add.
+2. Add a CNAME record pointing to `kawader-bootcamp-app.pages.dev`.
 3. Wait for SSL provisioning (~5 min).
 
-Don't do this until Ameer asks — the `.pages.dev` URL is fine for trainee work.
+Don't do this until Ameer asks. The `.pages.dev` URL is fine for development and even for sharing with campers during the camp.
 
-## Local testing without deploying
+## Forking the KV namespace (only if you need an isolated dev environment)
 
-You can run `wrangler pages dev` to test the Pages Function locally:
+If you want a personal KV that doesn't mix with the shared staging notes, create your own:
 
 ```bash
-npx wrangler pages dev . --kv NOTES_KV
-# Then open http://localhost:8788/src/simulation/index.html
-# Notes will save to a local KV emulator, not your real KV.
+npx wrangler kv namespace create MY_BOOTCAMP_NOTES
+# Copy the id from the output, then edit wrangler.toml:
+# id = "<your-new-id>"
 ```
 
-This is useful when you're debugging the `/api/notes` endpoint without burning real KV writes.
+Then redeploy. Don't commit that change to `main` — keep it on a personal branch.
 
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
 | `wrangler login` opens but page won't load | VPN / proxy interfering | Disable VPN, retry |
-| `kv_unavailable` in browser console | NOTES_KV binding missing | Re-check Step 5 + Cloudflare dashboard bindings |
-| Notes save locally but disappear in another browser | KV not bound, hitting localStorage only | Same as above |
-| `404 on /api/notes` | Function not deployed (wrong folder layout) | `functions/` must be at repo root, not under `src/` |
-| Avatar walks but no photos load | You served only `src/` instead of repo root | Always `python3 -m http.server` from repo root |
+| `kv_unavailable` in browser console | Dashboard binding missing | Pages → Settings → Functions → KV bindings (see above) |
+| Notes save locally but disappear in another browser | Same as above | Same fix |
+| `404 on /api/notes` | Function not deployed | `functions/` must be at repo root, not under `src/` |
+| Avatar walks but no photos load | You served `src/` instead of repo root | Always `python3 -m http.server` from repo root |

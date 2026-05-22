@@ -1,17 +1,18 @@
 {
-  "name": "bootcamp-interactive-map",
-  "version": "0.1.0",
+  "name": "kawader-bootcamp-app",
+  "version": "0.2.0",
   "private": true,
-  "description": "KAWADER Bootcamp 2026 — interactive scouting map and venue-twin game (Edward Said Cultural Institute, Birzeit).",
+  "description": "KAWADER Bootcamp 2026 — interactive map, scouting tool, and (WIP) in-camp app for participants and team. Edward Said Cultural Institute, Birzeit. August 2026.",
+  "repository": "https://github.com/management-art/kawader-bootcamp-app",
   "scripts": {
     "serve": "python3 -m http.server 8765",
-    "deploy": "wrangler pages deploy . --project-name $(grep '^name' wrangler.toml | head -1 | sed 's/.*\"\\(.*\\)\".*/\\1/')",
+    "deploy": "wrangler pages deploy . --project-name kawader-bootcamp-app",
     "dev": "wrangler pages dev . --kv NOTES_KV",
     "smoke": "node tests/smoke.mjs",
     "whoami": "wrangler whoami"
   },
   "devDependencies": {
-    "wrangler": "^3.0.0",
+    "wrangler": "^4.0.0",
     "playwright": "^1.40.0"
   }
 }
