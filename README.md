@@ -73,7 +73,9 @@ Your own deploy (created in `docs/deployment.md`) will live at a separate Cloudf
 
 ## Notion handoff page
 
-<!-- NOTION_LINK_PLACEHOLDER -->
+https://www.notion.so/Bootcamp-Interactive-Map-Game-Trainee-Handoff-368ce6a70d69812c8469c77369784236
+
+Bilingual (Arabic narrative + English technical). The Notion page is the project's outward-facing brief; this README is the engineer-facing one.
 
 ## License & credits
 
