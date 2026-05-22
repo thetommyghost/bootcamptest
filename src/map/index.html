@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0" />
+<meta name="theme-color" content="#4a7c3a" />
+<meta name="description" content="KAWADER Bootcamp location-scout interactive map — Edward Said Cultural Institute, Birzeit. 82 photos across 18 zones with activity notes." />
+<meta property="og:title" content="KAWADER Bootcamp · Location Scout · Edward Said Cultural Institute" />
+<meta property="og:description" content="Interactive scout map: 82 photos · 18 zones · 5 neighbourhood partners · sun-path overlay." />
+<meta property="og:type" content="website" />
+<title>KAWADER Bootcamp · Location Scout · Edward Said Cultural Institute, Birzeit</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%234a7c3a'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-family='serif' font-size='38' font-weight='700' fill='%23fdfaf2' dominant-baseline='middle'%3EK%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<style>
+:root{
+  --bg:#f6f1e6;
+  --paper:#fdfaf2;
+  --ink:#1f1c17;
+  --ink-2:#56514a;
+  --line:#d8cfbf;
+  --line-2:#ebe2cf;
+  --accent:#4a7c3a;
+  --accent-warm:#c97b3a;
+  --sun:#e2a64a;
+  --gold:#b88a32;
+  --serif:'Cormorant Garamond', 'IBM Plex Sans Arabic', serif;
+  --sans:'Inter', 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
+  --ar:'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
+  --header-h:74px;
+  --footer-h:48px;
+  --rail-w:296px;
+  --panel-w:440px;
+  --shadow-md:0 6px 22px rgba(20,18,12,.10);
+  --shadow-lg:0 16px 40px rgba(20,18,12,.18);
+  --safe-top:env(safe-area-inset-top, 0px);
+  --safe-bottom:env(safe-area-inset-bottom, 0px);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  margin:0; color:var(--ink); background:var(--bg);
+  font-family:var(--sans); font-size:14px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow:hidden;
+  overscroll-behavior:none;
+}
+.ar{font-family:var(--ar); direction:rtl; unicode-bidi:isolate; display:inline-block;}
+button{font-family:inherit; touch-action:manipulation;}
+
+/* ---------- top header ---------- */
+header.topbar{
+  height:var(--header-h); background:linear-gradient(180deg,#fdfaf2,#f6f1e6);
+  border-bottom:1px solid var(--line);
+  display:flex; align-items:stretch; padding:0 20px;
+  position:fixed; top:0; left:0; right:0; z-index:1100;
+  padding-top:var(--safe-top);
+}
+header .brand{
+  display:flex; flex-direction:column; justify-content:center;
+  padding-right:20px; border-right:1px solid var(--line-2);
+  min-width:0; flex-shrink:0;
+}
+.brand .eyebrow{font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); font-weight:600;}
+.brand h1{font-family:var(--serif); font-size:22px; font-weight:600; margin:2px 0 0; letter-spacing:0.01em; white-space:nowrap;}
+.brand .sub{font-size:12px; color:var(--ink-2); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.brand .sub b{color:var(--ink); font-weight:600;}
+header .center{
+  flex:1; min-width:0; display:flex; align-items:center; padding:0 20px; gap:14px;
+  border-right:1px solid var(--line-2);
+}
+.sun-strip{display:flex; align-items:center; gap:12px; width:100%;}
+.sun-pip{display:flex; align-items:center; gap:6px; font-size:11px; color:var(--ink-2); white-space:nowrap;}
+.sun-pip .dot{width:8px; height:8px; border-radius:50%; flex-shrink:0;}
+.sun-pip b{color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums;}
+.sun-bar{
+  flex:1; height:6px; border-radius:3px; min-width:60px;
+  background:linear-gradient(90deg,#1f3a5c 0%,#4a73a3 12%,#e2a64a 18%,#fde6b2 30%,#fff7df 50%,#fde6b2 70%,#e2a64a 82%,#4a73a3 88%,#1f3a5c 100%);
+}
+header .right{
+  display:flex; align-items:center; gap:6px; padding-left:20px; overflow-x:auto;
+  scrollbar-width:none;
+}
+header .right::-webkit-scrollbar{display:none;}
+.partner-pill{
+  font-size:11px; padding:6px 10px; border:1px solid var(--line); border-radius:999px;
+  background:#fff; color:var(--ink-2); cursor:pointer; transition:all .15s;
+  white-space:nowrap; flex-shrink:0;
+}
+.partner-pill:hover, .partner-pill:focus-visible{background:var(--accent); color:#fff; border-color:var(--accent); outline:none;}
+.partner-pill .ar{margin-right:4px;}
+
+/* mobile hamburger */
+.menu-btn{
+  display:none; background:transparent; border:1px solid var(--line); border-radius:8px;
+  width:38px; height:38px; align-items:center; justify-content:center; cursor:pointer;
+  color:var(--ink); margin-right:12px; flex-shrink:0; font-size:18px;
+}
+.menu-btn:hover, .menu-btn:focus-visible{background:var(--accent); color:#fff; border-color:var(--accent); outline:none;}
+
+/* ---------- main layout ---------- */
+main{
+  position:absolute; top:var(--header-h); left:0; right:0; bottom:var(--footer-h);
+  display:grid; grid-template-columns:var(--rail-w) 1fr;
+  padding-top:var(--safe-top);
+}
+aside.rail{
+  background:var(--paper); border-right:1px solid var(--line);
+  overflow-y:auto; padding:18px 0 24px;
+  -webkit-overflow-scrolling:touch;
+}
+aside h2{
+  font-family:var(--serif); font-size:18px; font-weight:600;
+  padding:0 18px 4px; margin:0 0 6px; letter-spacing:0.01em;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.rail-sub{padding:0 18px 14px; font-size:11px; color:var(--ink-2); letter-spacing:0.02em; border-bottom:1px solid var(--line-2);}
+.rail-close{
+  display:none; background:transparent; border:0; cursor:pointer; padding:4px;
+  color:var(--ink-2); font-size:18px;
+}
+.zone-list{list-style:none; margin:0; padding:0;}
+.zone-list li{
+  padding:11px 18px; cursor:pointer; border-bottom:1px solid var(--line-2);
+  display:flex; align-items:flex-start; gap:10px; transition:background .15s;
+  outline:none;
+}
+.zone-list li:hover, .zone-list li:focus-visible{background:#f1ead7;}
+.zone-list li.active{background:#ecf2e2;}
+.zone-list li.active .zone-name{color:var(--accent);}
+.zone-list .swatch{width:8px; min-width:8px; height:36px; border-radius:2px; margin-top:2px;}
+.zone-list .zone-emoji{font-size:18px; line-height:1; margin-top:2px;}
+.zone-list .zone-meta{flex:1; min-width:0;}
+.zone-list .zone-name{font-weight:600; font-size:13px; color:var(--ink); margin-bottom:2px;}
+.zone-list .zone-ar{font-size:12px; color:var(--ink-2); font-family:var(--ar); direction:rtl;}
+.zone-list .zone-count{font-size:10px; color:var(--ink-2); margin-top:3px; letter-spacing:0.04em; text-transform:uppercase;}
+
+/* ---------- map ---------- */
+.map-wrap{position:relative; background:#222;}
+#map{position:absolute; inset:0;}
+.leaflet-container{font-family:var(--sans); background:#1d2630;}
+.leaflet-popup-content-wrapper{border-radius:10px; padding:0; box-shadow:var(--shadow-md);}
+.leaflet-popup-content{margin:0; line-height:1.4;}
+.leaflet-tooltip{font-family:var(--sans); font-size:12px;}
+
+.photo-marker{
+  width:34px; height:34px; border-radius:50%; border:3px solid #fff;
+  background-size:cover; background-position:center; background-color:#777;
+  box-shadow:inset 0 0 0 1.5px #fff, 0 2px 6px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.25);
+  cursor:pointer; transition:transform .15s, width .15s, height .15s;
+  background-repeat:no-repeat;
+}
+.photo-marker:hover{transform:scale(1.18); z-index:1000;}
+.photo-marker.dot{width:14px; height:14px; border-width:2px; background-image:none !important;}
+.photo-marker.dot:hover{transform:scale(1.4);}
+.partner-marker{
+  width:30px; height:30px; border-radius:50%; background:#fdfaf2;
+  border:2px solid var(--accent-warm); display:flex; align-items:center; justify-content:center;
+  font-size:14px; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,.25);
+  color:var(--accent-warm); font-weight:700;
+}
+.partner-marker.ashtar{border-color:#a83a2a; color:#a83a2a;}
+.partner-marker:hover{transform:scale(1.15);}
+
+.map-controls{position:absolute; top:12px; left:64px; z-index:500; display:flex; gap:6px; flex-wrap:wrap; max-width:calc(100% - 80px);}
+.map-controls button{
+  background:#fdfaf2; border:1px solid var(--line); border-radius:8px;
+  padding:8px 12px; font-size:12px; cursor:pointer; color:var(--ink-2);
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+  min-height:36px;
+}
+.map-controls button:hover, .map-controls button:focus-visible{background:var(--accent); color:#fff; border-color:var(--accent); outline:none;}
+.map-controls button.active{background:var(--sun); color:#fff; border-color:var(--gold);}
+.edit-badge{background:#b03a3a; color:#fff; padding:6px 10px; border-radius:6px; font-size:11px; font-weight:600; align-self:center;}
+
+.scout-banner{position:absolute; bottom:12px; left:12px; z-index:500;
+  background:rgba(253,250,242,.94); border:1px solid var(--line); border-radius:8px;
+  padding:9px 12px; font-size:11px; color:var(--ink-2); max-width:300px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12); backdrop-filter:blur(4px);
+  line-height:1.45;
+}
+.scout-banner b{color:var(--ink); font-weight:600;}
+
+/* ---------- detail panel (desktop = right slide-in; mobile = bottom sheet) ---------- */
+aside.detail{
+  position:fixed; top:var(--header-h); right:0; bottom:var(--footer-h); width:var(--panel-w);
+  background:var(--paper); border-left:1px solid var(--line);
+  transform:translateX(100%); transition:transform .35s cubic-bezier(.2,.7,.2,1);
+  display:flex; flex-direction:column;
+  z-index:1000; box-shadow:var(--shadow-lg);
+}
+aside.detail.open{transform:translateX(0);}
+.detail-grab{display:none;}
+.detail-head{padding:20px 22px 14px; border-bottom:1px solid var(--line-2); position:relative; flex-shrink:0;}
+.detail-head .swatch-bar{position:absolute; top:0; left:0; right:0; height:4px;}
+.detail-head .dh-zone{font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-2); font-weight:600;}
+.detail-head .dh-title{font-family:var(--serif); font-size:24px; font-weight:600; margin:4px 0 2px; line-height:1.15;}
+.detail-head .dh-ar{font-family:var(--ar); direction:rtl; unicode-bidi:isolate; color:var(--ink-2); font-size:14px;}
+.detail-head .dh-meta{display:flex; gap:12px; margin-top:10px; font-size:11px; color:var(--ink-2); flex-wrap:wrap;}
+.detail-close{
+  position:absolute; top:14px; right:14px; width:32px; height:32px;
+  border-radius:50%; background:#fff; border:1px solid var(--line);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:14px; color:var(--ink-2); transition:all .15s;
+}
+.detail-close:hover, .detail-close:focus-visible{background:var(--ink); color:#fff; border-color:var(--ink); outline:none;}
+
+.detail-body{flex:1; overflow-y:auto; padding:18px 22px 28px; -webkit-overflow-scrolling:touch;}
+.detail-section{margin-bottom:22px;}
+.detail-section h3{
+  font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);
+  font-weight:700; margin:0 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line-2);
+}
+.detail-section p{margin:0; color:var(--ink); font-size:13.5px; line-height:1.6;}
+.detail-section .creative-note{font-style:italic; color:var(--ink-2); font-family:var(--serif); font-size:15px; line-height:1.55;}
+.activities{list-style:none; margin:0; padding:0;}
+.activities li{
+  padding:9px 12px 9px 30px; margin-bottom:6px; background:#fff;
+  border-radius:6px; border:1px solid var(--line-2); position:relative;
+  font-size:13px; line-height:1.4;
+}
+.activities li:before{
+  content:''; position:absolute; left:11px; top:14px;
+  width:10px; height:10px; border:2px solid var(--accent); border-radius:50%;
+}
+.gps-approx-note{font-size:11px; font-style:italic; color:var(--ink-2); display:block; margin:-4px 0 8px 0;}
+.photo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:6px;}
+.photo-grid img{width:100%; aspect-ratio:1; object-fit:cover; border-radius:4px; cursor:pointer; transition:transform .15s; background:#eee; display:block;}
+.photo-grid img:hover{transform:scale(1.04); z-index:5;}
+
+/* ---------- timeline footer ---------- */
+footer.timeline{
+  position:fixed; bottom:0; left:0; right:0; height:var(--footer-h);
+  background:var(--paper); border-top:1px solid var(--line);
+  display:flex; align-items:center; padding:0 16px; gap:14px;
+  z-index:1100;
+  padding-bottom:var(--safe-bottom);
+  box-sizing:content-box;
+}
+.tl-label{font-size:11px; color:var(--ink-2); white-space:nowrap;}
+.tl-label b{color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums;}
+.tl-current-mobile{display:none;}
+.tl-track{
+  flex:1; height:8px; background:#ebe2cf; border-radius:4px; position:relative; cursor:pointer;
+  touch-action:none; min-width:80px;
+}
+.tl-fill{
+  position:absolute; top:0; left:0; bottom:0; background:var(--accent); border-radius:4px;
+  pointer-events:none;
+}
+.tl-tick{
+  position:absolute; top:-3px; width:2px; height:14px; background:rgba(0,0,0,.18);
+  pointer-events:none;
+}
+.tl-tick.active{background:var(--accent-warm); height:18px; top:-5px;}
+.tl-buttons{display:flex; gap:8px;}
+.tl-btn{
+  font-size:11px; padding:7px 11px; border:1px solid var(--line); border-radius:6px;
+  background:#fff; color:var(--ink-2); cursor:pointer; min-height:32px;
+}
+.tl-btn:hover, .tl-btn:focus-visible{background:var(--ink); color:#fff; border-color:var(--ink); outline:none;}
+.tl-btn.active{background:var(--accent); color:#fff; border-color:var(--accent);}
+
+/* ---------- lightbox ---------- */
+#lightbox{
+  position:fixed; inset:0; background:rgba(15,12,8,.94); z-index:9999;
+  display:none; align-items:center; justify-content:center; padding:24px;
+  padding-top:max(24px, var(--safe-top));
+  padding-bottom:max(24px, var(--safe-bottom));
+}
+#lightbox.open{display:flex;}
+.lb-figure{
+  max-width:96vw; max-height:92vh; position:relative;
+  display:flex; flex-direction:column; align-items:center;
+}
+.lb-figure img{max-width:92vw; max-height:78vh; object-fit:contain; border-radius:4px; box-shadow:0 20px 60px rgba(0,0,0,.4); background:#222;}
+.lb-meta{color:#f6f1e6; padding:14px 8px 0; font-size:13px; text-align:center; line-height:1.4; max-width:92vw;}
+.lb-meta .lb-title{font-family:var(--serif); font-size:20px; font-weight:600; margin-bottom:4px;}
+.lb-meta .lb-zone{color:#c5b994; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; font-weight:600;}
+.lb-close, .lb-prev, .lb-next{
+  background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.22);
+  width:44px; height:44px; border-radius:50%; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; transition:all .15s; line-height:1;
+}
+.lb-close{position:fixed; top:max(20px, var(--safe-top)); right:20px; z-index:2;}
+.lb-prev, .lb-next{position:absolute; top:50%; transform:translateY(-50%); z-index:2;}
+.lb-prev{left:-56px;}
+.lb-next{right:-56px;}
+.lb-close:hover, .lb-prev:hover, .lb-next:hover{background:rgba(255,255,255,.28);}
+
+/* ---------- backdrop ---------- */
+.backdrop{
+  display:none; position:fixed; inset:0; background:rgba(20,18,12,.35);
+  z-index:999; backdrop-filter:blur(2px);
+}
+.backdrop.show{display:block;}
+
+/* ---------- tablet ---------- */
+@media (max-width:1100px){
+  :root{--rail-w:256px; --panel-w:380px;}
+  .brand h1{font-size:20px;}
+  header .center{padding:0 14px; gap:10px;}
+  .sun-pip{font-size:10px;}
+}
+
+/* ---------- mobile ---------- */
+@media (max-width:720px){
+  :root{--header-h:60px; --footer-h:60px; --rail-w:280px;}
+  body{font-size:13.5px;}
+  header.topbar{padding:0 12px;}
+  .menu-btn{display:flex;}
+  .brand{padding-right:0; border-right:0;}
+  .brand h1{font-size:17px;}
+  .brand .eyebrow{font-size:9px;}
+  .brand .sub{font-size:11px;}
+  header .center{display:none;}
+  header .right{display:none;}
+
+  main{grid-template-columns:1fr;}
+  aside.rail{
+    position:fixed; top:var(--header-h); left:0; bottom:0; width:var(--rail-w); z-index:1050;
+    transform:translateX(-100%); transition:transform .3s cubic-bezier(.2,.7,.2,1);
+    box-shadow:var(--shadow-lg);
+  }
+  aside.rail.open{transform:translateX(0);}
+  .rail-close{display:flex;}
+
+  /* Detail panel becomes bottom sheet */
+  aside.detail{
+    top:auto; right:0; left:0; bottom:0; width:100%;
+    height:78vh; max-height:78vh;
+    border-left:0; border-top:1px solid var(--line);
+    transform:translateY(100%);
+    border-radius:18px 18px 0 0;
+    padding-top:8px;
+  }
+  aside.detail.open{transform:translateY(0);}
+  .detail-grab{
+    display:block; width:46px; height:5px; background:var(--line); border-radius:3px;
+    margin:0 auto 8px; touch-action:none; cursor:grab;
+  }
+  .detail-head{padding:6px 18px 14px;}
+  .detail-head .dh-title{font-size:21px;}
+  .detail-close{top:8px; right:12px;}
+  .detail-body{padding:14px 18px 28px;}
+
+  /* timeline simplified */
+  footer.timeline{padding:0 12px; gap:10px;}
+  .tl-label{display:none;}
+  .tl-current-mobile{display:block; font-size:11px; color:var(--ink); font-weight:600; min-width:48px;}
+  .tl-buttons .tl-btn:last-child{display:none;} /* drop Reset on mobile */
+  .tl-btn{padding:7px 10px;}
+
+  /* map */
+  .map-controls{left:12px; top:12px; max-width:calc(100% - 24px);}
+  .map-controls button{padding:7px 10px; font-size:11.5px;}
+  .scout-banner{display:none;}
+
+  /* lightbox controls inside the screen */
+  .lb-prev{left:8px;}
+  .lb-next{right:8px;}
+  .lb-figure img{max-height:70vh;}
+}
+
+@media (max-width:420px){
+  .brand .sub{display:none;}
+}
+
+/* ---------- accessibility / motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important; animation:none !important;}
+}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+/* ---------- print fallback ---------- */
+@media print{
+  aside.rail, aside.detail, footer.timeline, .map-controls, .scout-banner, .menu-btn{display:none !important;}
+  body{overflow:auto;}
+  main{position:static;}
+}
+
+/* ---------- filter chips (rail) ---------- */
+.rail-filters{padding:10px 14px 12px; border-bottom:1px solid var(--line-2); display:flex; flex-direction:column; gap:8px; background:#fbf6e8;}
+.filter-group{display:flex; flex-direction:column; gap:4px;}
+.filter-group .filter-label{font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); font-weight:600;}
+.chips{display:flex; flex-wrap:wrap; gap:4px;}
+.chip{
+  font-size:10.5px; padding:4px 9px; border:1px solid var(--line); border-radius:999px;
+  background:#fff; color:var(--ink-2); cursor:pointer; transition:all .12s; line-height:1.3;
+  white-space:nowrap; user-select:none;
+}
+.chip:hover, .chip:focus-visible{background:#ecf2e2; color:var(--ink); border-color:var(--accent); outline:none;}
+.chip.on{background:var(--accent); color:#fff; border-color:var(--accent);}
+.chip.on:hover{background:#3d6730;}
+.zone-list li.hide{display:none;}
+.rail-empty{padding:18px; font-size:12px; color:var(--ink-2); font-style:italic; text-align:center;}
+
+/* ---------- extra map controls ---------- */
+.map-controls select{
+  background:#fdfaf2; border:1px solid var(--line); border-radius:8px;
+  padding:7px 10px; font-size:12px; color:var(--ink-2); cursor:pointer; min-height:36px;
+  font-family:inherit;
+}
+.map-controls select:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+.map-controls .ctrl-group{
+  display:flex; gap:2px; background:#fdfaf2; border:1px solid var(--line); border-radius:8px; padding:2px;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.map-controls .ctrl-group button{
+  border:0; box-shadow:none; padding:6px 10px; font-size:11.5px; border-radius:6px;
+  background:transparent; min-height:30px;
+}
+.map-controls .ctrl-group button.on{background:var(--accent); color:#fff;}
+.map-controls .ctrl-group button.on:hover{background:#3d6730;}
+.map-controls .bl-controls{
+  display:none; align-items:center; gap:8px;
+  background:#fdfaf2; border:1px solid var(--line); border-radius:8px;
+  padding:5px 10px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+  font-size:11.5px; color:var(--ink-2);
+}
+.map-controls .bl-controls.show{display:flex;}
+.map-controls .bl-controls label{font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-2);}
+.map-controls .bl-controls input[type="range"]{width:110px;}
+.map-controls .bl-controls input[type="date"]{font-family:inherit; font-size:11px; padding:3px 6px; border:1px solid var(--line); border-radius:4px; background:#fff;}
+.map-controls .bl-controls b{color:var(--ink); font-variant-numeric:tabular-nums; min-width:38px; display:inline-block;}
+
+.viz-legend{
+  position:absolute; bottom:64px; left:12px; z-index:500;
+  background:rgba(253,250,242,.94); border:1px solid var(--line); border-radius:8px;
+  padding:8px 12px; font-size:11px; color:var(--ink-2); max-width:240px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12); backdrop-filter:blur(4px);
+  display:none;
+}
+.viz-legend.show{display:block;}
+.viz-legend .lg-title{font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); margin-bottom:4px;}
+.viz-legend .lg-bar{height:8px; border-radius:4px; margin:4px 0 2px;}
+.viz-legend .lg-bar.heat{background:linear-gradient(90deg, rgba(74,124,58,0.08), rgba(74,124,58,0.55));}
+.viz-legend .lg-bar.sun{background:linear-gradient(90deg,#1f3a5c 0%,#4a73a3 25%,#e2a64a 55%,#fde6b2 75%,#fff7df 100%);}
+.viz-legend .lg-row{display:flex; justify-content:space-between; font-size:10px;}
+
+/* ---------- notes layer ---------- */
+.map-controls .notes-toolbar{
+  display:none; gap:2px; background:#fdfaf2; border:1px solid var(--line); border-radius:8px; padding:2px;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.map-controls .notes-toolbar.show{display:flex;}
+.map-controls .notes-toolbar button{
+  border:0; box-shadow:none; padding:6px 10px; font-size:11.5px; border-radius:6px;
+  background:transparent; min-height:30px;
+}
+.map-wrap.notes-on{cursor:crosshair;}
+.map-wrap.notes-on .leaflet-container{cursor:crosshair;}
+
+.note-marker{
+  width:30px; height:30px; border-radius:50% 50% 50% 4px;
+  background:#fde6b2; border:2px solid #b88a32;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; color:#5a4708; box-shadow:0 2px 5px rgba(0,0,0,.3);
+  transform:rotate(-8deg); cursor:pointer;
+}
+.note-marker:hover{transform:rotate(-8deg) scale(1.15);}
+
+.note-popover{
+  background:var(--paper); border-radius:10px; padding:14px 16px; min-width:280px; max-width:320px;
+  font-family:var(--sans);
+}
+.note-popover h4{
+  margin:0 0 10px; font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--accent); font-weight:700; border-bottom:1px solid var(--line-2); padding-bottom:6px;
+}
+.note-popover label{display:block; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-2); font-weight:600; margin:8px 0 3px;}
+.note-popover input[type="text"], .note-popover textarea, .note-popover select{
+  width:100%; padding:6px 8px; border:1px solid var(--line); border-radius:5px;
+  font-family:inherit; font-size:13px; background:#fff; color:var(--ink);
+  box-sizing:border-box;
+}
+.note-popover textarea{resize:vertical; min-height:60px; max-height:160px;}
+.note-popover input[type="file"]{font-size:11px; margin-top:4px;}
+.note-popover input[type="url"]{width:100%; padding:6px 8px; border:1px solid var(--line); border-radius:5px; font-family:inherit; font-size:12px; box-sizing:border-box;}
+.note-popover .npv-actions{display:flex; gap:6px; margin-top:12px; justify-content:flex-end;}
+.note-popover button{
+  font-family:inherit; font-size:11.5px; padding:6px 12px; border-radius:6px; cursor:pointer;
+  border:1px solid var(--line); background:#fff; color:var(--ink-2);
+}
+.note-popover button:hover{background:var(--ink); color:#fff; border-color:var(--ink);}
+.note-popover button.primary{background:var(--accent); color:#fff; border-color:var(--accent);}
+.note-popover button.primary:hover{background:#3d6730;}
+.note-popover button.danger{color:#b03a3a;}
+.note-popover button.danger:hover{background:#b03a3a; color:#fff; border-color:#b03a3a;}
+.note-popover .nv-photo{margin-top:6px; max-width:100%; max-height:120px; border-radius:5px; display:block;}
+.note-popover .nv-body{font-size:13px; color:var(--ink); line-height:1.5; white-space:pre-wrap; word-wrap:break-word; margin:6px 0 0;}
+.note-popover .nv-meta{font-size:10px; color:var(--ink-2); margin-top:8px; letter-spacing:0.04em;}
+.note-popover .nv-error{font-size:11px; color:#b03a3a; margin-top:4px;}
+
+@media (max-width:720px){
+  .rail-filters{padding:8px 12px 10px;}
+  .chip{font-size:11px; padding:5px 10px;}
+  .map-controls{flex-wrap:wrap;}
+  .map-controls .bl-controls input[type="range"]{width:90px;}
+  .map-controls .bl-controls input[type="date"]{display:none;}
+  .viz-legend{bottom:74px; max-width:200px; font-size:10px;}
+  .note-popover{min-width:240px; max-width:260px;}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar" role="banner">
+  <button class="menu-btn" id="menuBtn" aria-label="Open zones menu" aria-controls="rail" aria-expanded="false">☰</button>
+  <div class="brand">
+    <div class="eyebrow">KAWADER · Bootcamp Scout</div>
+    <h1 id="brandTitle">Edward Said · Birzeit</h1>
+    <div class="sub"><span class="ar" id="brandAr" dir="rtl">إدوارد سعيد</span> · <b id="brandDate">—</b> · <span id="brandCounts">— photos · — zones</span></div>
+  </div>
+  <div class="center" aria-label="Sun timing for 2026-05-11">
+    <div class="sun-strip">
+      <div class="sun-pip"><span class="dot" style="background:#4a73a3"></span>Sunrise <b id="sunrise">—</b></div>
+      <div class="sun-bar" id="sunbar" aria-hidden="true"></div>
+      <div class="sun-pip"><span class="dot" style="background:#e2a64a"></span>Noon <b id="solarnoon">—</b></div>
+      <div class="sun-pip"><span class="dot" style="background:#1f3a5c"></span>Sunset <b id="sunset">—</b></div>
+    </div>
+  </div>
+  <div class="right" id="partnerStrip" role="navigation" aria-label="Neighbourhood partners"></div>
+</header>
+
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+<main>
+  <aside class="rail" id="rail" aria-label="Zones list">
+    <h2>Zones <button class="rail-close" id="railClose" aria-label="Close zones menu">✕</button></h2>
+    <div class="rail-sub" id="railSub">18 distinct spaces · tap to fly</div>
+    <div class="rail-filters" id="railFilters">
+      <div class="filter-group">
+        <div class="filter-label">Floor</div>
+        <div class="chips" id="floorChips" role="radiogroup" aria-label="Filter by floor"></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">Theme <span style="font-weight:400; text-transform:none; letter-spacing:0; color:var(--ink-2)">· tap multiple</span></div>
+        <div class="chips" id="themeChips" role="group" aria-label="Filter by theme (multi-select)"></div>
+      </div>
+    </div>
+    <ul class="zone-list" id="zoneList" role="list"></ul>
+  </aside>
+
+  <div class="map-wrap" id="mapWrap">
+    <div id="map" role="application" aria-label="Satellite map of Edward Said Cultural Institute"></div>
+    <div class="map-controls">
+      <select id="basemapSel" aria-label="Basemap layer">
+        <option value="hybrid">🛰 Hybrid</option>
+        <option value="satellite">🛰 Satellite</option>
+        <option value="streets">🗺 Streets</option>
+        <option value="carto">🗺 OSM Carto</option>
+        <option value="blank">▢ Blank</option>
+      </select>
+      <div class="ctrl-group" id="vizGroup" role="radiogroup" aria-label="Visualisation mode">
+        <button data-viz="identity" class="on" aria-pressed="true" title="Identity — per-zone colors">🎨 Identity</button>
+        <button data-viz="heat" aria-pressed="false" title="Activity heatmap — opacity ∝ activities">🔥 Heatmap</button>
+        <button data-viz="bestlight" aria-pressed="false" title="Best-light — sun-position tint">☀ Best-light</button>
+      </div>
+      <div class="bl-controls" id="blControls">
+        <label>Date</label><input type="date" id="blDate" value="2026-08-05" />
+        <label>Time</label><input type="range" id="blTime" min="0" max="1425" step="15" value="720" aria-label="Time of day" />
+        <b id="blTimeLabel">12:00</b>
+      </div>
+      <button id="overlay-toggle" title="Toggle sun-path overlay" aria-pressed="false">☀ Sun-path</button>
+      <button id="fit-all" title="Re-fit all photo pins">⛶ Fit all</button>
+      <a id="play-mode" href="./simulation/" title="Play mode — walk the venue as an avatar (Track C)" style="text-decoration:none; background:#fdfaf2; border:1px solid var(--line); border-radius:8px; padding:8px 12px; font-size:12px; color:var(--ink-2); display:inline-flex; align-items:center; gap:4px; cursor:pointer; transition:all .15s;" onmouseover="this.style.background='var(--accent-warm)';this.style.color='#fff';this.style.borderColor='var(--accent-warm)';" onmouseout="this.style.background='#fdfaf2';this.style.color='var(--ink-2)';this.style.borderColor='var(--line)';">▶ Play mode</a>
+      <div class="ctrl-group">
+        <button id="notesToggle" aria-pressed="false" title="Notes mode — click map to drop a note">📌 Notes</button>
+      </div>
+      <div class="notes-toolbar" id="notesToolbar" role="toolbar" aria-label="Notes actions">
+        <button id="notesExport" title="Export notes as JSON">⬇ Export</button>
+        <button id="notesImport" title="Import notes from JSON">⬆ Import</button>
+        <input type="file" id="notesImportFile" accept="application/json" style="display:none" />
+      </div>
+    </div>
+    <div class="viz-legend" id="vizLegend"></div>
+    <div class="scout-banner">
+      <b>Pin</b> = photo at captured GPS · <b>Olive shapes</b> = activity zones · tap any pin or zone
+    </div>
+  </div>
+</main>
+
+<aside class="detail" id="detail" aria-label="Zone details" aria-hidden="true">
+  <div class="detail-grab" id="detailGrab" aria-hidden="true"></div>
+  <div class="detail-head">
+    <div class="swatch-bar" id="dhSwatch"></div>
+    <button class="detail-close" id="detailClose" aria-label="Close zone details">✕</button>
+    <div class="dh-zone" id="dhZone">Zone</div>
+    <div class="dh-title" id="dhTitle">—</div>
+    <div class="dh-ar" id="dhAr" dir="rtl">—</div>
+    <div class="dh-meta">
+      <span id="dhCount">— photos</span>
+      <span id="dhTimeRange">—</span>
+    </div>
+  </div>
+  <div class="detail-body" id="detailBody"></div>
+</aside>
+
+<footer class="timeline" role="contentinfo">
+  <div class="tl-label">Scout: <b id="tlStart">—</b> → <b id="tlEnd">—</b> · <b id="tlCurrent">—</b></div>
+  <div class="tl-current-mobile" id="tlCurrentMobile">—</div>
+  <div class="tl-track" id="tlTrack" role="slider" aria-label="Scout timeline" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="tl-fill" id="tlFill" style="width:0"></div>
+  </div>
+  <div class="tl-buttons">
+    <button class="tl-btn" id="tlPlay" aria-label="Play walk-through">▶ Walk-through</button>
+    <button class="tl-btn" id="tlReset" aria-label="Reset timeline">Reset</button>
+  </div>
+</footer>
+
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close photo viewer">✕</button>
+  <div class="lb-figure">
+    <button class="lb-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+    <img id="lbImg" alt="" />
+    <button class="lb-next" id="lbNext" aria-label="Next photo">›</button>
+    <div class="lb-meta">
+      <div class="lb-title" id="lbTitle"></div>
+      <div class="lb-zone" id="lbZone"></div>
+    </div>
+  </div>
+</div>
+
+<script id="data" type="application/json">{"venue":{"name_en":"Edward Said Cultural Institute","name_ar":"إدوارد سعيد","town_en":"Birzeit","town_ar":"بيرزيت","country":"Palestine","approx_center":{"lat":31.97084,"lon":35.19625},"google_maps":"https://www.google.com/maps/search/?api=1&query=31.970839,35.196249"},"manager":"Amjad (Edward Said Institute)","shoot_time_range":"2026-05-11 10:19 — 11:58 local","scout_date":"2026-05-11","sun":{"sunrise_local":"05:45","sunset_local":"19:26","solar_noon_local":"12:35","moonrise_local":"02:11","moonset_local":"13:44"},"zones":[{"id":"z01_sammer_workshop","title_en":"Sammer's Instrument Workshop","title_ar":"ورشة سامر لصناعة الآلات","summary":"Active luthier workshop on the property — violins, mandolins, tool wall, workbench. Sammer (instrument-maker, venue resident) is a separate doc subject; documentary on him is happening either way.","activities":["Documentary subject: Sammer (luthier) — own doc thread","Hands-on B-roll workshop: cinematography of craft (close-ups, hands, tools)","Sound design exercise: tap, scrape, string-pluck textures recorded room-tone"],"creative_notes":"Window on rear wall opens onto valley + olive grove. Daylight only late morning until early afternoon (window faces N/NW based on sun position).","photos":[{"stem":"IMG_4936","thumb":"./assets/photos/thumb/IMG_4936.jpg","full":"./assets/photos/full/IMG_4936.jpg","lat":31.970941666666665,"lon":35.19617777777778,"dt":"2026:05:11 10:19:49","zone":"z01_sammer_workshop"},{"stem":"IMG_4937","thumb":"./assets/photos/thumb/IMG_4937.jpg","full":"./assets/photos/full/IMG_4937.jpg","lat":31.970836111111108,"lon":35.19628888888889,"dt":"2026:05:11 10:20:13","zone":"z01_sammer_workshop"},{"stem":"IMG_4938","thumb":"./assets/photos/thumb/IMG_4938.jpg","full":"./assets/photos/full/IMG_4938.jpg","lat":31.97086111111111,"lon":35.19624444444444,"dt":"2026:05:11 10:20:23","zone":"z01_sammer_workshop"},{"stem":"IMG_4939","thumb":"./assets/photos/thumb/IMG_4939.jpg","full":"./assets/photos/full/IMG_4939.jpg","lat":31.97094722222222,"lon":35.19623055555555,"dt":"2026:05:11 10:21:01","zone":"z01_sammer_workshop"},{"stem":"IMG_4940","thumb":"./assets/photos/thumb/IMG_4940.jpg","full":"./assets/photos/full/IMG_4940.jpg","lat":31.97094444444444,"lon":35.196188888888884,"dt":"2026:05:11 10:43:11","zone":"z01_sammer_workshop"},{"stem":"IMG_4941","thumb":"./assets/photos/thumb/IMG_4941.jpg","full":"./assets/photos/full/IMG_4941.jpg","lat":31.97093333333333,"lon":35.19620833333333,"dt":"2026:05:11 10:43:17","zone":"z01_sammer_workshop"}],"photo_ids":["IMG_4936","IMG_4937","IMG_4938","IMG_4939","IMG_4940","IMG_4941"],"time_range":["2026:05:11 10:19:49","2026:05:11 10:43:17"],"centroid":{"lat":31.970910648148145,"lon":35.19622314814814},"color":"#c97b3a","tint":"#f9e6d3","emoji":"🎻","floor":"Ground","themes":["Workshop spaces","Doc subject"]},{"id":"z02_bedrooms_3rd_floor","title_en":"Bedrooms with Signature Walls (3rd floor)","title_ar":"غرف النوم بكتابات الجدران (الطابق الثالث)","summary":"Single-bed dorm rooms. Some have years of signatures, names, drawings — past participants left their marks. Per meeting notes, girls' rooms are on the 3rd floor next to admin.","activities":["Scene seed: stories pulled from wall imagery (meeting note 01:51)","Intimate dialogue scenes — natural backlight from windows","Documentary motif: name-graffiti as visual through-line for the cohort doc"],"creative_notes":"Strong backlit silhouettes at midday (windows face SW/W). Dim interiors create natural chiaroscuro. Wall art is a built-in production-design asset.","photos":[{"stem":"IMG_4942","thumb":"./assets/photos/thumb/IMG_4942.jpg","full":"./assets/photos/full/IMG_4942.jpg","lat":31.97090833333333,"lon":35.19624722222222,"dt":"2026:05:11 10:44:18","zone":"z02_bedrooms_3rd_floor"},{"stem":"IMG_4943","thumb":"./assets/photos/thumb/IMG_4943.jpg","full":"./assets/photos/full/IMG_4943.jpg","lat":31.970766666666666,"lon":35.196299999999994,"dt":"2026:05:11 10:44:51","zone":"z02_bedrooms_3rd_floor"},{"stem":"IMG_4944","thumb":"./assets/photos/thumb/IMG_4944.jpg","full":"./assets/photos/full/IMG_4944.jpg","lat":31.970688888888887,"lon":35.19630833333333,"dt":"2026:05:11 10:44:55","zone":"z02_bedrooms_3rd_floor"},{"stem":"IMG_4945","thumb":"./assets/photos/thumb/IMG_4945.jpg","full":"./assets/photos/full/IMG_4945.jpg","lat":31.97072222222222,"lon":35.19622777777777,"dt":"2026:05:11 10:45:12","zone":"z12_wall_text_motifs"},{"stem":"IMG_4947","thumb":"./assets/photos/thumb/IMG_4947.jpg","full":"./assets/photos/full/IMG_4947.jpg","lat":31.970766666666666,"lon":35.1962,"dt":"2026:05:11 10:45:35","zone":"z12_wall_text_motifs"},{"stem":"IMG_4971","thumb":"./assets/photos/thumb/IMG_4971.jpg","full":"./assets/photos/full/IMG_4971.jpg","lat":31.97078611111111,"lon":35.19639166666666,"dt":"2026:05:11 10:58:45","zone":"z02_bedrooms_3rd_floor"},{"stem":"IMG_4972","thumb":"./assets/photos/thumb/IMG_4972.jpg","full":"./assets/photos/full/IMG_4972.jpg","lat":31.97089722222222,"lon":35.19603333333333,"dt":"2026:05:11 11:01:09","zone":"z02_bedrooms_3rd_floor"},{"stem":"IMG_4973","thumb":"./assets/photos/thumb/IMG_4973.jpg","full":"./assets/photos/full/IMG_4973.jpg","lat":31.97090833333333,"lon":35.195991666666664,"dt":"2026:05:11 11:01:16","zone":"z02_bedrooms_3rd_floor"}],"photo_ids":["IMG_4942","IMG_4943","IMG_4944","IMG_4945","IMG_4947","IMG_4971","IMG_4972","IMG_4973"],"time_range":["2026:05:11 10:44:18","2026:05:11 11:01:16"],"centroid":{"lat":31.970805555555554,"lon":35.196212499999994},"color":"#7a5dba","tint":"#ece3f9","emoji":"🛏️","floor":"3F","floor_aliases":["1F"],"themes":["Accommodation","Set-design"]},{"id":"z03_bathrooms_main","title_en":"Main Bathrooms (pink + blue stalls)","title_ar":"الحمامات الرئيسية","summary":"Two stall-bathroom corridors (pink-pastel and blue-pastel doors). Per meeting note 01:51 — \"الحمام رهيب\" — a scene candidate.","activities":["Scene candidate: bathroom scene (per meeting)","Mirror / vent-fan / vanishing-point compositions","Lighting exercise: practical-light scene with overhead fluorescents"],"creative_notes":"Strong perspective corridor of stall doors. Daylight only via window at far end + extractor fan halo.","photos":[{"stem":"IMG_4949","thumb":"./assets/photos/thumb/IMG_4949.jpg","full":"./assets/photos/full/IMG_4949.jpg","lat":31.970938888888888,"lon":35.19606388888889,"dt":"2026:05:11 10:48:31","zone":"z03_bathrooms_main"},{"stem":"IMG_4950","thumb":"./assets/photos/thumb/IMG_4950.jpg","full":"./assets/photos/full/IMG_4950.jpg","lat":31.970938888888888,"lon":35.19606388888889,"dt":"2026:05:11 10:48:32","zone":"z03_bathrooms_main"},{"stem":"IMG_4974","thumb":"./assets/photos/thumb/IMG_4974.jpg","full":"./assets/photos/full/IMG_4974.jpg","lat":31.97095,"lon":35.19565833333333,"dt":"2026:05:11 11:02:18","zone":"z03_bathrooms_main"}],"photo_ids":["IMG_4949","IMG_4950","IMG_4974"],"time_range":["2026:05:11 10:48:31","2026:05:11 11:02:18"],"centroid":{"lat":31.970942592592593,"lon":35.1959287037037},"color":"#e07eb1","tint":"#fde3ef","emoji":"🚿","floor":"3F","floor_aliases":["1F"],"themes":["Accommodation","Utility"]},{"id":"z04_bathroom_derelict","title_en":"Derelict Bathroom (raw character)","title_ar":"الحمام القديم (سمة معتقلة)","summary":"Second-tier bathroom with water-damaged ceiling, exposed conduit, peeling tile. Strong texture and horror-/period-set potential per meeting note 02:09 — \"old beautiful spaces — horror-scene potential\".","activities":["Horror / period genre set","Texture & lighting drill: hard-light through small window","Sound design exercise: dripping / pipe ambience"],"creative_notes":"Direct shaft of light from a small upper window. Heavy decay = visual identity.","photos":[{"stem":"IMG_4956","thumb":"./assets/photos/thumb/IMG_4956.jpg","full":"./assets/photos/full/IMG_4956.jpg","lat":31.970747222222222,"lon":35.196216666666665,"dt":"2026:05:11 10:51:42","zone":"z04_bathroom_derelict"},{"stem":"IMG_4957","thumb":"./assets/photos/thumb/IMG_4957.jpg","full":"./assets/photos/full/IMG_4957.jpg","lat":31.970744444444442,"lon":35.196216666666665,"dt":"2026:05:11 10:51:46","zone":"z04_bathroom_derelict"}],"photo_ids":["IMG_4956","IMG_4957"],"time_range":["2026:05:11 10:51:42","2026:05:11 10:51:46"],"centroid":{"lat":31.970745833333332,"lon":35.196216666666665},"color":"#5a4e3c","tint":"#e5dfd0","emoji":"🕯️","floor":"Cross-floor","themes":["Set-design"]},{"id":"z05_roof","title_en":"Rooftop (السطح)","title_ar":"السطح","summary":"Flat concrete roof with 360° view of Birzeit. Meeting notes 02:09 — natural-light workshop: reflections, controlling light, multiple windows. Sun-path: rise 05:45 / set 19:26 on 11 May; arc swings south through midday.","activities":["Natural-light workshop (reflections, controlling light, multiple windows)","Sunrise / sunset photography sessions","Golden-hour cohort portraits (1 hr before sunset = ~18:25)","Drone / overhead establishing shots of Birzeit (pending venue + Civil Aviation permission)"],"creative_notes":"Open sky, no overhangs on most of the deck. Stairwell hut + water tanks are usable foreground. Watch heat — August midday is brutal; bias to early-morning + late-afternoon blocks.","photos":[{"stem":"IMG_4958","thumb":"./assets/photos/thumb/IMG_4958.jpg","full":"./assets/photos/full/IMG_4958.jpg","lat":31.970716666666664,"lon":35.19628611111111,"dt":"2026:05:11 10:52:20","zone":"z05_roof"},{"stem":"IMG_4959","thumb":"./assets/photos/thumb/IMG_4959.jpg","full":"./assets/photos/full/IMG_4959.jpg","lat":31.970633333333332,"lon":35.19631944444444,"dt":"2026:05:11 10:52:29","zone":"z05_roof"},{"stem":"IMG_4960","thumb":"./assets/photos/thumb/IMG_4960.jpg","full":"./assets/photos/full/IMG_4960.jpg","lat":31.970669444444443,"lon":35.196225,"dt":"2026:05:11 10:52:38","zone":"z05_roof"},{"stem":"IMG_4961","thumb":"./assets/photos/thumb/IMG_4961.jpg","full":"./assets/photos/full/IMG_4961.jpg","lat":31.970766666666666,"lon":35.196127777777775,"dt":"2026:05:11 10:53:26","zone":"z05_roof"},{"stem":"IMG_4962","thumb":"./assets/photos/thumb/IMG_4962.jpg","full":"./assets/photos/full/IMG_4962.jpg","lat":31.970858333333332,"lon":35.19608333333333,"dt":"2026:05:11 10:53:42","zone":"z05_roof"},{"stem":"IMG_4963","thumb":"./assets/photos/thumb/IMG_4963.jpg","full":"./assets/photos/full/IMG_4963.jpg","lat":31.970852777777775,"lon":35.19608611111111,"dt":"2026:05:11 10:53:45","zone":"z05_roof"},{"stem":"IMG_4964","thumb":"./assets/photos/thumb/IMG_4964.jpg","full":"./assets/photos/full/IMG_4964.jpg","lat":31.970847222222222,"lon":35.196080555555554,"dt":"2026:05:11 10:53:49","zone":"z05_roof"},{"stem":"IMG_4965","thumb":"./assets/photos/thumb/IMG_4965.jpg","full":"./assets/photos/full/IMG_4965.jpg","lat":31.970913888888887,"lon":35.196330555555555,"dt":"2026:05:11 10:54:31","zone":"z05_roof"}],"photo_ids":["IMG_4958","IMG_4959","IMG_4960","IMG_4961","IMG_4962","IMG_4963","IMG_4964","IMG_4965"],"time_range":["2026:05:11 10:52:20","2026:05:11 10:54:31"],"centroid":{"lat":31.970782291666666,"lon":35.19619236111111},"color":"#3a8fb7","tint":"#d6ecf6","emoji":"🌅","floor":"Rooftop","themes":["Workshop spaces","Outdoor"]},{"id":"z06_music_hall_grand_piano","title_en":"Big Hall · Grand Piano Studio","title_ar":"القاعة الكبرى (بيانو)","summary":"Music rehearsal hall with grand piano, music stands, ~30 chairs. Pink+white acoustic panels. Per meeting 01:32 — \"multiple halls, including a big one\". Best candidate for plenary lectures, screenings, and music workshops.","activities":["Plenary briefings + screenings (bring our own projector + screen)","Score-to-picture workshop (use the grand piano)","Director Q&A / masterclass setup","Group critique sessions"],"creative_notes":"High ceilings → good for boom-mic / dialogue scenes. Daylight side from a tall multi-pane window. Acoustic panels keep room from over-ringing.","photos":[{"stem":"IMG_4976","thumb":"./assets/photos/thumb/IMG_4976.jpg","full":"./assets/photos/full/IMG_4976.jpg","lat":31.97083888888889,"lon":35.19636666666666,"dt":"2026:05:11 11:03:31","zone":"z06_music_hall_grand_piano"},{"stem":"IMG_4977","thumb":"./assets/photos/thumb/IMG_4977.jpg","full":"./assets/photos/full/IMG_4977.jpg","lat":31.970836111111108,"lon":35.19636666666666,"dt":"2026:05:11 11:05:56","zone":"z06_music_hall_grand_piano"},{"stem":"IMG_4978","thumb":"./assets/photos/thumb/IMG_4978.jpg","full":"./assets/photos/full/IMG_4978.jpg","lat":31.970836111111108,"lon":35.19636666666666,"dt":"2026:05:11 11:05:56","zone":"z06_music_hall_grand_piano"},{"stem":"IMG_4993","thumb":"./assets/photos/thumb/IMG_4993.jpg","full":"./assets/photos/full/IMG_4993.jpg","lat":31.971030555555554,"lon":35.19593055555555,"dt":"2026:05:11 11:10:23","zone":"z06_music_hall_grand_piano"}],"photo_ids":["IMG_4976","IMG_4977","IMG_4978","IMG_4993"],"time_range":["2026:05:11 11:03:31","2026:05:11 11:10:23"],"centroid":{"lat":31.970885416666665,"lon":35.19625763888888},"color":"#1f4f6f","tint":"#d4e1ec","emoji":"🎹","floor":"Ground","themes":["Workshop spaces"]},{"id":"z07_dining_hall","title_en":"Dining Hall (pastel panels)","title_ar":"قاعة الطعام","summary":"Large dining/cafeteria hall with tables + chairs, big windows, pastel pink+peach tiled accent wall. We will not be using the venue's food ~90% — cooked / brought from Ramallah — so this hall is mostly multi-use seating.","activities":["Meals (breakfast / lunch / dinner — meals plan owner: TBD)","Evening recap circles","Doubles as classroom overflow when the music hall is in use","Content-shoot day: cohort dinners are doc gold"],"creative_notes":"Pastel wall tiles work as wide-aspect backdrop — read warm on uncorrected daylight.","photos":[{"stem":"IMG_4981","thumb":"./assets/photos/thumb/IMG_4981.jpg","full":"./assets/photos/full/IMG_4981.jpg","lat":31.971091666666666,"lon":35.19594444444444,"dt":"2026:05:11 11:07:08","zone":"z07_dining_hall"}],"photo_ids":["IMG_4981"],"time_range":["2026:05:11 11:07:08","2026:05:11 11:07:08"],"centroid":{"lat":31.971091666666666,"lon":35.19594444444444},"color":"#d4a64a","tint":"#fbeed1","emoji":"🍽️","floor":"Ground","themes":["Accommodation","Workshop spaces"]},{"id":"z08_practice_rooms","title_en":"Practice & Small Studios","title_ar":"قاعات التدريب الصغيرة","summary":"Multiple smaller practice rooms with high ceilings, percussion / drum stash, easels, storage cupboards. Per meeting — \"halls, multiple\".","activities":["Editing room setups (2–3 stations per room)","Sound mixing / Foley closet","Color-grading review with controlled light (close windows + curtain)","Breakouts when whole cohort splits into tracks"],"creative_notes":"Some rooms still cluttered with the institute's gear — plan a clean-up window with Amjad before camp.","photos":[{"stem":"IMG_4979","thumb":"./assets/photos/thumb/IMG_4979.jpg","full":"./assets/photos/full/IMG_4979.jpg","lat":31.970836111111108,"lon":35.19636666666666,"dt":"2026:05:11 11:06:27","zone":"z08_practice_rooms"},{"stem":"IMG_4980","thumb":"./assets/photos/thumb/IMG_4980.jpg","full":"./assets/photos/full/IMG_4980.jpg","lat":31.970836111111108,"lon":35.19636666666666,"dt":"2026:05:11 11:06:37","zone":"z08_practice_rooms"},{"stem":"IMG_4982","thumb":"./assets/photos/thumb/IMG_4982.jpg","full":"./assets/photos/full/IMG_4982.jpg","lat":31.971091666666666,"lon":35.19594444444444,"dt":"2026:05:11 11:07:10","zone":"z08_practice_rooms"},{"stem":"IMG_4983","thumb":"./assets/photos/thumb/IMG_4983.jpg","full":"./assets/photos/full/IMG_4983.jpg","lat":31.971213888888887,"lon":35.19574444444444,"dt":"2026:05:11 11:07:16","zone":"z08_practice_rooms"},{"stem":"IMG_4984","thumb":"./assets/photos/thumb/IMG_4984.jpg","full":"./assets/photos/full/IMG_4984.jpg","lat":31.971152777777775,"lon":35.19584166666667,"dt":"2026:05:11 11:07:32","zone":"z08_practice_rooms"},{"stem":"IMG_4986","thumb":"./assets/photos/thumb/IMG_4986.jpg","full":"./assets/photos/full/IMG_4986.jpg","lat":31.971149999999998,"lon":35.195766666666664,"dt":"2026:05:11 11:07:46","zone":"z08_practice_rooms"},{"stem":"IMG_4992","thumb":"./assets/photos/thumb/IMG_4992.jpg","full":"./assets/photos/full/IMG_4992.jpg","lat":31.970699999999997,"lon":35.19615555555555,"dt":"2026:05:11 11:09:42","zone":"z08_practice_rooms"}],"photo_ids":["IMG_4979","IMG_4980","IMG_4982","IMG_4983","IMG_4984","IMG_4986","IMG_4992"],"time_range":["2026:05:11 11:06:27","2026:05:11 11:09:42"],"centroid":{"lat":31.97099722222222,"lon":35.19602658730158},"color":"#5b6e4d","tint":"#e1e8da","emoji":"🎬","floor":"Ground","floor_aliases":["1F"],"themes":["Workshop spaces","Equipment"]},{"id":"z09_equipment_room_ground","title_en":"Ground-floor Equipment Room","title_ar":"غرفة المعدات (الطابق الأرضي)","summary":"Per meeting 01:32 — \"multiple options; will use the ground floor one\". Empty grey metal shelving units, ready to be loaded with Kawader gear cases.","activities":["Centralised gear check-in/out station","Daily kit sign-out log + barcode scan (matches Odoo serial pre-selection workflow)","Mohanad + 2 youth based here on rotation for security"],"creative_notes":"Empty, lockable, on the path to the courtyard — choose this over any upper-floor room because we don't want gear hauled up stairs.","photos":[{"stem":"IMG_4954","thumb":"./assets/photos/thumb/IMG_4954.jpg","full":"./assets/photos/full/IMG_4954.jpg","lat":31.970755555555552,"lon":35.19625833333333,"dt":"2026:05:11 10:50:58","zone":"z09_equipment_room_ground"},{"stem":"IMG_5013","thumb":"./assets/photos/thumb/IMG_5013.jpg","full":"./assets/photos/full/IMG_5013.jpg","lat":31.97114444444444,"lon":35.195786111111104,"dt":"2026:05:11 11:22:02","zone":"z09_equipment_room_ground"}],"photo_ids":["IMG_4954","IMG_5013"],"time_range":["2026:05:11 10:50:58","2026:05:11 11:22:02"],"centroid":{"lat":31.970949999999995,"lon":35.19602222222222},"color":"#34495e","tint":"#d6dde4","emoji":"🎥","floor":"Ground","themes":["Equipment"]},{"id":"z10_storage_attic","title_en":"Old Storage / Attic","title_ar":"المخزن القديم","summary":"Two storage spaces full of old binders, beds, wood, archive material. Not for daily use, but visually rich.","activities":["Set-dressing inventory (real props — old wood, doors, archive paper)","Texture / object photography drill","Genre-set candidate: cellar / archive / detective scene"],"creative_notes":"Heavy dust = mask up for any extended shoot. Don't move historical archives — institute's property.","photos":[{"stem":"IMG_4951","thumb":"./assets/photos/thumb/IMG_4951.jpg","full":"./assets/photos/full/IMG_4951.jpg","lat":31.971019444444444,"lon":35.19613333333333,"dt":"2026:05:11 10:50:15","zone":"z10_storage_attic"},{"stem":"IMG_4952","thumb":"./assets/photos/thumb/IMG_4952.jpg","full":"./assets/photos/full/IMG_4952.jpg","lat":31.97078611111111,"lon":35.19628055555555,"dt":"2026:05:11 10:50:40","zone":"z10_storage_attic"},{"stem":"IMG_4955","thumb":"./assets/photos/thumb/IMG_4955.jpg","full":"./assets/photos/full/IMG_4955.jpg","lat":31.970744444444442,"lon":35.19624722222222,"dt":"2026:05:11 10:51:31","zone":"z10_storage_attic"},{"stem":"IMG_4988","thumb":"./assets/photos/thumb/IMG_4988.jpg","full":"./assets/photos/full/IMG_4988.jpg","lat":31.970836111111108,"lon":35.19607222222222,"dt":"2026:05:11 11:08:54","zone":"z10_storage_attic"},{"stem":"IMG_4989","thumb":"./assets/photos/thumb/IMG_4989.jpg","full":"./assets/photos/full/IMG_4989.jpg","lat":31.970847222222222,"lon":35.19606666666667,"dt":"2026:05:11 11:09:07","zone":"z10_storage_attic"},{"stem":"IMG_5007","thumb":"./assets/photos/thumb/IMG_5007.jpg","full":"./assets/photos/full/IMG_5007.jpg","lat":31.97111111111111,"lon":35.19628055555555,"dt":"2026:05:11 11:20:19","zone":"z10_storage_attic"}],"photo_ids":["IMG_4951","IMG_4952","IMG_4955","IMG_4988","IMG_4989","IMG_5007"],"time_range":["2026:05:11 10:50:15","2026:05:11 11:20:19"],"centroid":{"lat":31.97089074074074,"lon":35.19618009259259},"color":"#7a6149","tint":"#ebe1d4","emoji":"📦","floor":"Cross-floor","themes":["Set-design","Utility"]},{"id":"z11_outdoor_courtyard_garden","title_en":"Outdoor Courtyard + Garden","title_ar":"الفناء والحديقة الخارجية","summary":"Stone garden walls, dirt paths, mature olive + pine trees, picnic bench, ember-bed BBQ trough, decorative stone outbuilding hidden in trees. Walled compound around the building.","activities":["Exterior camera-movement drills (steadicam, gimbal, dolly)","Group photo + ID portraits under olive trees","Communal cook-fire / shared meal (BBQ trough is operational)","Outdoor circle for partner workshops (Circus School could drop in here)","Plein-air scene shoots — natural light, full control"],"creative_notes":"Shade quality changes hourly — south side gets full sun midday, north side stays shaded after ~14:00. Best ambient sound block 08:00–10:00 + 17:00–19:00 (avoid mosque + traffic peaks).","photos":[{"stem":"IMG_4948","thumb":"./assets/photos/thumb/IMG_4948.jpg","full":"./assets/photos/full/IMG_4948.jpg","lat":31.97075,"lon":35.19635833333333,"dt":"2026:05:11 10:46:08","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_4966","thumb":"./assets/photos/thumb/IMG_4966.jpg","full":"./assets/photos/full/IMG_4966.jpg","lat":31.970955555555555,"lon":35.19628055555555,"dt":"2026:05:11 10:55:01","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_4990","thumb":"./assets/photos/thumb/IMG_4990.jpg","full":"./assets/photos/full/IMG_4990.jpg","lat":31.970775,"lon":35.196102777777774,"dt":"2026:05:11 11:09:29","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_4991","thumb":"./assets/photos/thumb/IMG_4991.jpg","full":"./assets/photos/full/IMG_4991.jpg","lat":31.970780555555553,"lon":35.19608611111111,"dt":"2026:05:11 11:09:30","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_4994","thumb":"./assets/photos/thumb/IMG_4994.jpg","full":"./assets/photos/full/IMG_4994.jpg","lat":31.97069722222222,"lon":35.195775,"dt":"2026:05:11 11:15:05","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_4995","thumb":"./assets/photos/thumb/IMG_4995.jpg","full":"./assets/photos/full/IMG_4995.jpg","lat":31.97053611111111,"lon":35.19605555555555,"dt":"2026:05:11 11:15:06","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_4996","thumb":"./assets/photos/thumb/IMG_4996.jpg","full":"./assets/photos/full/IMG_4996.jpg","lat":31.97071111111111,"lon":35.196441666666665,"dt":"2026:05:11 11:16:23","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_4999","thumb":"./assets/photos/thumb/IMG_4999.jpg","full":"./assets/photos/full/IMG_4999.jpg","lat":31.970894444444443,"lon":35.19638333333333,"dt":"2026:05:11 11:17:42","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_5002","thumb":"./assets/photos/thumb/IMG_5002.jpg","full":"./assets/photos/full/IMG_5002.jpg","lat":31.970980555555553,"lon":35.19632222222222,"dt":"2026:05:11 11:18:03","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_5003","thumb":"./assets/photos/thumb/IMG_5003.jpg","full":"./assets/photos/full/IMG_5003.jpg","lat":31.971077777777776,"lon":35.196266666666666,"dt":"2026:05:11 11:18:14","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_5004","thumb":"./assets/photos/thumb/IMG_5004.jpg","full":"./assets/photos/full/IMG_5004.jpg","lat":31.97109722222222,"lon":35.196188888888884,"dt":"2026:05:11 11:18:28","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_5005","thumb":"./assets/photos/thumb/IMG_5005.jpg","full":"./assets/photos/full/IMG_5005.jpg","lat":31.971172222222222,"lon":35.19626944444444,"dt":"2026:05:11 11:19:18","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_5006","thumb":"./assets/photos/thumb/IMG_5006.jpg","full":"./assets/photos/full/IMG_5006.jpg","lat":31.971230555555554,"lon":35.196011111111105,"dt":"2026:05:11 11:19:51","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_5008","thumb":"./assets/photos/thumb/IMG_5008.jpg","full":"./assets/photos/full/IMG_5008.jpg","lat":31.971016666666664,"lon":35.19630833333333,"dt":"2026:05:11 11:20:24","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_5009","thumb":"./assets/photos/thumb/IMG_5009.jpg","full":"./assets/photos/full/IMG_5009.jpg","lat":31.970869444444443,"lon":35.19639722222222,"dt":"2026:05:11 11:20:38","zone":"z11_outdoor_courtyard_garden"},{"stem":"IMG_5020","thumb":"./assets/photos/thumb/IMG_5020.jpg","full":"./assets/photos/full/IMG_5020.jpg","lat":31.970924999999998,"lon":35.197063888888884,"dt":"2026:05:11 11:58:39","zone":"z11_outdoor_courtyard_garden"},{"stem":"bd902677-0e88-41fa-a54b-fcbe517a89cb","thumb":"./assets/photos/thumb/bd902677-0e88-41fa-a54b-fcbe517a89cb.jpg","full":"./assets/photos/full/bd902677-0e88-41fa-a54b-fcbe517a89cb.jpg","lat":null,"lon":null,"dt":null,"zone":"z11_outdoor_courtyard_garden"}],"photo_ids":["IMG_4948","IMG_4966","IMG_4990","IMG_4991","IMG_4994","IMG_4995","IMG_4996","IMG_4999","IMG_5002","IMG_5003","IMG_5004","IMG_5005","IMG_5006","IMG_5008","IMG_5009","IMG_5020","bd902677-0e88-41fa-a54b-fcbe517a89cb"],"time_range":["2026:05:11 10:46:08","2026:05:11 11:58:39"],"centroid":{"lat":31.970904340277777,"lon":35.19626944444444},"color":"#4a7c3a","tint":"#dce8d4","emoji":"🌳","floor":"Outdoor","themes":["Outdoor","Workshop spaces"]},{"id":"z12_wall_text_motifs","title_en":"Wall Text & Symbols (graphic motifs)","title_ar":"كتابات الجدران ومنحوتاتها","summary":"Arabic-language wall writings across rooms and the rooftop. Two striking pieces: 'سجن حينما يحسم التوقعة' (cell / prison metaphor) and 'الحرية التي لا مقابل لها إنما هي المقابل' (Freedom that has no price is itself the price). Powerful visual identity for the camp.","activities":["Title-design source material (camp brand / promo teaser)","Photography prompt: typography in space","Recurring B-roll motif across the doc"],"creative_notes":"Verify with Amjad which writings are part of the institute's heritage (do not paint over) and which are open to reinterpretation. Treat as living archive.","photos":[{"stem":"IMG_4945","thumb":"./assets/photos/thumb/IMG_4945.jpg","full":"./assets/photos/full/IMG_4945.jpg","lat":31.97072222222222,"lon":35.19622777777777,"dt":"2026:05:11 10:45:12","zone":"z12_wall_text_motifs"},{"stem":"IMG_4947","thumb":"./assets/photos/thumb/IMG_4947.jpg","full":"./assets/photos/full/IMG_4947.jpg","lat":31.970766666666666,"lon":35.1962,"dt":"2026:05:11 10:45:35","zone":"z12_wall_text_motifs"},{"stem":"IMG_4967","thumb":"./assets/photos/thumb/IMG_4967.jpg","full":"./assets/photos/full/IMG_4967.jpg","lat":31.970919444444444,"lon":35.19624722222222,"dt":"2026:05:11 10:55:32","zone":"z12_wall_text_motifs"},{"stem":"IMG_4969","thumb":"./assets/photos/thumb/IMG_4969.jpg","full":"./assets/photos/full/IMG_4969.jpg","lat":31.970836111111108,"lon":35.19636666666666,"dt":"2026:05:11 10:57:28","zone":"z12_wall_text_motifs"},{"stem":"IMG_4970","thumb":"./assets/photos/thumb/IMG_4970.jpg","full":"./assets/photos/full/IMG_4970.jpg","lat":31.97083888888889,"lon":35.19636666666666,"dt":"2026:05:11 10:57:39","zone":"z12_wall_text_motifs"}],"photo_ids":["IMG_4945","IMG_4947","IMG_4967","IMG_4969","IMG_4970"],"time_range":["2026:05:11 10:45:12","2026:05:11 10:57:39"],"centroid":{"lat":31.970816666666668,"lon":35.196281666666664},"color":"#b03a3a","tint":"#f6d6d6","emoji":"✒️","floor":"Cross-floor","themes":["Set-design","Wall-text"]},{"id":"z13_exterior_views","title_en":"Window & Rooftop Views (Birzeit panorama)","title_ar":"إطلالات نوافذ وسطح بيرزيت","summary":"Window framings overlooking the courtyard, neighbouring buildings, Birzeit valley, and the old town. Naturally cinematic.","activities":["Establishing shots / opening sequence","Rule-of-thirds framing exercise (use window as natural matte)","Promo teaser cutaways"],"creative_notes":"South-facing windows = harsh midday, magic at 17:00+. North-facing = consistent soft light all day.","photos":[{"stem":"IMG_4946","thumb":"./assets/photos/thumb/IMG_4946.jpg","full":"./assets/photos/full/IMG_4946.jpg","lat":31.970724999999998,"lon":35.19622777777777,"dt":"2026:05:11 10:45:18","zone":"z13_exterior_views"},{"stem":"IMG_4953","thumb":"./assets/photos/thumb/IMG_4953.jpg","full":"./assets/photos/full/IMG_4953.jpg","lat":31.97078611111111,"lon":35.19626944444444,"dt":"2026:05:11 10:50:43","zone":"z13_exterior_views"},{"stem":"IMG_4968","thumb":"./assets/photos/thumb/IMG_4968.jpg","full":"./assets/photos/full/IMG_4968.jpg","lat":31.970841666666665,"lon":35.196261111111106,"dt":"2026:05:11 10:55:39","zone":"z13_exterior_views"}],"photo_ids":["IMG_4946","IMG_4953","IMG_4968"],"time_range":["2026:05:11 10:45:18","2026:05:11 10:55:39"],"centroid":{"lat":31.970784259259258,"lon":35.19625277777777},"color":"#6b7c7d","tint":"#dee6e6","emoji":"🪟","floor":"Cross-floor","themes":["Set-design"]},{"id":"z14_utility_basement","title_en":"Utility Basement / Boiler Tunnel","title_ar":"قبو الخدمات","summary":"Narrow corridor with overhead pipes, water-damaged ceiling, stacked gas cylinders. Rough, atmospheric.","activities":["Atmospheric / horror scene set","Sound design environment (drips, pipe knocks, low rumble)","Lighting drill: practical bare-bulb + flashlight scene"],"creative_notes":"Safety: gas cylinders + low ceiling. Light it cold (3200K minus green). No open flame.","photos":[{"stem":"IMG_4997","thumb":"./assets/photos/thumb/IMG_4997.jpg","full":"./assets/photos/full/IMG_4997.jpg","lat":31.970663888888886,"lon":35.196486111111106,"dt":"2026:05:11 11:16:50","zone":"z14_utility_basement"},{"stem":"IMG_5011","thumb":"./assets/photos/thumb/IMG_5011.jpg","full":"./assets/photos/full/IMG_5011.jpg","lat":31.970755555555552,"lon":35.19632222222222,"dt":"2026:05:11 11:21:22","zone":"z14_utility_basement"},{"stem":"IMG_5012","thumb":"./assets/photos/thumb/IMG_5012.jpg","full":"./assets/photos/full/IMG_5012.jpg","lat":31.970894444444443,"lon":35.19625555555555,"dt":"2026:05:11 11:21:28","zone":"z14_utility_basement"}],"photo_ids":["IMG_4997","IMG_5011","IMG_5012"],"time_range":["2026:05:11 11:16:50","2026:05:11 11:21:28"],"centroid":{"lat":31.970771296296295,"lon":35.19635462962963},"color":"#2c3e50","tint":"#cbd4dc","emoji":"⚙️","floor":"Basement","themes":["Set-design","Utility"]},{"id":"z15_chalkboard_classroom_assets","title_en":"Classroom Assets","title_ar":"أدوات الفصل","summary":"Green chalkboard + easel surfaces present on site. Useful for whiteboarding shoot plans, schedules.","activities":["Daily call-sheet board (one per track)","Storyboarding station","Schedule visibility"],"creative_notes":"Chalk doubles as on-set art department supply.","photos":[{"stem":"IMG_5014","thumb":"./assets/photos/thumb/IMG_5014.jpg","full":"./assets/photos/full/IMG_5014.jpg","lat":31.970952777777775,"lon":35.19523888888889,"dt":"2026:05:11 11:23:55","zone":"z15_chalkboard_classroom_assets"}],"photo_ids":["IMG_5014"],"time_range":["2026:05:11 11:23:55","2026:05:11 11:23:55"],"centroid":{"lat":31.970952777777775,"lon":35.19523888888889},"color":"#1e6b52","tint":"#cde2d7","emoji":"📝","floor":"Ground","themes":["Workshop spaces","Equipment"]},{"id":"z16_kitchen_derelict","title_en":"Old Kitchen (derelict)","title_ar":"المطبخ القديم","summary":"Old stove + fridge in a disused kitchen. Visible through a barred opening. Not for cooking — we cook off-site or in the active institute kitchen.","activities":["Production design asset","Period scene candidate"],"creative_notes":"Heavy patina — minimal dressing needed for an 80s/90s period scene.","photos":[{"stem":"IMG_4985","thumb":"./assets/photos/thumb/IMG_4985.jpg","full":"./assets/photos/full/IMG_4985.jpg","lat":31.971149999999998,"lon":35.195766666666664,"dt":"2026:05:11 11:07:40","zone":"z16_kitchen_derelict"}],"photo_ids":["IMG_4985"],"time_range":["2026:05:11 11:07:40","2026:05:11 11:07:40"],"centroid":{"lat":31.971149999999998,"lon":35.195766666666664},"color":"#8b6f47","tint":"#ecd9c0","emoji":"🍳","floor":"Ground","themes":["Set-design","Utility"]},{"id":"z17_rusted_door_arrow","title_en":"Iron Door with Red Arrow","title_ar":"الباب الحديدي والسهم","summary":"Rusted double iron door with a painted red arrow — a single visually arresting object on the compound.","activities":["Title card / poster background","Doorway portrait drill (single subject, single light)"],"creative_notes":"Symbolism on-tap: the red arrow as direction motif for the camp.","photos":[{"stem":"IMG_4987","thumb":"./assets/photos/thumb/IMG_4987.jpg","full":"./assets/photos/full/IMG_4987.jpg","lat":31.970894444444443,"lon":35.19609722222222,"dt":"2026:05:11 11:08:35","zone":"z17_rusted_door_arrow"}],"photo_ids":["IMG_4987"],"time_range":["2026:05:11 11:08:35","2026:05:11 11:08:35"],"centroid":{"lat":31.970894444444443,"lon":35.19609722222222},"color":"#a83a2a","tint":"#f4cfc6","emoji":"➡️","floor":"Cross-floor","themes":["Set-design","Wall-text"]},{"id":"z18_main_stone_facade","title_en":"Main Stone Façade (front of building)","title_ar":"واجهة المبنى الحجرية","summary":"Front of Edward Said Institute — limestone Palestinian masonry, recessed grilled windows, pergola, palm + olive in frame.","activities":["Group cohort shot — arrival day","Wide establishing of the venue","Doc opening establishing shot"],"creative_notes":"Stone glows warm at 17:00–18:30 (golden hour).","photos":[{"stem":"IMG_5001","thumb":"./assets/photos/thumb/IMG_5001.jpg","full":"./assets/photos/full/IMG_5001.jpg","lat":31.97095,"lon":35.19636666666666,"dt":"2026:05:11 11:17:49","zone":"z18_main_stone_facade"}],"photo_ids":["IMG_5001"],"time_range":["2026:05:11 11:17:49","2026:05:11 11:17:49"],"centroid":{"lat":31.97095,"lon":35.19636666666666},"color":"#a08263","tint":"#ebdec9","emoji":"🏛️","floor":"Ground","themes":["Set-design"]}],"partners":[{"id":"p_circus","name_en":"Palestine Circus School","name_ar":"مدرسة سيرك فلسطين","contact":"Mohammad Rabbah","workshop":"Camera movement using circus tools + body capability","lat":31.9716,"lon":35.1991,"note":"Old town, walking distance"},{"id":"p_rednoses","name_en":"Red Noses","name_ar":"الأنوف الحمر","contact":"Daoud (زعتر), Ezzat Natsheh (سمسم)","workshop":"Silent film / mime — no dialogue","lat":31.9705,"lon":35.1985,"note":"Old town, walking distance"},{"id":"p_ashtar","name_en":"Ashtar Theatre","name_ar":"مسرح عشتار","contact":"Iman Aoun / Emile Saba","workshop":"TBD — same Edward Said compound; verify renovation timing for August","co_located":true,"lat":31.971,"lon":35.1962,"note":"Same Edward Said compound"},{"id":"p_rozana","name_en":"Al-Rozana","name_ar":"مؤسسة الروزنا","contact":"Raed Saadeh","workshop":"Building access — currently inactive, custodianship transferred","lat":31.9712,"lon":35.1978,"note":"Walking distance, custodianship Raed Saadeh"},{"id":"p_nayzak","name_en":"Al-Nayzak","name_ar":"النيزك","contact":"Raed Saadeh","workshop":"Building access — opposite Al-Rozana","lat":31.9714,"lon":35.1978,"note":"Opposite Al-Rozana"}],"references":{"satellite_wide":"./assets/satellite/satellite_birzeit_wide.png","satellite_zoom":"./assets/satellite/satellite_birzeit_zoom.jpg","sunpath":["./assets/satellite/sunpath_wide.jpg","./assets/satellite/sunpath_mid.jpg","./assets/satellite/sunpath_zoomed.jpg"],"annotation_circle":"./assets/satellite/annotation_circle.jpg"},"meta":{"generated_at":"2026-05-11","photo_count":82,"discarded_count":4}}</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/suncalc@1.9.0/suncalc.js"></script>
+<script>
+(() => {
+  'use strict';
+  let DATA;
+  try {
+    DATA = JSON.parse(document.getElementById('data').textContent);
+  } catch (e) {
+    document.body.innerHTML = '<div style="padding:40px; font-family:system-ui;">Failed to load map data. Reload the page.</div>';
+    return;
+  }
+  if (typeof L === 'undefined') {
+    document.body.innerHTML = '<div style="padding:40px; font-family:system-ui;">Map library failed to load. Check your network connection and reload.</div>';
+    return;
+  }
+  window._DATA = DATA;
+
+  const editMode = new URLSearchParams(location.search).get('edit') === '1';
+  const corrected = {};
+
+  const isMobile = () => window.matchMedia('(max-width:720px)').matches;
+  const $ = (id) => document.getElementById(id);
+
+  /* ---------- header ---------- */
+  $('brandTitle').textContent = `${DATA.venue.name_en.split('(')[0].trim()} · ${DATA.venue.town_en}`;
+  $('brandAr').textContent = DATA.venue.name_ar;
+  $('brandDate').textContent = DATA.scout_date;
+  const photoCount = DATA.zones.reduce((s, z) => s + z.photos.length, 0);
+  $('brandCounts').textContent = `${photoCount} photos · ${DATA.zones.length} zones`;
+  $('sunrise').textContent = DATA.sun.sunrise_local;
+  $('solarnoon').textContent = DATA.sun.solar_noon_local;
+  $('sunset').textContent = DATA.sun.sunset_local;
+  $('railSub').textContent = `${DATA.zones.length} distinct spaces · tap to fly`;
+
+  /* partner strip */
+  const partnerStrip = $('partnerStrip');
+  DATA.partners.forEach(p => {
+    const b = document.createElement('button');
+    b.className = 'partner-pill';
+    b.innerHTML = `${p.name_en} <span class="ar" dir="rtl">${p.name_ar}</span>`;
+    b.title = p.workshop || '';
+    b.setAttribute('aria-label', `${p.name_en} — ${p.workshop || ''}`);
+    b.onclick = () => flyToPartner(p);
+    partnerStrip.appendChild(b);
+  });
+
+  /* ---------- zone rail ---------- */
+  const zoneList = $('zoneList');
+  DATA.zones.forEach(z => {
+    const li = document.createElement('li');
+    li.dataset.zid = z.id;
+    li.setAttribute('role', 'button');
+    li.setAttribute('tabindex', '0');
+    li.setAttribute('aria-label', `${z.title_en}, ${z.photos.length} photos`);
+    li.innerHTML = `
+      <div class="swatch" style="background:${z.color}" aria-hidden="true"></div>
+      <div class="zone-emoji" aria-hidden="true">${z.emoji || '📍'}</div>
+      <div class="zone-meta">
+        <div class="zone-name">${z.title_en}</div>
+        <div class="zone-ar" dir="rtl">${z.title_ar}</div>
+        <div class="zone-count">${z.photos.length} photo${z.photos.length===1?'':'s'}</div>
+      </div>
+    `;
+    li.onclick = () => openZone(z.id);
+    li.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openZone(z.id); }};
+    zoneList.appendChild(li);
+  });
+
+  /* ---------- map ---------- */
+  const map = L.map('map', {
+    center: [DATA.venue.approx_center.lat, DATA.venue.approx_center.lon],
+    zoom: 19,
+    minZoom: 14,
+    maxZoom: 21,
+    zoomControl: true,
+    tap: true,
+  });
+
+  /* ---------- basemap registry (B3) ---------- */
+  const BASEMAP_STORAGE_KEY = 'kawader_map_basemap';
+  function makeEsriSat() {
+    return L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      { attribution: 'Tiles &copy; Esri — Earthstar Geographics', maxZoom: 21, maxNativeZoom: 19, detectRetina: true }
+    );
+  }
+  function makeEsriLabels() {
+    return L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+      { attribution: '', maxZoom: 21, maxNativeZoom: 19, opacity: 0.85, detectRetina: true }
+    );
+  }
+  function makeOsm() {
+    return L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { attribution: '&copy; OpenStreetMap', maxZoom: 19, detectRetina: true }
+    );
+  }
+  function makeOsmCarto() {
+    return L.tileLayer(
+      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { attribution: '&copy; OpenStreetMap', maxZoom: 19, detectRetina: true }
+    );
+  }
+  const basemaps = {
+    hybrid:    () => [makeEsriSat(), makeEsriLabels()],
+    satellite: () => [makeEsriSat()],
+    streets:   () => [makeOsm()],
+    carto:     () => [makeOsmCarto()],
+    blank:     () => [],
+  };
+  let currentBasemapName = null;
+  let currentBasemapLayers = [];
+  function setBasemap(name) {
+    if (!basemaps[name]) name = 'hybrid';
+    currentBasemapLayers.forEach(l => map.removeLayer(l));
+    currentBasemapLayers = basemaps[name]();
+    currentBasemapLayers.forEach(l => l.addTo(map));
+    currentBasemapName = name;
+    try { localStorage.setItem(BASEMAP_STORAGE_KEY, name); } catch (e) {}
+    document.querySelector('.leaflet-container').style.background =
+      name === 'blank' ? '#1d2630' : '';
+  }
+  const initialBasemap = (() => {
+    try { return localStorage.getItem(BASEMAP_STORAGE_KEY) || 'hybrid'; }
+    catch (e) { return 'hybrid'; }
+  })();
+  setBasemap(initialBasemap);
+
+  /* ---------- zone polygons ---------- */
+  function convexHull(points) {
+    if (points.length < 3) return points.slice();
+    const pts = points.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    const cross = (O, A, B) => (A[0] - O[0]) * (B[1] - O[1]) - (A[1] - O[1]) * (B[0] - O[0]);
+    const lower = [];
+    for (const p of pts) {
+      while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) lower.pop();
+      lower.push(p);
+    }
+    const upper = [];
+    for (let i = pts.length - 1; i >= 0; i--) {
+      const p = pts[i];
+      while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) upper.pop();
+      upper.push(p);
+    }
+    return lower.slice(0, -1).concat(upper.slice(0, -1));
+  }
+
+  const zonePolys = {};
+  DATA.zones.forEach(z => {
+    const pts = z.photos.filter(p => p.lat && p.lon).map(p => [p.lat, p.lon]);
+    if (pts.length < 2) return;
+    let hull = pts.length >= 3 ? convexHull(pts) : pts;
+    const cx = hull.reduce((s, p) => s + p[0], 0) / hull.length;
+    const cy = hull.reduce((s, p) => s + p[1], 0) / hull.length;
+    hull = hull.map(([x, y]) => [cx + (x - cx) * 1.35 + 0.00002, cy + (y - cy) * 1.35]);
+    const poly = L.polygon(hull, {
+      color: z.color, weight: 1.8, opacity: 0.7, fillColor: z.color, fillOpacity: 0.12,
+      smoothFactor: 1, interactive: false,
+    }).addTo(map);
+    zonePolys[z.id] = poly;
+  });
+
+  /* ---------- photo markers (zoom-aware) ---------- */
+  const allPhotos = DATA.zones.flatMap(z => z.photos.map(p => ({ ...p, _zone: z })));
+  const markerMap = {};
+  const photoMarkers = [];
+
+  // Distribute coincident points around a tight circle so they don't fully overlap
+  function spreadPoints(photos) {
+    const grouped = new Map();
+    photos.forEach(p => {
+      if (!p.lat || !p.lon) return;
+      const key = p.lat.toFixed(5) + ',' + p.lon.toFixed(5);
+      if (!grouped.has(key)) grouped.set(key, []);
+      grouped.get(key).push(p);
+    });
+    grouped.forEach((group, key) => {
+      if (group.length === 1) {
+        group[0]._displayLat = group[0].lat;
+        group[0]._displayLon = group[0].lon;
+        return;
+      }
+      // Place around a small circle (~3 metres radius)
+      const r = 0.00003;
+      group.forEach((p, i) => {
+        const a = (2 * Math.PI * i) / group.length;
+        p._displayLat = p.lat + r * Math.cos(a);
+        p._displayLon = p.lon + r * Math.sin(a) / Math.cos(p.lat * Math.PI / 180);
+      });
+    });
+  }
+  spreadPoints(allPhotos);
+
+  function makeIcon(p, dot) {
+    const cls = dot ? 'photo-marker dot' : 'photo-marker';
+    const bg = dot ? '' : `background-image:url('${p.thumb}');`;
+    return L.divIcon({
+      className: '',
+      html: `<div class="${cls}" style="${bg}background-color:${p._zone.color}; border-color:${p._zone.color}"></div>`,
+      iconSize: dot ? [14, 14] : [34, 34],
+      iconAnchor: dot ? [7, 7] : [17, 17],
+    });
+  }
+
+  allPhotos.forEach(p => {
+    if (!p._displayLat) return;
+    const m = L.marker([p._displayLat, p._displayLon], { icon: makeIcon(p, true), zIndexOffset: 100, keyboard: false, draggable: editMode });
+    m.on('click', () => { if (!editMode && !notesMode) openLightbox(p); });
+    m._photo = p;
+    photoMarkers.push(m);
+    markerMap[p.stem] = m;
+    m.addTo(map);
+    if (editMode) {
+      m.on('dragend', (e) => {
+        const ll = e.target.getLatLng();
+        corrected[p.stem] = { lat: ll.lat, lon: ll.lng };
+      });
+    }
+  });
+
+  let currentMarkerMode = 'dot';
+  function updateMarkers() {
+    const z = map.getZoom();
+    const mode = z >= 18 ? 'thumb' : 'dot';
+    if (mode === currentMarkerMode) return;
+    currentMarkerMode = mode;
+    photoMarkers.forEach(m => {
+      m.setIcon(makeIcon(m._photo, mode === 'dot'));
+    });
+  }
+  map.on('zoomend', updateMarkers);
+  updateMarkers();
+
+  /* ---------- partner markers ---------- */
+  DATA.partners.forEach(p => {
+    if (!p.lat || !p.lon) return;
+    const cls = p.id === 'p_ashtar' ? 'partner-marker ashtar' : 'partner-marker';
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="${cls}" title="${p.name_en}">★</div>`,
+      iconSize: [30, 30], iconAnchor: [15, 15],
+    });
+    const m = L.marker([p.lat, p.lon], { icon, keyboard: false }).addTo(map);
+    m.bindTooltip(
+      `<b>${p.name_en}</b><br><span style="font-family:var(--ar);direction:rtl">${p.name_ar}</span><br><i>${p.workshop || ''}</i><br><span style="opacity:.7;font-size:10px">${p.note || ''} · approximate</span>`,
+      { direction: 'top', offset: [0, -10] }
+    );
+    p._marker = m;
+  });
+
+  function flyToPartner(p) {
+    if (!p.lat || !p.lon) return;
+    map.flyTo([p.lat, p.lon], 19, { duration: 0.8 });
+    if (p._marker) p._marker.openTooltip();
+  }
+
+  /* ---------- detail panel ---------- */
+  const detail = $('detail');
+  const backdrop = $('backdrop');
+  let currentZone = null;
+  let lastFocus = null;
+
+  function openZone(zid, opts = {}) {
+    const z = DATA.zones.find(x => x.id === zid);
+    if (!z) return;
+    currentZone = z;
+    lastFocus = document.activeElement;
+
+    document.querySelectorAll('.zone-list li').forEach(li => {
+      const active = li.dataset.zid === zid;
+      li.classList.toggle('active', active);
+      if (active) li.setAttribute('aria-current', 'true'); else li.removeAttribute('aria-current');
+    });
+
+    $('dhSwatch').style.background = z.color;
+    $('dhZone').textContent = z.id.replace(/^z\d+_/, '').replace(/_/g, ' ').toUpperCase();
+    $('dhTitle').textContent = `${z.emoji} ${z.title_en}`;
+    $('dhAr').textContent = z.title_ar;
+    $('dhCount').textContent = `${z.photos.length} photo${z.photos.length===1?'':'s'}`;
+    if (z.time_range) {
+      const a = z.time_range[0]?.split(' ')[1]?.slice(0,5) || '';
+      const b = z.time_range[1]?.split(' ')[1]?.slice(0,5) || '';
+      $('dhTimeRange').textContent = a === b ? a : `${a} → ${b}`;
+    } else {
+      $('dhTimeRange').textContent = '';
+    }
+
+    const body = $('detailBody');
+    body.innerHTML = `
+      <div class="detail-section">
+        <h3>What's here</h3>
+        <p>${escapeHtml(z.summary)}</p>
+      </div>
+      ${z.creative_notes ? `<div class="detail-section">
+        <h3>Creative notes</h3>
+        <p class="creative-note">${escapeHtml(z.creative_notes)}</p>
+      </div>` : ''}
+      <div class="detail-section">
+        <h3>Hypothetical activities</h3>
+        <ul class="activities">${z.activities.map(a => `<li>${escapeHtml(a)}</li>`).join('')}</ul>
+      </div>
+      <div class="detail-section">
+        <h3>Photos · ${z.photos.length}</h3>
+        <span class="gps-approx-note">Pin positions are approximate (iPhone EXIF GPS, indoor drift ±10–30 m).</span>
+        <div class="photo-grid">${z.photos.map(p => `<img src="${p.thumb}" data-stem="${p.stem}" alt="Scout photo ${p.stem} — ${escapeHtml(z.title_en)}" loading="lazy" decoding="async" />`).join('')}</div>
+      </div>
+    `;
+    body.querySelectorAll('.photo-grid img').forEach(img => {
+      img.onclick = () => {
+        const p = z.photos.find(x => x.stem === img.dataset.stem);
+        openLightbox(p, z);
+      };
+    });
+    body.scrollTop = 0;
+
+    detail.classList.add('open');
+    detail.setAttribute('aria-hidden', 'false');
+    if (isMobile()) backdrop.classList.add('show');
+
+    if (!opts.skipMapFly && z.centroid?.lat) {
+      const pts = z.photos.filter(p => p.lat && p.lon).map(p => [p.lat, p.lon]);
+      if (pts.length > 1) {
+        map.flyToBounds(L.latLngBounds(pts).pad(0.4), { maxZoom: 20, duration: 0.6 });
+      } else {
+        map.flyTo([z.centroid.lat, z.centroid.lon], 20, { duration: 0.6 });
+      }
+    }
+
+    if (!opts.skipHash) history.replaceState({ zone: z.id }, '', '#' + z.id);
+
+    if (isMobile()) {
+      closeRail();
+      $('detailClose').focus({ preventScroll: true });
+    }
+  }
+
+  function closeDetail() {
+    detail.classList.remove('open');
+    detail.setAttribute('aria-hidden', 'true');
+    backdrop.classList.remove('show');
+    document.querySelectorAll('.zone-list li').forEach(li => {
+      li.classList.remove('active');
+      li.removeAttribute('aria-current');
+    });
+    currentZone = null;
+    history.replaceState({}, '', location.pathname + location.search);
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  $('detailClose').onclick = closeDetail;
+  backdrop.onclick = () => { closeDetail(); closeRail(); };
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  /* bottom-sheet swipe-down to dismiss on mobile */
+  let sheetStartY = 0, sheetDeltaY = 0, sheetDragging = false;
+  function onSheetStart(e) {
+    if (!isMobile()) return;
+    sheetDragging = true; sheetStartY = (e.touches ? e.touches[0].clientY : e.clientY); sheetDeltaY = 0;
+    detail.style.transition = 'none';
+  }
+  function onSheetMove(e) {
+    if (!sheetDragging) return;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    sheetDeltaY = Math.max(0, y - sheetStartY);
+    detail.style.transform = `translateY(${sheetDeltaY}px)`;
+  }
+  function onSheetEnd() {
+    if (!sheetDragging) return;
+    sheetDragging = false;
+    detail.style.transition = '';
+    if (sheetDeltaY > 100) {
+      detail.style.transform = '';
+      closeDetail();
+    } else {
+      detail.style.transform = '';
+    }
+  }
+  const grab = $('detailGrab');
+  grab.addEventListener('touchstart', onSheetStart, { passive: true });
+  grab.addEventListener('touchmove', onSheetMove, { passive: true });
+  grab.addEventListener('touchend', onSheetEnd);
+  grab.addEventListener('mousedown', onSheetStart);
+  window.addEventListener('mousemove', onSheetMove);
+  window.addEventListener('mouseup', onSheetEnd);
+
+  /* ---------- rail (mobile drawer) ---------- */
+  function openRail() {
+    $('rail').classList.add('open');
+    $('menuBtn').setAttribute('aria-expanded', 'true');
+    if (isMobile()) backdrop.classList.add('show');
+  }
+  function closeRail() {
+    $('rail').classList.remove('open');
+    $('menuBtn').setAttribute('aria-expanded', 'false');
+    if (!detail.classList.contains('open') || !isMobile()) backdrop.classList.remove('show');
+  }
+  $('menuBtn').onclick = () => {
+    if ($('rail').classList.contains('open')) closeRail(); else openRail();
+  };
+  $('railClose').onclick = closeRail;
+
+  /* ---------- lightbox ---------- */
+  const lb = $('lightbox');
+  const lbImg = $('lbImg');
+  let lbList = []; let lbIdx = 0;
+
+  function openLightbox(photo, zoneCtx) {
+    const z = zoneCtx || DATA.zones.find(zz => zz.id === photo.zone);
+    if (z) {
+      lbList = z.photos;
+      lbIdx = lbList.findIndex(p => p.stem === photo.stem);
+      if (lbIdx < 0) lbIdx = 0;
+    } else {
+      lbList = [photo]; lbIdx = 0;
+    }
+    renderLightbox(z);
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    $('lbClose').focus({ preventScroll: true });
+  }
+  function renderLightbox(z) {
+    const p = lbList[lbIdx];
+    lbImg.src = p.full;
+    lbImg.alt = `${p.stem} · ${z ? z.title_en : ''}`;
+    $('lbTitle').textContent = z ? `${z.emoji || ''} ${z.title_en}` : p.stem;
+    const t = (p.dt || '').split(' ')[1]?.slice(0,5) || '';
+    $('lbZone').textContent = `${p.stem} · ${t}${z ? ' · ' + z.title_ar : ''}`;
+    // preload neighbors
+    if (lbList.length > 1) {
+      [(lbIdx+1)%lbList.length, (lbIdx-1+lbList.length)%lbList.length].forEach(i => {
+        const im = new Image(); im.src = lbList[i].full;
+      });
+    }
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+  }
+  $('lbClose').onclick = closeLightbox;
+  $('lbPrev').onclick = () => { if (lbList.length>1){ lbIdx=(lbIdx-1+lbList.length)%lbList.length; renderLightbox(DATA.zones.find(zz => zz.id === lbList[lbIdx].zone)); } };
+  $('lbNext').onclick = () => { if (lbList.length>1){ lbIdx=(lbIdx+1)%lbList.length; renderLightbox(DATA.zones.find(zz => zz.id === lbList[lbIdx].zone)); } };
+
+  /* swipe lightbox on touch */
+  let touchStartX = 0, touchStartY = 0, swiping = false;
+  lb.addEventListener('touchstart', (e) => {
+    const t = e.touches[0]; touchStartX = t.clientX; touchStartY = t.clientY; swiping = true;
+  }, { passive: true });
+  lb.addEventListener('touchend', (e) => {
+    if (!swiping) return; swiping = false;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX; const dy = t.clientY - touchStartY;
+    if (Math.abs(dx) > 60 && Math.abs(dy) < 100) {
+      if (dx > 0) $('lbPrev').click(); else $('lbNext').click();
+    } else if (dy > 100 && Math.abs(dx) < 60) {
+      closeLightbox();
+    }
+  });
+  lb.onclick = (e) => { if (e.target === lb) closeLightbox(); };
+
+  /* ---------- keyboard ---------- */
+  document.addEventListener('keydown', (e) => {
+    if (lb.classList.contains('open')) {
+      if (e.key === 'Escape') { closeLightbox(); e.preventDefault(); }
+      else if (e.key === 'ArrowLeft') $('lbPrev').click();
+      else if (e.key === 'ArrowRight') $('lbNext').click();
+      return;
+    }
+    if (e.key === 'Escape') {
+      if (detail.classList.contains('open')) { closeDetail(); e.preventDefault(); }
+      else if ($('rail').classList.contains('open') && isMobile()) closeRail();
+    }
+  });
+
+  /* ---------- timeline ---------- */
+  const timedPhotos = allPhotos.filter(p => p.dt).sort((a,b) => (a.dt||'').localeCompare(b.dt||''));
+  const tStart = timedPhotos[0]?.dt;
+  const tEnd = timedPhotos[timedPhotos.length-1]?.dt;
+  if (tStart) $('tlStart').textContent = tStart.split(' ')[1].slice(0,5);
+  if (tEnd) $('tlEnd').textContent = tEnd.split(' ')[1].slice(0,5);
+
+  function parseDt(s) {
+    const [d, t] = s.split(' ');
+    const [Y, M, D] = d.split(':');
+    return new Date(`${Y}-${M}-${D}T${t}`).getTime();
+  }
+  const t0 = tStart ? parseDt(tStart) : 0;
+  const t1 = tEnd ? parseDt(tEnd) : 1;
+
+  const track = $('tlTrack');
+  timedPhotos.forEach((p,i) => {
+    const tt = parseDt(p.dt);
+    const pct = (tt - t0) / (t1 - t0) * 100;
+    const tick = document.createElement('div');
+    tick.className = 'tl-tick'; tick.style.left = `calc(${pct}% - 1px)`;
+    tick.dataset.idx = i;
+    track.appendChild(tick);
+  });
+
+  const tlFill = $('tlFill');
+  function tlSeek(pct) {
+    pct = Math.max(0, Math.min(100, pct));
+    tlFill.style.width = pct + '%';
+    track.setAttribute('aria-valuenow', Math.round(pct));
+    const targetMs = t0 + (t1 - t0) * (pct / 100);
+    let closest = timedPhotos[0]; let bd = Infinity;
+    for (const p of timedPhotos) {
+      const d = Math.abs(parseDt(p.dt) - targetMs);
+      if (d < bd) { bd = d; closest = p; }
+    }
+    const lbl = closest.dt.split(' ')[1].slice(0,5) + ' · ' + closest.stem;
+    $('tlCurrent').textContent = lbl;
+    $('tlCurrentMobile').textContent = closest.dt.split(' ')[1].slice(0,5);
+    document.querySelectorAll('.tl-tick').forEach(t => t.classList.toggle('active', timedPhotos[t.dataset.idx]?.stem === closest.stem));
+    if (markerMap[closest.stem]) {
+      map.panTo(markerMap[closest.stem].getLatLng(), { animate: true, duration: 0.4 });
+    }
+    return closest;
+  }
+  function trackToPct(clientX) {
+    const r = track.getBoundingClientRect();
+    return ((clientX - r.left) / r.width) * 100;
+  }
+  let tlDragging = false;
+  track.addEventListener('pointerdown', (e) => {
+    tlDragging = true; track.setPointerCapture(e.pointerId); tlSeek(trackToPct(e.clientX));
+  });
+  track.addEventListener('pointermove', (e) => { if (tlDragging) tlSeek(trackToPct(e.clientX)); });
+  track.addEventListener('pointerup', () => { tlDragging = false; });
+  track.addEventListener('pointercancel', () => { tlDragging = false; });
+
+  let playing = false; let pIv = null;
+  const playBtn = $('tlPlay');
+  function stopPlay() {
+    playing = false; clearInterval(pIv); pIv = null;
+    playBtn.textContent = '▶ Walk-through'; playBtn.classList.remove('active');
+    playBtn.setAttribute('aria-label', 'Play walk-through');
+  }
+  playBtn.onclick = () => {
+    if (playing) { stopPlay(); return; }
+    playing = true; playBtn.textContent = '⏸ Pause'; playBtn.classList.add('active');
+    playBtn.setAttribute('aria-label', 'Pause walk-through');
+    let pct = parseFloat(tlFill.style.width) || 0;
+    pIv = setInterval(() => {
+      pct += 1.0;
+      if (pct >= 100) { pct = 100; tlSeek(pct); stopPlay(); return; }
+      tlSeek(pct);
+    }, 200);
+  };
+  $('tlReset').onclick = () => { stopPlay(); tlSeek(0); };
+
+  /* ---------- sun-path overlay ---------- */
+  const sunToggle = $('overlay-toggle');
+  let sunLayer = null;
+  function buildSunPath() {
+    const c = [DATA.venue.approx_center.lat, DATA.venue.approx_center.lon];
+    const R = 0.0009;
+    const arc = [];
+    for (let t = 0; t <= 1; t += 0.02) {
+      const az = 80 + t * 200;
+      const r = R * (0.5 + 0.5 * Math.sin(t * Math.PI));
+      const dx = r * Math.sin(az * Math.PI / 180);
+      const dy = r * Math.cos(az * Math.PI / 180);
+      arc.push([c[0] + dy, c[1] + dx / Math.cos(c[0] * Math.PI / 180)]);
+    }
+    const g = L.layerGroup();
+    L.polyline(arc, { color:'#e2a64a', weight:3, opacity:0.85, dashArray:'2 4' }).addTo(g);
+    const stations = [
+      { name:'Sunrise '+DATA.sun.sunrise_local, t:0,    color:'#4a73a3' },
+      { name:'09:00',                            t:0.25, color:'#e2a64a' },
+      { name:'Noon '+DATA.sun.solar_noon_local,  t:0.5,  color:'#f4c25a' },
+      { name:'15:00',                            t:0.75, color:'#e2a64a' },
+      { name:'Sunset '+DATA.sun.sunset_local,    t:1,    color:'#1f3a5c' },
+    ];
+    stations.forEach(s => {
+      const p = arc[Math.round(s.t * (arc.length - 1))];
+      L.circleMarker(p, { radius:6, color:'#fff', weight:2, fillColor:s.color, fillOpacity:1 })
+        .bindTooltip(s.name, { permanent:true, direction:'top', offset:[0,-8] })
+        .addTo(g);
+    });
+    return g;
+  }
+  sunToggle.onclick = () => {
+    if (sunLayer) {
+      map.removeLayer(sunLayer); sunLayer = null;
+      sunToggle.classList.remove('active');
+      sunToggle.setAttribute('aria-pressed', 'false');
+      sunToggle.textContent = '☀ Sun-path';
+    } else {
+      sunLayer = buildSunPath(); sunLayer.addTo(map);
+      sunToggle.classList.add('active');
+      sunToggle.setAttribute('aria-pressed', 'true');
+      sunToggle.textContent = '☀ Hide sun-path';
+    }
+  };
+
+  /* ---------- initial focus & deep-link ---------- */
+  const allPts = allPhotos.filter(p => p._displayLat).map(p => [p._displayLat, p._displayLon]);
+  function fitAll() {
+    if (allPts.length) map.fitBounds(L.latLngBounds(allPts).pad(0.25), { maxZoom: 19 });
+  }
+  fitAll();
+  $('fit-all').onclick = fitAll;
+
+  /* ---------- edit mode (?edit=1) ---------- */
+  if (editMode) {
+    const controls = document.querySelector('.map-controls');
+    controls.insertAdjacentHTML('beforeend',
+      '<span class="edit-badge">⚠ EDIT MODE — drag pins to correct</span>' +
+      '<button id="dl-corrected" title="Download corrected data.json">💾 Download corrected</button>'
+    );
+    $('dl-corrected').onclick = () => {
+      const cloned = JSON.parse(JSON.stringify(DATA));
+      cloned.zones.forEach(z => z.photos.forEach(p => {
+        if (corrected[p.stem]) { p.lat = corrected[p.stem].lat; p.lon = corrected[p.stem].lon; }
+      }));
+      const blob = new Blob([JSON.stringify(cloned, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'data-corrected.json';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    };
+  }
+
+  /* deep-link: #z05_roof  or  #z05_roof&note=n_xyz  (resolved fully by parseNoteHash below) */
+  const initialHashRaw = location.hash.replace(/^#/, '');
+  // Defer zone resolution until parseNoteHash exists; if no hash and desktop, open first zone.
+  if (!initialHashRaw && !isMobile()) {
+    setTimeout(() => openZone(DATA.zones[0].id), 600);
+  }
+
+  /* close rail on outside click (mobile) */
+  document.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+    const rail = $('rail');
+    if (rail.classList.contains('open') && !rail.contains(e.target) && !$('menuBtn').contains(e.target)) {
+      closeRail();
+    }
+  });
+
+  /* relayout-on-resize */
+  window.addEventListener('resize', () => map.invalidateSize());
+
+  /* ---------- Track B: filter state ---------- */
+  const FLOOR_OPTIONS = ['All', '3F', '1F', 'Ground', 'Basement', 'Rooftop', 'Outdoor', 'Cross-floor'];
+  const THEME_OPTIONS = ['Accommodation', 'Workshop spaces', 'Outdoor', 'Partners', 'Set-design', 'Wall-text', 'Utility', 'Equipment'];
+
+  const filterState = { floor: 'All', themes: new Set() };
+
+  function zonePassesFilters(z) {
+    if (filterState.floor !== 'All') {
+      const zf = [z.floor, ...(z.floor_aliases || [])];
+      if (!zf.includes(filterState.floor)) return false;
+    }
+    if (filterState.themes.size > 0) {
+      const zthemes = new Set(z.themes || []);
+      for (const t of filterState.themes) {
+        if (!zthemes.has(t)) return false;
+      }
+    }
+    return true;
+  }
+
+  function applyFilters() {
+    const visibleZids = new Set();
+    DATA.zones.forEach(z => {
+      const pass = zonePassesFilters(z);
+      if (pass) visibleZids.add(z.id);
+    });
+
+    // zone-list items
+    document.querySelectorAll('.zone-list li').forEach(li => {
+      li.classList.toggle('hide', !visibleZids.has(li.dataset.zid));
+    });
+    // empty state
+    let empty = document.querySelector('.rail-empty');
+    if (visibleZids.size === 0) {
+      if (!empty) {
+        empty = document.createElement('div');
+        empty.className = 'rail-empty';
+        empty.textContent = 'No zones match these filters.';
+        zoneList.parentNode.insertBefore(empty, zoneList.nextSibling);
+      }
+    } else if (empty) {
+      empty.remove();
+    }
+
+    // photo markers
+    photoMarkers.forEach(m => {
+      const zid = m._photo._zone.id;
+      const show = visibleZids.has(zid);
+      if (show && !map.hasLayer(m)) m.addTo(map);
+      else if (!show && map.hasLayer(m)) map.removeLayer(m);
+    });
+
+    // zone polygons
+    Object.entries(zonePolys).forEach(([zid, poly]) => {
+      const show = visibleZids.has(zid);
+      if (show && !map.hasLayer(poly)) poly.addTo(map);
+      else if (!show && map.hasLayer(poly)) map.removeLayer(poly);
+    });
+
+    // re-apply viz mode so newly-shown polygons get correct style
+    applyVizMode();
+  }
+
+  /* render chips */
+  const floorChips = $('floorChips');
+  FLOOR_OPTIONS.forEach(label => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (label === 'All' ? ' on' : '');
+    b.textContent = label;
+    b.setAttribute('role', 'radio');
+    b.setAttribute('aria-checked', label === 'All' ? 'true' : 'false');
+    b.dataset.floor = label;
+    b.onclick = () => {
+      filterState.floor = label;
+      floorChips.querySelectorAll('.chip').forEach(c => {
+        const on = c.dataset.floor === label;
+        c.classList.toggle('on', on);
+        c.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      applyFilters();
+    };
+    floorChips.appendChild(b);
+  });
+
+  const themeChips = $('themeChips');
+  THEME_OPTIONS.forEach(label => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = label;
+    b.setAttribute('role', 'checkbox');
+    b.setAttribute('aria-checked', 'false');
+    b.dataset.theme = label;
+    b.onclick = () => {
+      if (filterState.themes.has(label)) {
+        filterState.themes.delete(label);
+        b.classList.remove('on');
+        b.setAttribute('aria-checked', 'false');
+      } else {
+        filterState.themes.add(label);
+        b.classList.add('on');
+        b.setAttribute('aria-checked', 'true');
+      }
+      applyFilters();
+    };
+    themeChips.appendChild(b);
+  });
+
+  /* ---------- Track B: basemap picker (UI) ---------- */
+  const basemapSel = $('basemapSel');
+  basemapSel.value = currentBasemapName;
+  basemapSel.onchange = () => {
+    const center = map.getCenter();
+    const zoom = map.getZoom();
+    setBasemap(basemapSel.value);
+    map.setView(center, zoom, { animate: false });
+  };
+
+  /* ---------- Track B: visualisation modes (B4) ---------- */
+  let vizMode = 'identity';
+  const vizGroup = $('vizGroup');
+  const blControls = $('blControls');
+  const blDate = $('blDate');
+  const blTime = $('blTime');
+  const blTimeLabel = $('blTimeLabel');
+  const vizLegend = $('vizLegend');
+
+  function maxActivities() {
+    return DATA.zones.reduce((m, z) => Math.max(m, (z.activities || []).length), 0) || 1;
+  }
+  const MAX_ACT = maxActivities();
+
+  function formatMinutes(mins) {
+    const h = String(Math.floor(mins / 60)).padStart(2, '0');
+    const m = String(mins % 60).padStart(2, '0');
+    return `${h}:${m}`;
+  }
+
+  function applyVizMode() {
+    if (vizMode === 'identity') {
+      Object.entries(zonePolys).forEach(([zid, poly]) => {
+        const z = DATA.zones.find(zz => zz.id === zid);
+        if (!z) return;
+        poly.setStyle({ color: z.color, fillColor: z.color, fillOpacity: 0.12, opacity: 0.7 });
+      });
+      vizLegend.classList.remove('show');
+      vizLegend.innerHTML = '';
+      blControls.classList.remove('show');
+    } else if (vizMode === 'heat') {
+      Object.entries(zonePolys).forEach(([zid, poly]) => {
+        const z = DATA.zones.find(zz => zz.id === zid);
+        if (!z) return;
+        const ratio = (z.activities || []).length / MAX_ACT;
+        const fillOpacity = 0.05 + ratio * 0.5;
+        poly.setStyle({ color: '#4a7c3a', fillColor: '#4a7c3a', fillOpacity, opacity: 0.55 });
+      });
+      vizLegend.classList.add('show');
+      vizLegend.innerHTML = `
+        <div class="lg-title">Activity heat</div>
+        <div class="lg-bar heat"></div>
+        <div class="lg-row"><span>Few</span><span>Many activities</span></div>
+      `;
+      blControls.classList.remove('show');
+    } else if (vizMode === 'bestlight') {
+      const dateStr = blDate.value || '2026-08-05';
+      const mins = parseInt(blTime.value, 10) || 720;
+      blTimeLabel.textContent = formatMinutes(mins);
+      const [Y, M, D] = dateStr.split('-').map(Number);
+      const hh = Math.floor(mins / 60);
+      const mm = mins % 60;
+      // Use local Palestine timezone offset (UTC+3 standard / +3 DST — use +3 as approx)
+      // Build a UTC date that corresponds to the local Palestine time
+      const local = new Date(Date.UTC(Y, (M || 1) - 1, D || 1, hh - 3, mm));
+
+      if (typeof SunCalc === 'undefined') {
+        vizLegend.innerHTML = '<div class="lg-title">Best-light unavailable</div><div>SunCalc failed to load.</div>';
+        vizLegend.classList.add('show');
+        return;
+      }
+
+      Object.entries(zonePolys).forEach(([zid, poly]) => {
+        const z = DATA.zones.find(zz => zz.id === zid);
+        if (!z || !z.centroid) return;
+        const sun = SunCalc.getPosition(local, z.centroid.lat, z.centroid.lon);
+        const alt = sun.altitude; // radians
+        let fillColor, fillOpacity, strokeColor;
+        if (alt > 0) {
+          const warmth = Math.cos(alt);
+          fillColor = '#e2a64a';
+          strokeColor = '#b88a32';
+          fillOpacity = 0.18 + warmth * 0.5;
+        } else {
+          fillColor = '#1f3a5c';
+          strokeColor = '#3a4f6c';
+          fillOpacity = 0.18;
+        }
+        poly.setStyle({ color: strokeColor, fillColor, fillOpacity, opacity: 0.55 });
+      });
+
+      // Compute sun summary for venue center
+      const venueSun = SunCalc.getPosition(local, DATA.venue.approx_center.lat, DATA.venue.approx_center.lon);
+      const venueAltDeg = (venueSun.altitude * 180 / Math.PI).toFixed(1);
+      const venueAzDeg = ((venueSun.azimuth * 180 / Math.PI + 180) % 360).toFixed(0);
+      vizLegend.classList.add('show');
+      vizLegend.innerHTML = `
+        <div class="lg-title">Best-light · ${dateStr} ${formatMinutes(mins)}</div>
+        <div class="lg-bar sun"></div>
+        <div class="lg-row"><span>night</span><span>oblique</span><span>noon</span></div>
+        <div class="nv-meta" style="margin-top:6px;font-size:10px;color:var(--ink-2)">Sun alt ${venueAltDeg}° · az ${venueAzDeg}°</div>
+      `;
+      blControls.classList.add('show');
+    }
+  }
+
+  vizGroup.querySelectorAll('button').forEach(btn => {
+    btn.onclick = () => {
+      vizMode = btn.dataset.viz;
+      vizGroup.querySelectorAll('button').forEach(b => {
+        const on = b === btn;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      applyVizMode();
+    };
+  });
+  blTime.oninput = () => { if (vizMode === 'bestlight') applyVizMode(); };
+  blDate.onchange = () => { if (vizMode === 'bestlight') applyVizMode(); };
+
+  /* ---------- Track B: notes layer (B5/B6/B7) ---------- */
+  const NOTES_STORAGE_KEY = 'kawader_scout_notes_v1';
+  const NOTES_SCHEMA_VERSION = 1;
+  let notesState = { schema_version: NOTES_SCHEMA_VERSION, notes: [] };
+  const noteMarkers = new Map(); // id -> L.marker
+  let notesMode = false;
+  let mapClickHandler = null;
+  let pendingPopup = null; // popup for an unsaved note
+
+  function loadNotes() {
+    try {
+      const raw = localStorage.getItem(NOTES_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.notes)) {
+          notesState = { schema_version: parsed.schema_version || NOTES_SCHEMA_VERSION, notes: parsed.notes };
+        }
+      }
+    } catch (e) { console.warn('Failed to load notes:', e); }
+  }
+  function saveNotes() {
+    try {
+      localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notesState));
+    } catch (e) { console.warn('Failed to save notes:', e); }
+  }
+  function genId() {
+    return 'n_' + Math.random().toString(36).slice(2, 8);
+  }
+  function nearestZone(lat, lon) {
+    let best = null; let bd = Infinity;
+    DATA.zones.forEach(z => {
+      if (!z.centroid) return;
+      const dx = z.centroid.lat - lat;
+      const dy = z.centroid.lon - lon;
+      const d = dx * dx + dy * dy;
+      if (d < bd) { bd = d; best = z.id; }
+    });
+    return best;
+  }
+
+  function makeNoteIcon() {
+    return L.divIcon({
+      className: '',
+      html: `<div class="note-marker" title="Scout note">📌</div>`,
+      iconSize: [30, 30],
+      iconAnchor: [6, 28],
+    });
+  }
+
+  function renderNotes() {
+    // Remove existing markers no longer present
+    const existingIds = new Set(noteMarkers.keys());
+    const currentIds = new Set(notesState.notes.map(n => n.id));
+    existingIds.forEach(id => {
+      if (!currentIds.has(id)) {
+        const m = noteMarkers.get(id);
+        if (m) map.removeLayer(m);
+        noteMarkers.delete(id);
+      }
+    });
+    // Add new
+    notesState.notes.forEach(n => {
+      if (noteMarkers.has(n.id)) return;
+      const m = L.marker([n.lat, n.lon], { icon: makeNoteIcon(), zIndexOffset: 500, keyboard: false });
+      m.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        openNotePopup(n);
+      });
+      m.addTo(map);
+      noteMarkers.set(n.id, m);
+    });
+  }
+
+  function escapeAttr(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function zoneSelectOptions(selectedZid) {
+    return DATA.zones.map(z => `<option value="${z.id}"${z.id === selectedZid ? ' selected' : ''}>${escapeAttr(z.title_en)}</option>`).join('');
+  }
+
+  function buildNoteEditForm(note) {
+    const root = document.createElement('div');
+    root.className = 'note-popover';
+    root.innerHTML = `
+      <h4>${note._isNew ? 'New note' : 'Edit note'}</h4>
+      <label>Title</label>
+      <input type="text" class="nv-title" maxlength="120" value="${escapeAttr(note.title || '')}" placeholder="Short label" />
+      <label>Body</label>
+      <textarea class="nv-body-input" placeholder="What you want to remember about this spot">${escapeAttr(note.body || '')}</textarea>
+      <label>Zone</label>
+      <select class="nv-zone">${zoneSelectOptions(note.zone || nearestZone(note.lat, note.lon))}</select>
+      <label>Photo (optional, &lt;100 KB)</label>
+      <input type="file" class="nv-photo-input" accept="image/*" />
+      <div class="nv-err nv-error" style="display:none"></div>
+      <label>Or paste a Drive/photo URL</label>
+      <input type="url" class="nv-photo-url" placeholder="https://drive.google.com/..." value="${escapeAttr(note.photo_url || '')}" />
+      ${note.photo ? `<img class="nv-photo" src="${note.photo}" alt="Note photo" />` : ''}
+      <div class="npv-actions">
+        ${note._isNew ? '' : '<button class="danger" type="button" data-act="delete">Delete</button>'}
+        <button type="button" data-act="cancel">Cancel</button>
+        <button class="primary" type="button" data-act="save">Save</button>
+      </div>
+    `;
+    return root;
+  }
+
+  function buildNoteReadView(note) {
+    const root = document.createElement('div');
+    root.className = 'note-popover';
+    const z = DATA.zones.find(zz => zz.id === note.zone);
+    const zname = z ? z.title_en : (note.zone || '');
+    let photoHtml = '';
+    if (note.photo) {
+      photoHtml = `<img class="nv-photo" src="${note.photo}" alt="Note photo" />`;
+    } else if (note.photo_url) {
+      photoHtml = `<a href="${escapeAttr(note.photo_url)}" target="_blank" rel="noopener" style="font-size:11px;color:var(--accent)">📷 Open linked photo →</a>`;
+    }
+    root.innerHTML = `
+      <h4>📌 ${escapeAttr(note.title || 'Note')}</h4>
+      ${note.body ? `<div class="nv-body">${escapeAttr(note.body)}</div>` : ''}
+      ${photoHtml}
+      <div class="nv-meta">${escapeAttr(zname)} · ${new Date(note.updated_at || note.created_at).toLocaleString()}</div>
+      <div class="npv-actions">
+        <button type="button" data-act="edit">Edit</button>
+        <button class="danger" type="button" data-act="delete">Delete</button>
+      </div>
+    `;
+    return root;
+  }
+
+  function openNotePopup(note) {
+    const isNew = !!note._isNew;
+    const marker = noteMarkers.get(note.id);
+    // Build read view first (or edit view if new)
+    const renderView = (mode) => {
+      let content;
+      if (mode === 'edit' || isNew) {
+        content = buildNoteEditForm(note);
+        wireEditActions(content, note);
+      } else {
+        content = buildNoteReadView(note);
+        wireReadActions(content, note);
+      }
+      return content;
+    };
+
+    let popup;
+    if (marker) {
+      popup = marker.bindPopup(renderView(isNew ? 'edit' : 'read'), {
+        maxWidth: 340, minWidth: 280, autoPan: true, closeOnClick: false,
+      }).openPopup();
+      if (note.id) history.replaceState({}, '', location.pathname + location.search + '#' + (currentZone ? currentZone.id + '&note=' + note.id : 'note=' + note.id));
+    } else {
+      // For unsaved notes without a marker yet, attach popup to map
+      if (pendingPopup) map.closePopup(pendingPopup);
+      const content = renderView('edit');
+      pendingPopup = L.popup({ maxWidth: 340, minWidth: 280, autoPan: true, closeOnClick: false })
+        .setLatLng([note.lat, note.lon])
+        .setContent(content)
+        .openOn(map);
+    }
+
+    function wireEditActions(root, n) {
+      const titleEl = root.querySelector('.nv-title');
+      const bodyEl = root.querySelector('.nv-body-input');
+      const zoneEl = root.querySelector('.nv-zone');
+      const photoInput = root.querySelector('.nv-photo-input');
+      const photoUrlInput = root.querySelector('.nv-photo-url');
+      const errEl = root.querySelector('.nv-err');
+      let stagedPhoto = n.photo || null;
+
+      photoInput.onchange = () => {
+        const file = photoInput.files[0];
+        if (!file) return;
+        if (file.size > 100 * 1024) {
+          errEl.style.display = 'block';
+          errEl.textContent = 'Photo > 100 KB. Upload to Drive and paste the URL below instead.';
+          photoInput.value = '';
+          return;
+        }
+        errEl.style.display = 'none';
+        const reader = new FileReader();
+        reader.onload = () => { stagedPhoto = reader.result; };
+        reader.readAsDataURL(file);
+      };
+
+      root.querySelectorAll('button').forEach(btn => {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          const act = btn.dataset.act;
+          if (act === 'cancel') {
+            if (isNew) {
+              if (pendingPopup) { map.closePopup(pendingPopup); pendingPopup = null; }
+            } else if (marker) {
+              marker.closePopup();
+            }
+          } else if (act === 'delete') {
+            deleteNote(n.id);
+          } else if (act === 'save') {
+            const now = new Date().toISOString();
+            const saved = {
+              id: n.id,
+              lat: n.lat, lon: n.lon,
+              title: titleEl.value.trim(),
+              body: bodyEl.value.trim(),
+              photo: stagedPhoto,
+              photo_url: photoUrlInput.value.trim() || null,
+              zone: zoneEl.value,
+              created_at: n.created_at || now,
+              updated_at: now,
+            };
+            upsertNote(saved);
+            if (pendingPopup) { map.closePopup(pendingPopup); pendingPopup = null; }
+            // Reopen the saved note in read view
+            setTimeout(() => openNotePopup(saved), 80);
+          }
+        };
+      });
+    }
+
+    function wireReadActions(root, n) {
+      root.querySelectorAll('button').forEach(btn => {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          const act = btn.dataset.act;
+          if (act === 'edit') {
+            const m = noteMarkers.get(n.id);
+            if (m) {
+              const content = buildNoteEditForm(n);
+              wireEditActions(content, n);
+              m.setPopupContent(content);
+            }
+          } else if (act === 'delete') {
+            if (confirm('Delete this note?')) deleteNote(n.id);
+          }
+        };
+      });
+    }
+  }
+
+  function upsertNote(note) {
+    const idx = notesState.notes.findIndex(x => x.id === note.id);
+    if (idx >= 0) notesState.notes[idx] = note;
+    else notesState.notes.push(note);
+    saveNotes();
+    renderNotes();
+  }
+
+  function deleteNote(id) {
+    notesState.notes = notesState.notes.filter(x => x.id !== id);
+    const m = noteMarkers.get(id);
+    if (m) { map.closePopup(); map.removeLayer(m); noteMarkers.delete(id); }
+    saveNotes();
+  }
+
+  function onMapClickForNote(e) {
+    if (!notesMode) return;
+    const { lat, lng } = e.latlng;
+    const note = {
+      id: genId(),
+      lat, lon: lng,
+      title: '', body: '', photo: null, photo_url: null,
+      zone: nearestZone(lat, lng),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      _isNew: true,
+    };
+    openNotePopup(note);
+  }
+
+  const mapWrap = $('mapWrap');
+  const notesToggle = $('notesToggle');
+  const notesToolbar = $('notesToolbar');
+  notesToggle.onclick = () => {
+    notesMode = !notesMode;
+    notesToggle.classList.toggle('on', notesMode);
+    notesToggle.setAttribute('aria-pressed', notesMode ? 'true' : 'false');
+    mapWrap.classList.toggle('notes-on', notesMode);
+    notesToolbar.classList.toggle('show', notesMode);
+    if (notesMode && !mapClickHandler) {
+      mapClickHandler = onMapClickForNote;
+      map.on('click', mapClickHandler);
+    } else if (!notesMode && mapClickHandler) {
+      map.off('click', mapClickHandler);
+      mapClickHandler = null;
+      if (pendingPopup) { map.closePopup(pendingPopup); pendingPopup = null; }
+    }
+  };
+
+  /* B6 — Export */
+  $('notesExport').onclick = () => {
+    const today = new Date().toISOString().slice(0, 10);
+    const payload = {
+      schema_version: NOTES_SCHEMA_VERSION,
+      venue: DATA.venue.name_en,
+      exported_at: new Date().toISOString(),
+      notes: notesState.notes,
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `kawader_scout_notes_${today}.json`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+
+  /* B6 — Import */
+  $('notesImport').onclick = () => $('notesImportFile').click();
+  $('notesImportFile').onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        const incoming = Array.isArray(parsed.notes) ? parsed.notes : (Array.isArray(parsed) ? parsed : []);
+        const existingIds = new Set(notesState.notes.map(n => n.id));
+        let added = 0; let skipped = 0;
+        incoming.forEach(n => {
+          if (!n || !n.id || typeof n.lat !== 'number' || typeof n.lon !== 'number') { skipped++; return; }
+          if (existingIds.has(n.id)) { skipped++; return; }
+          notesState.notes.push(n);
+          existingIds.add(n.id);
+          added++;
+        });
+        saveNotes();
+        renderNotes();
+        alert(`Imported ${added} note${added === 1 ? '' : 's'} · skipped ${skipped} (duplicate id or invalid).`);
+      } catch (err) {
+        alert('Could not parse notes JSON: ' + err.message);
+      } finally {
+        e.target.value = '';
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  /* B7 — Deep-link notes: extend hashchange + initial hash to handle &note=ID */
+  function parseNoteHash() {
+    const h = location.hash.replace(/^#/, '');
+    if (!h) return { zone: null, note: null };
+    const parts = h.split('&').map(p => p.trim()).filter(Boolean);
+    let zoneId = null; let noteId = null;
+    parts.forEach(p => {
+      if (p.startsWith('note=')) noteId = p.slice(5);
+      else if (DATA.zones.some(z => z.id === p)) zoneId = p;
+    });
+    return { zone: zoneId, note: noteId };
+  }
+  function openByHash() {
+    const { zone, note } = parseNoteHash();
+    if (zone) openZone(zone, { skipHash: true });
+    if (note) {
+      const n = notesState.notes.find(x => x.id === note);
+      if (n) setTimeout(() => openNotePopup(n), 400);
+    }
+  }
+
+  /* Replace prior hashchange handler with this enriched one */
+  window.addEventListener('hashchange', openByHash);
+
+  loadNotes();
+  renderNotes();
+
+  // Initial deep-link: resolve zone + note from hash (replaces older initial-hash handler)
+  if (initialHashRaw) {
+    setTimeout(() => openByHash(), 400);
+  }
+
+  /* expose for debugging */
+  window._map = map;
+  window._openZone = openZone;
+  window._notes = () => notesState;
+  window._setBasemap = setBasemap;
+  window._filterState = filterState;
+})();
+</script>
+</body>
+</html>

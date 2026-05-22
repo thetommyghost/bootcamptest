@@ -1,0 +1,15 @@
+{
+  "sprite": "./assets/avatar.png",
+  "frame_size": { "w": 24, "h": 32 },
+  "sheet_size": { "cols": 8, "rows": 4 },
+  "frames_per_direction": 8,
+  "fps": 10,
+  "rows": {
+    "down":  0,
+    "up":    1,
+    "left":  2,
+    "right": 3
+  },
+  "display": { "w": 36, "h": 48, "anchor_x": 18, "anchor_y": 44 },
+  "notes": "Verified on 2026-05-11 by slicing the source sheet: 192x128 px / 8 cols × 4 rows = 24x32 per frame. Row 0 = front (DOWN), row 1 = back (UP), row 2 = left-facing, row 3 = right-facing. Display at 1.5x scale (36x48 px on screen)."
+}

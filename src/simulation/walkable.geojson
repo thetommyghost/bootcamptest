@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "_comment": "Walkable area for the venue twin simulation. This is a GENEROUS bounding polygon derived from photo-coordinate spread (77m N-S × 172m E-W) with ~5m margin. The eastern node extends to z11 outdoor garden's east edge; the western node reaches z15 classroom assets. Refine in ?edit=1 mode by hand-tracing the actual compound wall + walkable paths from satellite imagery.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dar Al-Saeed compound walkable area (v1 — generous starter polygon)",
+        "version": 1,
+        "source": "auto-derived from photo coords on 2026-05-11; refine by hand later"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [35.195150, 31.970480],
+            [35.197180, 31.970480],
+            [35.197180, 31.970780],
+            [35.196500, 31.970920],
+            [35.196500, 31.971310],
+            [35.195150, 31.971310],
+            [35.195150, 31.970480]
+          ]
+        ]
+      }
+    }
+  ]
+}

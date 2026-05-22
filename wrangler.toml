@@ -1,0 +1,18 @@
+# wrangler.toml — Cloudflare Pages config for the Bootcamp Interactive Map
+#
+# Trainee setup: see docs/deployment.md. Replace the CHANGE_ME values below.
+#
+# Quick reminder:
+#   1. npx wrangler pages project create <your-project-name> --production-branch main
+#   2. npx wrangler kv:namespace create NOTES_KV
+#   3. Paste the namespace `id` here, then `npm run deploy`.
+
+name = "CHANGE_ME-your-pages-project-name"   # e.g. "bootcamp-map-trainee"
+pages_build_output_dir = "."
+compatibility_date = "2025-04-01"
+
+[[kv_namespaces]]
+binding = "NOTES_KV"
+id = "CHANGE_ME-kv-namespace-id-from-wrangler-output"
+# Optional preview namespace (only if you want a separate preview env):
+# preview_id = "CHANGE_ME-preview-namespace-id"

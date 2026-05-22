@@ -1,0 +1,1468 @@
+{
+  "venue": {
+    "name_en": "Edward Said Cultural Institute",
+    "name_ar": "\u0625\u062f\u0648\u0627\u0631\u062f \u0633\u0639\u064a\u062f",
+    "town_en": "Birzeit",
+    "town_ar": "\u0628\u064a\u0631\u0632\u064a\u062a",
+    "country": "Palestine",
+    "approx_center": {
+      "lat": 31.97084,
+      "lon": 35.19625
+    },
+    "google_maps": "https://www.google.com/maps/search/?api=1&query=31.970839,35.196249"
+  },
+  "manager": "Amjad (Edward Said Institute)",
+  "shoot_time_range": "2026-05-11 10:19 \u2014 11:58 local",
+  "scout_date": "2026-05-11",
+  "sun": {
+    "sunrise_local": "05:45",
+    "sunset_local": "19:26",
+    "solar_noon_local": "12:35",
+    "moonrise_local": "02:11",
+    "moonset_local": "13:44"
+  },
+  "zones": [
+    {
+      "id": "z01_sammer_workshop",
+      "title_en": "Sammer's Instrument Workshop",
+      "title_ar": "\u0648\u0631\u0634\u0629 \u0633\u0627\u0645\u0631 \u0644\u0635\u0646\u0627\u0639\u0629 \u0627\u0644\u0622\u0644\u0627\u062a",
+      "summary": "Active luthier workshop on the property \u2014 violins, mandolins, tool wall, workbench. Sammer (instrument-maker, venue resident) is a separate doc subject; documentary on him is happening either way.",
+      "activities": [
+        "Documentary subject: Sammer (luthier) \u2014 own doc thread",
+        "Hands-on B-roll workshop: cinematography of craft (close-ups, hands, tools)",
+        "Sound design exercise: tap, scrape, string-pluck textures recorded room-tone"
+      ],
+      "creative_notes": "Window on rear wall opens onto valley + olive grove. Daylight only late morning until early afternoon (window faces N/NW based on sun position).",
+      "photos": [
+        {
+          "stem": "IMG_4936",
+          "thumb": "./assets/photos/thumb/IMG_4936.jpg",
+          "full": "./assets/photos/full/IMG_4936.jpg",
+          "lat": 31.970941666666665,
+          "lon": 35.19617777777778,
+          "dt": "2026:05:11 10:19:49",
+          "zone": "z01_sammer_workshop"
+        },
+        {
+          "stem": "IMG_4937",
+          "thumb": "./assets/photos/thumb/IMG_4937.jpg",
+          "full": "./assets/photos/full/IMG_4937.jpg",
+          "lat": 31.970836111111108,
+          "lon": 35.19628888888889,
+          "dt": "2026:05:11 10:20:13",
+          "zone": "z01_sammer_workshop"
+        },
+        {
+          "stem": "IMG_4938",
+          "thumb": "./assets/photos/thumb/IMG_4938.jpg",
+          "full": "./assets/photos/full/IMG_4938.jpg",
+          "lat": 31.97086111111111,
+          "lon": 35.19624444444444,
+          "dt": "2026:05:11 10:20:23",
+          "zone": "z01_sammer_workshop"
+        },
+        {
+          "stem": "IMG_4939",
+          "thumb": "./assets/photos/thumb/IMG_4939.jpg",
+          "full": "./assets/photos/full/IMG_4939.jpg",
+          "lat": 31.97094722222222,
+          "lon": 35.19623055555555,
+          "dt": "2026:05:11 10:21:01",
+          "zone": "z01_sammer_workshop"
+        },
+        {
+          "stem": "IMG_4940",
+          "thumb": "./assets/photos/thumb/IMG_4940.jpg",
+          "full": "./assets/photos/full/IMG_4940.jpg",
+          "lat": 31.97094444444444,
+          "lon": 35.196188888888884,
+          "dt": "2026:05:11 10:43:11",
+          "zone": "z01_sammer_workshop"
+        },
+        {
+          "stem": "IMG_4941",
+          "thumb": "./assets/photos/thumb/IMG_4941.jpg",
+          "full": "./assets/photos/full/IMG_4941.jpg",
+          "lat": 31.97093333333333,
+          "lon": 35.19620833333333,
+          "dt": "2026:05:11 10:43:17",
+          "zone": "z01_sammer_workshop"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4936",
+        "IMG_4937",
+        "IMG_4938",
+        "IMG_4939",
+        "IMG_4940",
+        "IMG_4941"
+      ],
+      "time_range": [
+        "2026:05:11 10:19:49",
+        "2026:05:11 10:43:17"
+      ],
+      "centroid": {
+        "lat": 31.970910648148145,
+        "lon": 35.19622314814814
+      },
+      "color": "#c97b3a",
+      "tint": "#f9e6d3",
+      "emoji": "\ud83c\udfbb",
+      "floor": "Ground",
+      "themes": [
+        "Workshop spaces",
+        "Doc subject"
+      ]
+    },
+    {
+      "id": "z02_bedrooms_3rd_floor",
+      "title_en": "Bedrooms with Signature Walls (3rd floor)",
+      "title_ar": "\u063a\u0631\u0641 \u0627\u0644\u0646\u0648\u0645 \u0628\u0643\u062a\u0627\u0628\u0627\u062a \u0627\u0644\u062c\u062f\u0631\u0627\u0646 (\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u062b\u0627\u0644\u062b)",
+      "summary": "Single-bed dorm rooms. Some have years of signatures, names, drawings \u2014 past participants left their marks. Per meeting notes, girls' rooms are on the 3rd floor next to admin.",
+      "activities": [
+        "Scene seed: stories pulled from wall imagery (meeting note 01:51)",
+        "Intimate dialogue scenes \u2014 natural backlight from windows",
+        "Documentary motif: name-graffiti as visual through-line for the cohort doc"
+      ],
+      "creative_notes": "Strong backlit silhouettes at midday (windows face SW/W). Dim interiors create natural chiaroscuro. Wall art is a built-in production-design asset.",
+      "photos": [
+        {
+          "stem": "IMG_4942",
+          "thumb": "./assets/photos/thumb/IMG_4942.jpg",
+          "full": "./assets/photos/full/IMG_4942.jpg",
+          "lat": 31.97090833333333,
+          "lon": 35.19624722222222,
+          "dt": "2026:05:11 10:44:18",
+          "zone": "z02_bedrooms_3rd_floor"
+        },
+        {
+          "stem": "IMG_4943",
+          "thumb": "./assets/photos/thumb/IMG_4943.jpg",
+          "full": "./assets/photos/full/IMG_4943.jpg",
+          "lat": 31.970766666666666,
+          "lon": 35.196299999999994,
+          "dt": "2026:05:11 10:44:51",
+          "zone": "z02_bedrooms_3rd_floor"
+        },
+        {
+          "stem": "IMG_4944",
+          "thumb": "./assets/photos/thumb/IMG_4944.jpg",
+          "full": "./assets/photos/full/IMG_4944.jpg",
+          "lat": 31.970688888888887,
+          "lon": 35.19630833333333,
+          "dt": "2026:05:11 10:44:55",
+          "zone": "z02_bedrooms_3rd_floor"
+        },
+        {
+          "stem": "IMG_4945",
+          "thumb": "./assets/photos/thumb/IMG_4945.jpg",
+          "full": "./assets/photos/full/IMG_4945.jpg",
+          "lat": 31.97072222222222,
+          "lon": 35.19622777777777,
+          "dt": "2026:05:11 10:45:12",
+          "zone": "z12_wall_text_motifs"
+        },
+        {
+          "stem": "IMG_4947",
+          "thumb": "./assets/photos/thumb/IMG_4947.jpg",
+          "full": "./assets/photos/full/IMG_4947.jpg",
+          "lat": 31.970766666666666,
+          "lon": 35.1962,
+          "dt": "2026:05:11 10:45:35",
+          "zone": "z12_wall_text_motifs"
+        },
+        {
+          "stem": "IMG_4971",
+          "thumb": "./assets/photos/thumb/IMG_4971.jpg",
+          "full": "./assets/photos/full/IMG_4971.jpg",
+          "lat": 31.97078611111111,
+          "lon": 35.19639166666666,
+          "dt": "2026:05:11 10:58:45",
+          "zone": "z02_bedrooms_3rd_floor"
+        },
+        {
+          "stem": "IMG_4972",
+          "thumb": "./assets/photos/thumb/IMG_4972.jpg",
+          "full": "./assets/photos/full/IMG_4972.jpg",
+          "lat": 31.97089722222222,
+          "lon": 35.19603333333333,
+          "dt": "2026:05:11 11:01:09",
+          "zone": "z02_bedrooms_3rd_floor"
+        },
+        {
+          "stem": "IMG_4973",
+          "thumb": "./assets/photos/thumb/IMG_4973.jpg",
+          "full": "./assets/photos/full/IMG_4973.jpg",
+          "lat": 31.97090833333333,
+          "lon": 35.195991666666664,
+          "dt": "2026:05:11 11:01:16",
+          "zone": "z02_bedrooms_3rd_floor"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4942",
+        "IMG_4943",
+        "IMG_4944",
+        "IMG_4945",
+        "IMG_4947",
+        "IMG_4971",
+        "IMG_4972",
+        "IMG_4973"
+      ],
+      "time_range": [
+        "2026:05:11 10:44:18",
+        "2026:05:11 11:01:16"
+      ],
+      "centroid": {
+        "lat": 31.970805555555554,
+        "lon": 35.196212499999994
+      },
+      "color": "#7a5dba",
+      "tint": "#ece3f9",
+      "emoji": "\ud83d\udecf\ufe0f",
+      "floor": "3F",
+      "floor_aliases": [
+        "1F"
+      ],
+      "themes": [
+        "Accommodation",
+        "Set-design"
+      ]
+    },
+    {
+      "id": "z03_bathrooms_main",
+      "title_en": "Main Bathrooms (pink + blue stalls)",
+      "title_ar": "\u0627\u0644\u062d\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629",
+      "summary": "Two stall-bathroom corridors (pink-pastel and blue-pastel doors). Per meeting note 01:51 \u2014 \"\u0627\u0644\u062d\u0645\u0627\u0645 \u0631\u0647\u064a\u0628\" \u2014 a scene candidate.",
+      "activities": [
+        "Scene candidate: bathroom scene (per meeting)",
+        "Mirror / vent-fan / vanishing-point compositions",
+        "Lighting exercise: practical-light scene with overhead fluorescents"
+      ],
+      "creative_notes": "Strong perspective corridor of stall doors. Daylight only via window at far end + extractor fan halo.",
+      "photos": [
+        {
+          "stem": "IMG_4949",
+          "thumb": "./assets/photos/thumb/IMG_4949.jpg",
+          "full": "./assets/photos/full/IMG_4949.jpg",
+          "lat": 31.970938888888888,
+          "lon": 35.19606388888889,
+          "dt": "2026:05:11 10:48:31",
+          "zone": "z03_bathrooms_main"
+        },
+        {
+          "stem": "IMG_4950",
+          "thumb": "./assets/photos/thumb/IMG_4950.jpg",
+          "full": "./assets/photos/full/IMG_4950.jpg",
+          "lat": 31.970938888888888,
+          "lon": 35.19606388888889,
+          "dt": "2026:05:11 10:48:32",
+          "zone": "z03_bathrooms_main"
+        },
+        {
+          "stem": "IMG_4974",
+          "thumb": "./assets/photos/thumb/IMG_4974.jpg",
+          "full": "./assets/photos/full/IMG_4974.jpg",
+          "lat": 31.97095,
+          "lon": 35.19565833333333,
+          "dt": "2026:05:11 11:02:18",
+          "zone": "z03_bathrooms_main"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4949",
+        "IMG_4950",
+        "IMG_4974"
+      ],
+      "time_range": [
+        "2026:05:11 10:48:31",
+        "2026:05:11 11:02:18"
+      ],
+      "centroid": {
+        "lat": 31.970942592592593,
+        "lon": 35.1959287037037
+      },
+      "color": "#e07eb1",
+      "tint": "#fde3ef",
+      "emoji": "\ud83d\udebf",
+      "floor": "3F",
+      "floor_aliases": [
+        "1F"
+      ],
+      "themes": [
+        "Accommodation",
+        "Utility"
+      ]
+    },
+    {
+      "id": "z04_bathroom_derelict",
+      "title_en": "Derelict Bathroom (raw character)",
+      "title_ar": "\u0627\u0644\u062d\u0645\u0627\u0645 \u0627\u0644\u0642\u062f\u064a\u0645 (\u0633\u0645\u0629 \u0645\u0639\u062a\u0642\u0644\u0629)",
+      "summary": "Second-tier bathroom with water-damaged ceiling, exposed conduit, peeling tile. Strong texture and horror-/period-set potential per meeting note 02:09 \u2014 \"old beautiful spaces \u2014 horror-scene potential\".",
+      "activities": [
+        "Horror / period genre set",
+        "Texture & lighting drill: hard-light through small window",
+        "Sound design exercise: dripping / pipe ambience"
+      ],
+      "creative_notes": "Direct shaft of light from a small upper window. Heavy decay = visual identity.",
+      "photos": [
+        {
+          "stem": "IMG_4956",
+          "thumb": "./assets/photos/thumb/IMG_4956.jpg",
+          "full": "./assets/photos/full/IMG_4956.jpg",
+          "lat": 31.970747222222222,
+          "lon": 35.196216666666665,
+          "dt": "2026:05:11 10:51:42",
+          "zone": "z04_bathroom_derelict"
+        },
+        {
+          "stem": "IMG_4957",
+          "thumb": "./assets/photos/thumb/IMG_4957.jpg",
+          "full": "./assets/photos/full/IMG_4957.jpg",
+          "lat": 31.970744444444442,
+          "lon": 35.196216666666665,
+          "dt": "2026:05:11 10:51:46",
+          "zone": "z04_bathroom_derelict"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4956",
+        "IMG_4957"
+      ],
+      "time_range": [
+        "2026:05:11 10:51:42",
+        "2026:05:11 10:51:46"
+      ],
+      "centroid": {
+        "lat": 31.970745833333332,
+        "lon": 35.196216666666665
+      },
+      "color": "#5a4e3c",
+      "tint": "#e5dfd0",
+      "emoji": "\ud83d\udd6f\ufe0f",
+      "floor": "Cross-floor",
+      "themes": [
+        "Set-design"
+      ]
+    },
+    {
+      "id": "z05_roof",
+      "title_en": "Rooftop (\u0627\u0644\u0633\u0637\u062d)",
+      "title_ar": "\u0627\u0644\u0633\u0637\u062d",
+      "summary": "Flat concrete roof with 360\u00b0 view of Birzeit. Meeting notes 02:09 \u2014 natural-light workshop: reflections, controlling light, multiple windows. Sun-path: rise 05:45 / set 19:26 on 11 May; arc swings south through midday.",
+      "activities": [
+        "Natural-light workshop (reflections, controlling light, multiple windows)",
+        "Sunrise / sunset photography sessions",
+        "Golden-hour cohort portraits (1 hr before sunset = ~18:25)",
+        "Drone / overhead establishing shots of Birzeit (pending venue + Civil Aviation permission)"
+      ],
+      "creative_notes": "Open sky, no overhangs on most of the deck. Stairwell hut + water tanks are usable foreground. Watch heat \u2014 August midday is brutal; bias to early-morning + late-afternoon blocks.",
+      "photos": [
+        {
+          "stem": "IMG_4958",
+          "thumb": "./assets/photos/thumb/IMG_4958.jpg",
+          "full": "./assets/photos/full/IMG_4958.jpg",
+          "lat": 31.970716666666664,
+          "lon": 35.19628611111111,
+          "dt": "2026:05:11 10:52:20",
+          "zone": "z05_roof"
+        },
+        {
+          "stem": "IMG_4959",
+          "thumb": "./assets/photos/thumb/IMG_4959.jpg",
+          "full": "./assets/photos/full/IMG_4959.jpg",
+          "lat": 31.970633333333332,
+          "lon": 35.19631944444444,
+          "dt": "2026:05:11 10:52:29",
+          "zone": "z05_roof"
+        },
+        {
+          "stem": "IMG_4960",
+          "thumb": "./assets/photos/thumb/IMG_4960.jpg",
+          "full": "./assets/photos/full/IMG_4960.jpg",
+          "lat": 31.970669444444443,
+          "lon": 35.196225,
+          "dt": "2026:05:11 10:52:38",
+          "zone": "z05_roof"
+        },
+        {
+          "stem": "IMG_4961",
+          "thumb": "./assets/photos/thumb/IMG_4961.jpg",
+          "full": "./assets/photos/full/IMG_4961.jpg",
+          "lat": 31.970766666666666,
+          "lon": 35.196127777777775,
+          "dt": "2026:05:11 10:53:26",
+          "zone": "z05_roof"
+        },
+        {
+          "stem": "IMG_4962",
+          "thumb": "./assets/photos/thumb/IMG_4962.jpg",
+          "full": "./assets/photos/full/IMG_4962.jpg",
+          "lat": 31.970858333333332,
+          "lon": 35.19608333333333,
+          "dt": "2026:05:11 10:53:42",
+          "zone": "z05_roof"
+        },
+        {
+          "stem": "IMG_4963",
+          "thumb": "./assets/photos/thumb/IMG_4963.jpg",
+          "full": "./assets/photos/full/IMG_4963.jpg",
+          "lat": 31.970852777777775,
+          "lon": 35.19608611111111,
+          "dt": "2026:05:11 10:53:45",
+          "zone": "z05_roof"
+        },
+        {
+          "stem": "IMG_4964",
+          "thumb": "./assets/photos/thumb/IMG_4964.jpg",
+          "full": "./assets/photos/full/IMG_4964.jpg",
+          "lat": 31.970847222222222,
+          "lon": 35.196080555555554,
+          "dt": "2026:05:11 10:53:49",
+          "zone": "z05_roof"
+        },
+        {
+          "stem": "IMG_4965",
+          "thumb": "./assets/photos/thumb/IMG_4965.jpg",
+          "full": "./assets/photos/full/IMG_4965.jpg",
+          "lat": 31.970913888888887,
+          "lon": 35.196330555555555,
+          "dt": "2026:05:11 10:54:31",
+          "zone": "z05_roof"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4958",
+        "IMG_4959",
+        "IMG_4960",
+        "IMG_4961",
+        "IMG_4962",
+        "IMG_4963",
+        "IMG_4964",
+        "IMG_4965"
+      ],
+      "time_range": [
+        "2026:05:11 10:52:20",
+        "2026:05:11 10:54:31"
+      ],
+      "centroid": {
+        "lat": 31.970782291666666,
+        "lon": 35.19619236111111
+      },
+      "color": "#3a8fb7",
+      "tint": "#d6ecf6",
+      "emoji": "\ud83c\udf05",
+      "floor": "Rooftop",
+      "themes": [
+        "Workshop spaces",
+        "Outdoor"
+      ]
+    },
+    {
+      "id": "z06_music_hall_grand_piano",
+      "title_en": "Big Hall \u00b7 Grand Piano Studio",
+      "title_ar": "\u0627\u0644\u0642\u0627\u0639\u0629 \u0627\u0644\u0643\u0628\u0631\u0649 (\u0628\u064a\u0627\u0646\u0648)",
+      "summary": "Music rehearsal hall with grand piano, music stands, ~30 chairs. Pink+white acoustic panels. Per meeting 01:32 \u2014 \"multiple halls, including a big one\". Best candidate for plenary lectures, screenings, and music workshops.",
+      "activities": [
+        "Plenary briefings + screenings (bring our own projector + screen)",
+        "Score-to-picture workshop (use the grand piano)",
+        "Director Q&A / masterclass setup",
+        "Group critique sessions"
+      ],
+      "creative_notes": "High ceilings \u2192 good for boom-mic / dialogue scenes. Daylight side from a tall multi-pane window. Acoustic panels keep room from over-ringing.",
+      "photos": [
+        {
+          "stem": "IMG_4976",
+          "thumb": "./assets/photos/thumb/IMG_4976.jpg",
+          "full": "./assets/photos/full/IMG_4976.jpg",
+          "lat": 31.97083888888889,
+          "lon": 35.19636666666666,
+          "dt": "2026:05:11 11:03:31",
+          "zone": "z06_music_hall_grand_piano"
+        },
+        {
+          "stem": "IMG_4977",
+          "thumb": "./assets/photos/thumb/IMG_4977.jpg",
+          "full": "./assets/photos/full/IMG_4977.jpg",
+          "lat": 31.970836111111108,
+          "lon": 35.19636666666666,
+          "dt": "2026:05:11 11:05:56",
+          "zone": "z06_music_hall_grand_piano"
+        },
+        {
+          "stem": "IMG_4978",
+          "thumb": "./assets/photos/thumb/IMG_4978.jpg",
+          "full": "./assets/photos/full/IMG_4978.jpg",
+          "lat": 31.970836111111108,
+          "lon": 35.19636666666666,
+          "dt": "2026:05:11 11:05:56",
+          "zone": "z06_music_hall_grand_piano"
+        },
+        {
+          "stem": "IMG_4993",
+          "thumb": "./assets/photos/thumb/IMG_4993.jpg",
+          "full": "./assets/photos/full/IMG_4993.jpg",
+          "lat": 31.971030555555554,
+          "lon": 35.19593055555555,
+          "dt": "2026:05:11 11:10:23",
+          "zone": "z06_music_hall_grand_piano"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4976",
+        "IMG_4977",
+        "IMG_4978",
+        "IMG_4993"
+      ],
+      "time_range": [
+        "2026:05:11 11:03:31",
+        "2026:05:11 11:10:23"
+      ],
+      "centroid": {
+        "lat": 31.970885416666665,
+        "lon": 35.19625763888888
+      },
+      "color": "#1f4f6f",
+      "tint": "#d4e1ec",
+      "emoji": "\ud83c\udfb9",
+      "floor": "Ground",
+      "themes": [
+        "Workshop spaces"
+      ]
+    },
+    {
+      "id": "z07_dining_hall",
+      "title_en": "Dining Hall (pastel panels)",
+      "title_ar": "\u0642\u0627\u0639\u0629 \u0627\u0644\u0637\u0639\u0627\u0645",
+      "summary": "Large dining/cafeteria hall with tables + chairs, big windows, pastel pink+peach tiled accent wall. We will not be using the venue's food ~90% \u2014 cooked / brought from Ramallah \u2014 so this hall is mostly multi-use seating.",
+      "activities": [
+        "Meals (breakfast / lunch / dinner \u2014 meals plan owner: TBD)",
+        "Evening recap circles",
+        "Doubles as classroom overflow when the music hall is in use",
+        "Content-shoot day: cohort dinners are doc gold"
+      ],
+      "creative_notes": "Pastel wall tiles work as wide-aspect backdrop \u2014 read warm on uncorrected daylight.",
+      "photos": [
+        {
+          "stem": "IMG_4981",
+          "thumb": "./assets/photos/thumb/IMG_4981.jpg",
+          "full": "./assets/photos/full/IMG_4981.jpg",
+          "lat": 31.971091666666666,
+          "lon": 35.19594444444444,
+          "dt": "2026:05:11 11:07:08",
+          "zone": "z07_dining_hall"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4981"
+      ],
+      "time_range": [
+        "2026:05:11 11:07:08",
+        "2026:05:11 11:07:08"
+      ],
+      "centroid": {
+        "lat": 31.971091666666666,
+        "lon": 35.19594444444444
+      },
+      "color": "#d4a64a",
+      "tint": "#fbeed1",
+      "emoji": "\ud83c\udf7d\ufe0f",
+      "floor": "Ground",
+      "themes": [
+        "Accommodation",
+        "Workshop spaces"
+      ]
+    },
+    {
+      "id": "z08_practice_rooms",
+      "title_en": "Practice & Small Studios",
+      "title_ar": "\u0642\u0627\u0639\u0627\u062a \u0627\u0644\u062a\u062f\u0631\u064a\u0628 \u0627\u0644\u0635\u063a\u064a\u0631\u0629",
+      "summary": "Multiple smaller practice rooms with high ceilings, percussion / drum stash, easels, storage cupboards. Per meeting \u2014 \"halls, multiple\".",
+      "activities": [
+        "Editing room setups (2\u20133 stations per room)",
+        "Sound mixing / Foley closet",
+        "Color-grading review with controlled light (close windows + curtain)",
+        "Breakouts when whole cohort splits into tracks"
+      ],
+      "creative_notes": "Some rooms still cluttered with the institute's gear \u2014 plan a clean-up window with Amjad before camp.",
+      "photos": [
+        {
+          "stem": "IMG_4979",
+          "thumb": "./assets/photos/thumb/IMG_4979.jpg",
+          "full": "./assets/photos/full/IMG_4979.jpg",
+          "lat": 31.970836111111108,
+          "lon": 35.19636666666666,
+          "dt": "2026:05:11 11:06:27",
+          "zone": "z08_practice_rooms"
+        },
+        {
+          "stem": "IMG_4980",
+          "thumb": "./assets/photos/thumb/IMG_4980.jpg",
+          "full": "./assets/photos/full/IMG_4980.jpg",
+          "lat": 31.970836111111108,
+          "lon": 35.19636666666666,
+          "dt": "2026:05:11 11:06:37",
+          "zone": "z08_practice_rooms"
+        },
+        {
+          "stem": "IMG_4982",
+          "thumb": "./assets/photos/thumb/IMG_4982.jpg",
+          "full": "./assets/photos/full/IMG_4982.jpg",
+          "lat": 31.971091666666666,
+          "lon": 35.19594444444444,
+          "dt": "2026:05:11 11:07:10",
+          "zone": "z08_practice_rooms"
+        },
+        {
+          "stem": "IMG_4983",
+          "thumb": "./assets/photos/thumb/IMG_4983.jpg",
+          "full": "./assets/photos/full/IMG_4983.jpg",
+          "lat": 31.971213888888887,
+          "lon": 35.19574444444444,
+          "dt": "2026:05:11 11:07:16",
+          "zone": "z08_practice_rooms"
+        },
+        {
+          "stem": "IMG_4984",
+          "thumb": "./assets/photos/thumb/IMG_4984.jpg",
+          "full": "./assets/photos/full/IMG_4984.jpg",
+          "lat": 31.971152777777775,
+          "lon": 35.19584166666667,
+          "dt": "2026:05:11 11:07:32",
+          "zone": "z08_practice_rooms"
+        },
+        {
+          "stem": "IMG_4986",
+          "thumb": "./assets/photos/thumb/IMG_4986.jpg",
+          "full": "./assets/photos/full/IMG_4986.jpg",
+          "lat": 31.971149999999998,
+          "lon": 35.195766666666664,
+          "dt": "2026:05:11 11:07:46",
+          "zone": "z08_practice_rooms"
+        },
+        {
+          "stem": "IMG_4992",
+          "thumb": "./assets/photos/thumb/IMG_4992.jpg",
+          "full": "./assets/photos/full/IMG_4992.jpg",
+          "lat": 31.970699999999997,
+          "lon": 35.19615555555555,
+          "dt": "2026:05:11 11:09:42",
+          "zone": "z08_practice_rooms"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4979",
+        "IMG_4980",
+        "IMG_4982",
+        "IMG_4983",
+        "IMG_4984",
+        "IMG_4986",
+        "IMG_4992"
+      ],
+      "time_range": [
+        "2026:05:11 11:06:27",
+        "2026:05:11 11:09:42"
+      ],
+      "centroid": {
+        "lat": 31.97099722222222,
+        "lon": 35.19602658730158
+      },
+      "color": "#5b6e4d",
+      "tint": "#e1e8da",
+      "emoji": "\ud83c\udfac",
+      "floor": "Ground",
+      "floor_aliases": [
+        "1F"
+      ],
+      "themes": [
+        "Workshop spaces",
+        "Equipment"
+      ]
+    },
+    {
+      "id": "z09_equipment_room_ground",
+      "title_en": "Ground-floor Equipment Room",
+      "title_ar": "\u063a\u0631\u0641\u0629 \u0627\u0644\u0645\u0639\u062f\u0627\u062a (\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u0623\u0631\u0636\u064a)",
+      "summary": "Per meeting 01:32 \u2014 \"multiple options; will use the ground floor one\". Empty grey metal shelving units, ready to be loaded with Kawader gear cases.",
+      "activities": [
+        "Centralised gear check-in/out station",
+        "Daily kit sign-out log + barcode scan (matches Odoo serial pre-selection workflow)",
+        "Mohanad + 2 youth based here on rotation for security"
+      ],
+      "creative_notes": "Empty, lockable, on the path to the courtyard \u2014 choose this over any upper-floor room because we don't want gear hauled up stairs.",
+      "photos": [
+        {
+          "stem": "IMG_4954",
+          "thumb": "./assets/photos/thumb/IMG_4954.jpg",
+          "full": "./assets/photos/full/IMG_4954.jpg",
+          "lat": 31.970755555555552,
+          "lon": 35.19625833333333,
+          "dt": "2026:05:11 10:50:58",
+          "zone": "z09_equipment_room_ground"
+        },
+        {
+          "stem": "IMG_5013",
+          "thumb": "./assets/photos/thumb/IMG_5013.jpg",
+          "full": "./assets/photos/full/IMG_5013.jpg",
+          "lat": 31.97114444444444,
+          "lon": 35.195786111111104,
+          "dt": "2026:05:11 11:22:02",
+          "zone": "z09_equipment_room_ground"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4954",
+        "IMG_5013"
+      ],
+      "time_range": [
+        "2026:05:11 10:50:58",
+        "2026:05:11 11:22:02"
+      ],
+      "centroid": {
+        "lat": 31.970949999999995,
+        "lon": 35.19602222222222
+      },
+      "color": "#34495e",
+      "tint": "#d6dde4",
+      "emoji": "\ud83c\udfa5",
+      "floor": "Ground",
+      "themes": [
+        "Equipment"
+      ]
+    },
+    {
+      "id": "z10_storage_attic",
+      "title_en": "Old Storage / Attic",
+      "title_ar": "\u0627\u0644\u0645\u062e\u0632\u0646 \u0627\u0644\u0642\u062f\u064a\u0645",
+      "summary": "Two storage spaces full of old binders, beds, wood, archive material. Not for daily use, but visually rich.",
+      "activities": [
+        "Set-dressing inventory (real props \u2014 old wood, doors, archive paper)",
+        "Texture / object photography drill",
+        "Genre-set candidate: cellar / archive / detective scene"
+      ],
+      "creative_notes": "Heavy dust = mask up for any extended shoot. Don't move historical archives \u2014 institute's property.",
+      "photos": [
+        {
+          "stem": "IMG_4951",
+          "thumb": "./assets/photos/thumb/IMG_4951.jpg",
+          "full": "./assets/photos/full/IMG_4951.jpg",
+          "lat": 31.971019444444444,
+          "lon": 35.19613333333333,
+          "dt": "2026:05:11 10:50:15",
+          "zone": "z10_storage_attic"
+        },
+        {
+          "stem": "IMG_4952",
+          "thumb": "./assets/photos/thumb/IMG_4952.jpg",
+          "full": "./assets/photos/full/IMG_4952.jpg",
+          "lat": 31.97078611111111,
+          "lon": 35.19628055555555,
+          "dt": "2026:05:11 10:50:40",
+          "zone": "z10_storage_attic"
+        },
+        {
+          "stem": "IMG_4955",
+          "thumb": "./assets/photos/thumb/IMG_4955.jpg",
+          "full": "./assets/photos/full/IMG_4955.jpg",
+          "lat": 31.970744444444442,
+          "lon": 35.19624722222222,
+          "dt": "2026:05:11 10:51:31",
+          "zone": "z10_storage_attic"
+        },
+        {
+          "stem": "IMG_4988",
+          "thumb": "./assets/photos/thumb/IMG_4988.jpg",
+          "full": "./assets/photos/full/IMG_4988.jpg",
+          "lat": 31.970836111111108,
+          "lon": 35.19607222222222,
+          "dt": "2026:05:11 11:08:54",
+          "zone": "z10_storage_attic"
+        },
+        {
+          "stem": "IMG_4989",
+          "thumb": "./assets/photos/thumb/IMG_4989.jpg",
+          "full": "./assets/photos/full/IMG_4989.jpg",
+          "lat": 31.970847222222222,
+          "lon": 35.19606666666667,
+          "dt": "2026:05:11 11:09:07",
+          "zone": "z10_storage_attic"
+        },
+        {
+          "stem": "IMG_5007",
+          "thumb": "./assets/photos/thumb/IMG_5007.jpg",
+          "full": "./assets/photos/full/IMG_5007.jpg",
+          "lat": 31.97111111111111,
+          "lon": 35.19628055555555,
+          "dt": "2026:05:11 11:20:19",
+          "zone": "z10_storage_attic"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4951",
+        "IMG_4952",
+        "IMG_4955",
+        "IMG_4988",
+        "IMG_4989",
+        "IMG_5007"
+      ],
+      "time_range": [
+        "2026:05:11 10:50:15",
+        "2026:05:11 11:20:19"
+      ],
+      "centroid": {
+        "lat": 31.97089074074074,
+        "lon": 35.19618009259259
+      },
+      "color": "#7a6149",
+      "tint": "#ebe1d4",
+      "emoji": "\ud83d\udce6",
+      "floor": "Cross-floor",
+      "themes": [
+        "Set-design",
+        "Utility"
+      ]
+    },
+    {
+      "id": "z11_outdoor_courtyard_garden",
+      "title_en": "Outdoor Courtyard + Garden",
+      "title_ar": "\u0627\u0644\u0641\u0646\u0627\u0621 \u0648\u0627\u0644\u062d\u062f\u064a\u0642\u0629 \u0627\u0644\u062e\u0627\u0631\u062c\u064a\u0629",
+      "summary": "Stone garden walls, dirt paths, mature olive + pine trees, picnic bench, ember-bed BBQ trough, decorative stone outbuilding hidden in trees. Walled compound around the building.",
+      "activities": [
+        "Exterior camera-movement drills (steadicam, gimbal, dolly)",
+        "Group photo + ID portraits under olive trees",
+        "Communal cook-fire / shared meal (BBQ trough is operational)",
+        "Outdoor circle for partner workshops (Circus School could drop in here)",
+        "Plein-air scene shoots \u2014 natural light, full control"
+      ],
+      "creative_notes": "Shade quality changes hourly \u2014 south side gets full sun midday, north side stays shaded after ~14:00. Best ambient sound block 08:00\u201310:00 + 17:00\u201319:00 (avoid mosque + traffic peaks).",
+      "photos": [
+        {
+          "stem": "IMG_4948",
+          "thumb": "./assets/photos/thumb/IMG_4948.jpg",
+          "full": "./assets/photos/full/IMG_4948.jpg",
+          "lat": 31.97075,
+          "lon": 35.19635833333333,
+          "dt": "2026:05:11 10:46:08",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_4966",
+          "thumb": "./assets/photos/thumb/IMG_4966.jpg",
+          "full": "./assets/photos/full/IMG_4966.jpg",
+          "lat": 31.970955555555555,
+          "lon": 35.19628055555555,
+          "dt": "2026:05:11 10:55:01",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_4990",
+          "thumb": "./assets/photos/thumb/IMG_4990.jpg",
+          "full": "./assets/photos/full/IMG_4990.jpg",
+          "lat": 31.970775,
+          "lon": 35.196102777777774,
+          "dt": "2026:05:11 11:09:29",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_4991",
+          "thumb": "./assets/photos/thumb/IMG_4991.jpg",
+          "full": "./assets/photos/full/IMG_4991.jpg",
+          "lat": 31.970780555555553,
+          "lon": 35.19608611111111,
+          "dt": "2026:05:11 11:09:30",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_4994",
+          "thumb": "./assets/photos/thumb/IMG_4994.jpg",
+          "full": "./assets/photos/full/IMG_4994.jpg",
+          "lat": 31.97069722222222,
+          "lon": 35.195775,
+          "dt": "2026:05:11 11:15:05",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_4995",
+          "thumb": "./assets/photos/thumb/IMG_4995.jpg",
+          "full": "./assets/photos/full/IMG_4995.jpg",
+          "lat": 31.97053611111111,
+          "lon": 35.19605555555555,
+          "dt": "2026:05:11 11:15:06",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_4996",
+          "thumb": "./assets/photos/thumb/IMG_4996.jpg",
+          "full": "./assets/photos/full/IMG_4996.jpg",
+          "lat": 31.97071111111111,
+          "lon": 35.196441666666665,
+          "dt": "2026:05:11 11:16:23",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_4999",
+          "thumb": "./assets/photos/thumb/IMG_4999.jpg",
+          "full": "./assets/photos/full/IMG_4999.jpg",
+          "lat": 31.970894444444443,
+          "lon": 35.19638333333333,
+          "dt": "2026:05:11 11:17:42",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_5002",
+          "thumb": "./assets/photos/thumb/IMG_5002.jpg",
+          "full": "./assets/photos/full/IMG_5002.jpg",
+          "lat": 31.970980555555553,
+          "lon": 35.19632222222222,
+          "dt": "2026:05:11 11:18:03",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_5003",
+          "thumb": "./assets/photos/thumb/IMG_5003.jpg",
+          "full": "./assets/photos/full/IMG_5003.jpg",
+          "lat": 31.971077777777776,
+          "lon": 35.196266666666666,
+          "dt": "2026:05:11 11:18:14",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_5004",
+          "thumb": "./assets/photos/thumb/IMG_5004.jpg",
+          "full": "./assets/photos/full/IMG_5004.jpg",
+          "lat": 31.97109722222222,
+          "lon": 35.196188888888884,
+          "dt": "2026:05:11 11:18:28",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_5005",
+          "thumb": "./assets/photos/thumb/IMG_5005.jpg",
+          "full": "./assets/photos/full/IMG_5005.jpg",
+          "lat": 31.971172222222222,
+          "lon": 35.19626944444444,
+          "dt": "2026:05:11 11:19:18",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_5006",
+          "thumb": "./assets/photos/thumb/IMG_5006.jpg",
+          "full": "./assets/photos/full/IMG_5006.jpg",
+          "lat": 31.971230555555554,
+          "lon": 35.196011111111105,
+          "dt": "2026:05:11 11:19:51",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_5008",
+          "thumb": "./assets/photos/thumb/IMG_5008.jpg",
+          "full": "./assets/photos/full/IMG_5008.jpg",
+          "lat": 31.971016666666664,
+          "lon": 35.19630833333333,
+          "dt": "2026:05:11 11:20:24",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_5009",
+          "thumb": "./assets/photos/thumb/IMG_5009.jpg",
+          "full": "./assets/photos/full/IMG_5009.jpg",
+          "lat": 31.970869444444443,
+          "lon": 35.19639722222222,
+          "dt": "2026:05:11 11:20:38",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "IMG_5020",
+          "thumb": "./assets/photos/thumb/IMG_5020.jpg",
+          "full": "./assets/photos/full/IMG_5020.jpg",
+          "lat": 31.970924999999998,
+          "lon": 35.197063888888884,
+          "dt": "2026:05:11 11:58:39",
+          "zone": "z11_outdoor_courtyard_garden"
+        },
+        {
+          "stem": "bd902677-0e88-41fa-a54b-fcbe517a89cb",
+          "thumb": "./assets/photos/thumb/bd902677-0e88-41fa-a54b-fcbe517a89cb.jpg",
+          "full": "./assets/photos/full/bd902677-0e88-41fa-a54b-fcbe517a89cb.jpg",
+          "lat": null,
+          "lon": null,
+          "dt": null,
+          "zone": "z11_outdoor_courtyard_garden"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4948",
+        "IMG_4966",
+        "IMG_4990",
+        "IMG_4991",
+        "IMG_4994",
+        "IMG_4995",
+        "IMG_4996",
+        "IMG_4999",
+        "IMG_5002",
+        "IMG_5003",
+        "IMG_5004",
+        "IMG_5005",
+        "IMG_5006",
+        "IMG_5008",
+        "IMG_5009",
+        "IMG_5020",
+        "bd902677-0e88-41fa-a54b-fcbe517a89cb"
+      ],
+      "time_range": [
+        "2026:05:11 10:46:08",
+        "2026:05:11 11:58:39"
+      ],
+      "centroid": {
+        "lat": 31.970904340277777,
+        "lon": 35.19626944444444
+      },
+      "color": "#4a7c3a",
+      "tint": "#dce8d4",
+      "emoji": "\ud83c\udf33",
+      "floor": "Outdoor",
+      "themes": [
+        "Outdoor",
+        "Workshop spaces"
+      ]
+    },
+    {
+      "id": "z12_wall_text_motifs",
+      "title_en": "Wall Text & Symbols (graphic motifs)",
+      "title_ar": "\u0643\u062a\u0627\u0628\u0627\u062a \u0627\u0644\u062c\u062f\u0631\u0627\u0646 \u0648\u0645\u0646\u062d\u0648\u062a\u0627\u062a\u0647\u0627",
+      "summary": "Arabic-language wall writings across rooms and the rooftop. Two striking pieces: '\u0633\u062c\u0646 \u062d\u064a\u0646\u0645\u0627 \u064a\u062d\u0633\u0645 \u0627\u0644\u062a\u0648\u0642\u0639\u0629' (cell / prison metaphor) and '\u0627\u0644\u062d\u0631\u064a\u0629 \u0627\u0644\u062a\u064a \u0644\u0627 \u0645\u0642\u0627\u0628\u0644 \u0644\u0647\u0627 \u0625\u0646\u0645\u0627 \u0647\u064a \u0627\u0644\u0645\u0642\u0627\u0628\u0644' (Freedom that has no price is itself the price). Powerful visual identity for the camp.",
+      "activities": [
+        "Title-design source material (camp brand / promo teaser)",
+        "Photography prompt: typography in space",
+        "Recurring B-roll motif across the doc"
+      ],
+      "creative_notes": "Verify with Amjad which writings are part of the institute's heritage (do not paint over) and which are open to reinterpretation. Treat as living archive.",
+      "photos": [
+        {
+          "stem": "IMG_4945",
+          "thumb": "./assets/photos/thumb/IMG_4945.jpg",
+          "full": "./assets/photos/full/IMG_4945.jpg",
+          "lat": 31.97072222222222,
+          "lon": 35.19622777777777,
+          "dt": "2026:05:11 10:45:12",
+          "zone": "z12_wall_text_motifs"
+        },
+        {
+          "stem": "IMG_4947",
+          "thumb": "./assets/photos/thumb/IMG_4947.jpg",
+          "full": "./assets/photos/full/IMG_4947.jpg",
+          "lat": 31.970766666666666,
+          "lon": 35.1962,
+          "dt": "2026:05:11 10:45:35",
+          "zone": "z12_wall_text_motifs"
+        },
+        {
+          "stem": "IMG_4967",
+          "thumb": "./assets/photos/thumb/IMG_4967.jpg",
+          "full": "./assets/photos/full/IMG_4967.jpg",
+          "lat": 31.970919444444444,
+          "lon": 35.19624722222222,
+          "dt": "2026:05:11 10:55:32",
+          "zone": "z12_wall_text_motifs"
+        },
+        {
+          "stem": "IMG_4969",
+          "thumb": "./assets/photos/thumb/IMG_4969.jpg",
+          "full": "./assets/photos/full/IMG_4969.jpg",
+          "lat": 31.970836111111108,
+          "lon": 35.19636666666666,
+          "dt": "2026:05:11 10:57:28",
+          "zone": "z12_wall_text_motifs"
+        },
+        {
+          "stem": "IMG_4970",
+          "thumb": "./assets/photos/thumb/IMG_4970.jpg",
+          "full": "./assets/photos/full/IMG_4970.jpg",
+          "lat": 31.97083888888889,
+          "lon": 35.19636666666666,
+          "dt": "2026:05:11 10:57:39",
+          "zone": "z12_wall_text_motifs"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4945",
+        "IMG_4947",
+        "IMG_4967",
+        "IMG_4969",
+        "IMG_4970"
+      ],
+      "time_range": [
+        "2026:05:11 10:45:12",
+        "2026:05:11 10:57:39"
+      ],
+      "centroid": {
+        "lat": 31.970816666666668,
+        "lon": 35.196281666666664
+      },
+      "color": "#b03a3a",
+      "tint": "#f6d6d6",
+      "emoji": "\u2712\ufe0f",
+      "floor": "Cross-floor",
+      "themes": [
+        "Set-design",
+        "Wall-text"
+      ]
+    },
+    {
+      "id": "z13_exterior_views",
+      "title_en": "Window & Rooftop Views (Birzeit panorama)",
+      "title_ar": "\u0625\u0637\u0644\u0627\u0644\u0627\u062a \u0646\u0648\u0627\u0641\u0630 \u0648\u0633\u0637\u062d \u0628\u064a\u0631\u0632\u064a\u062a",
+      "summary": "Window framings overlooking the courtyard, neighbouring buildings, Birzeit valley, and the old town. Naturally cinematic.",
+      "activities": [
+        "Establishing shots / opening sequence",
+        "Rule-of-thirds framing exercise (use window as natural matte)",
+        "Promo teaser cutaways"
+      ],
+      "creative_notes": "South-facing windows = harsh midday, magic at 17:00+. North-facing = consistent soft light all day.",
+      "photos": [
+        {
+          "stem": "IMG_4946",
+          "thumb": "./assets/photos/thumb/IMG_4946.jpg",
+          "full": "./assets/photos/full/IMG_4946.jpg",
+          "lat": 31.970724999999998,
+          "lon": 35.19622777777777,
+          "dt": "2026:05:11 10:45:18",
+          "zone": "z13_exterior_views"
+        },
+        {
+          "stem": "IMG_4953",
+          "thumb": "./assets/photos/thumb/IMG_4953.jpg",
+          "full": "./assets/photos/full/IMG_4953.jpg",
+          "lat": 31.97078611111111,
+          "lon": 35.19626944444444,
+          "dt": "2026:05:11 10:50:43",
+          "zone": "z13_exterior_views"
+        },
+        {
+          "stem": "IMG_4968",
+          "thumb": "./assets/photos/thumb/IMG_4968.jpg",
+          "full": "./assets/photos/full/IMG_4968.jpg",
+          "lat": 31.970841666666665,
+          "lon": 35.196261111111106,
+          "dt": "2026:05:11 10:55:39",
+          "zone": "z13_exterior_views"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4946",
+        "IMG_4953",
+        "IMG_4968"
+      ],
+      "time_range": [
+        "2026:05:11 10:45:18",
+        "2026:05:11 10:55:39"
+      ],
+      "centroid": {
+        "lat": 31.970784259259258,
+        "lon": 35.19625277777777
+      },
+      "color": "#6b7c7d",
+      "tint": "#dee6e6",
+      "emoji": "\ud83e\ude9f",
+      "floor": "Cross-floor",
+      "themes": [
+        "Set-design"
+      ]
+    },
+    {
+      "id": "z14_utility_basement",
+      "title_en": "Utility Basement / Boiler Tunnel",
+      "title_ar": "\u0642\u0628\u0648 \u0627\u0644\u062e\u062f\u0645\u0627\u062a",
+      "summary": "Narrow corridor with overhead pipes, water-damaged ceiling, stacked gas cylinders. Rough, atmospheric.",
+      "activities": [
+        "Atmospheric / horror scene set",
+        "Sound design environment (drips, pipe knocks, low rumble)",
+        "Lighting drill: practical bare-bulb + flashlight scene"
+      ],
+      "creative_notes": "Safety: gas cylinders + low ceiling. Light it cold (3200K minus green). No open flame.",
+      "photos": [
+        {
+          "stem": "IMG_4997",
+          "thumb": "./assets/photos/thumb/IMG_4997.jpg",
+          "full": "./assets/photos/full/IMG_4997.jpg",
+          "lat": 31.970663888888886,
+          "lon": 35.196486111111106,
+          "dt": "2026:05:11 11:16:50",
+          "zone": "z14_utility_basement"
+        },
+        {
+          "stem": "IMG_5011",
+          "thumb": "./assets/photos/thumb/IMG_5011.jpg",
+          "full": "./assets/photos/full/IMG_5011.jpg",
+          "lat": 31.970755555555552,
+          "lon": 35.19632222222222,
+          "dt": "2026:05:11 11:21:22",
+          "zone": "z14_utility_basement"
+        },
+        {
+          "stem": "IMG_5012",
+          "thumb": "./assets/photos/thumb/IMG_5012.jpg",
+          "full": "./assets/photos/full/IMG_5012.jpg",
+          "lat": 31.970894444444443,
+          "lon": 35.19625555555555,
+          "dt": "2026:05:11 11:21:28",
+          "zone": "z14_utility_basement"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4997",
+        "IMG_5011",
+        "IMG_5012"
+      ],
+      "time_range": [
+        "2026:05:11 11:16:50",
+        "2026:05:11 11:21:28"
+      ],
+      "centroid": {
+        "lat": 31.970771296296295,
+        "lon": 35.19635462962963
+      },
+      "color": "#2c3e50",
+      "tint": "#cbd4dc",
+      "emoji": "\u2699\ufe0f",
+      "floor": "Basement",
+      "themes": [
+        "Set-design",
+        "Utility"
+      ]
+    },
+    {
+      "id": "z15_chalkboard_classroom_assets",
+      "title_en": "Classroom Assets",
+      "title_ar": "\u0623\u062f\u0648\u0627\u062a \u0627\u0644\u0641\u0635\u0644",
+      "summary": "Green chalkboard + easel surfaces present on site. Useful for whiteboarding shoot plans, schedules.",
+      "activities": [
+        "Daily call-sheet board (one per track)",
+        "Storyboarding station",
+        "Schedule visibility"
+      ],
+      "creative_notes": "Chalk doubles as on-set art department supply.",
+      "photos": [
+        {
+          "stem": "IMG_5014",
+          "thumb": "./assets/photos/thumb/IMG_5014.jpg",
+          "full": "./assets/photos/full/IMG_5014.jpg",
+          "lat": 31.970952777777775,
+          "lon": 35.19523888888889,
+          "dt": "2026:05:11 11:23:55",
+          "zone": "z15_chalkboard_classroom_assets"
+        }
+      ],
+      "photo_ids": [
+        "IMG_5014"
+      ],
+      "time_range": [
+        "2026:05:11 11:23:55",
+        "2026:05:11 11:23:55"
+      ],
+      "centroid": {
+        "lat": 31.970952777777775,
+        "lon": 35.19523888888889
+      },
+      "color": "#1e6b52",
+      "tint": "#cde2d7",
+      "emoji": "\ud83d\udcdd",
+      "floor": "Ground",
+      "themes": [
+        "Workshop spaces",
+        "Equipment"
+      ]
+    },
+    {
+      "id": "z16_kitchen_derelict",
+      "title_en": "Old Kitchen (derelict)",
+      "title_ar": "\u0627\u0644\u0645\u0637\u0628\u062e \u0627\u0644\u0642\u062f\u064a\u0645",
+      "summary": "Old stove + fridge in a disused kitchen. Visible through a barred opening. Not for cooking \u2014 we cook off-site or in the active institute kitchen.",
+      "activities": [
+        "Production design asset",
+        "Period scene candidate"
+      ],
+      "creative_notes": "Heavy patina \u2014 minimal dressing needed for an 80s/90s period scene.",
+      "photos": [
+        {
+          "stem": "IMG_4985",
+          "thumb": "./assets/photos/thumb/IMG_4985.jpg",
+          "full": "./assets/photos/full/IMG_4985.jpg",
+          "lat": 31.971149999999998,
+          "lon": 35.195766666666664,
+          "dt": "2026:05:11 11:07:40",
+          "zone": "z16_kitchen_derelict"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4985"
+      ],
+      "time_range": [
+        "2026:05:11 11:07:40",
+        "2026:05:11 11:07:40"
+      ],
+      "centroid": {
+        "lat": 31.971149999999998,
+        "lon": 35.195766666666664
+      },
+      "color": "#8b6f47",
+      "tint": "#ecd9c0",
+      "emoji": "\ud83c\udf73",
+      "floor": "Ground",
+      "themes": [
+        "Set-design",
+        "Utility"
+      ]
+    },
+    {
+      "id": "z17_rusted_door_arrow",
+      "title_en": "Iron Door with Red Arrow",
+      "title_ar": "\u0627\u0644\u0628\u0627\u0628 \u0627\u0644\u062d\u062f\u064a\u062f\u064a \u0648\u0627\u0644\u0633\u0647\u0645",
+      "summary": "Rusted double iron door with a painted red arrow \u2014 a single visually arresting object on the compound.",
+      "activities": [
+        "Title card / poster background",
+        "Doorway portrait drill (single subject, single light)"
+      ],
+      "creative_notes": "Symbolism on-tap: the red arrow as direction motif for the camp.",
+      "photos": [
+        {
+          "stem": "IMG_4987",
+          "thumb": "./assets/photos/thumb/IMG_4987.jpg",
+          "full": "./assets/photos/full/IMG_4987.jpg",
+          "lat": 31.970894444444443,
+          "lon": 35.19609722222222,
+          "dt": "2026:05:11 11:08:35",
+          "zone": "z17_rusted_door_arrow"
+        }
+      ],
+      "photo_ids": [
+        "IMG_4987"
+      ],
+      "time_range": [
+        "2026:05:11 11:08:35",
+        "2026:05:11 11:08:35"
+      ],
+      "centroid": {
+        "lat": 31.970894444444443,
+        "lon": 35.19609722222222
+      },
+      "color": "#a83a2a",
+      "tint": "#f4cfc6",
+      "emoji": "\u27a1\ufe0f",
+      "floor": "Cross-floor",
+      "themes": [
+        "Set-design",
+        "Wall-text"
+      ]
+    },
+    {
+      "id": "z18_main_stone_facade",
+      "title_en": "Main Stone Fa\u00e7ade (front of building)",
+      "title_ar": "\u0648\u0627\u062c\u0647\u0629 \u0627\u0644\u0645\u0628\u0646\u0649 \u0627\u0644\u062d\u062c\u0631\u064a\u0629",
+      "summary": "Front of Edward Said Institute \u2014 limestone Palestinian masonry, recessed grilled windows, pergola, palm + olive in frame.",
+      "activities": [
+        "Group cohort shot \u2014 arrival day",
+        "Wide establishing of the venue",
+        "Doc opening establishing shot"
+      ],
+      "creative_notes": "Stone glows warm at 17:00\u201318:30 (golden hour).",
+      "photos": [
+        {
+          "stem": "IMG_5001",
+          "thumb": "./assets/photos/thumb/IMG_5001.jpg",
+          "full": "./assets/photos/full/IMG_5001.jpg",
+          "lat": 31.97095,
+          "lon": 35.19636666666666,
+          "dt": "2026:05:11 11:17:49",
+          "zone": "z18_main_stone_facade"
+        }
+      ],
+      "photo_ids": [
+        "IMG_5001"
+      ],
+      "time_range": [
+        "2026:05:11 11:17:49",
+        "2026:05:11 11:17:49"
+      ],
+      "centroid": {
+        "lat": 31.97095,
+        "lon": 35.19636666666666
+      },
+      "color": "#a08263",
+      "tint": "#ebdec9",
+      "emoji": "\ud83c\udfdb\ufe0f",
+      "floor": "Ground",
+      "themes": [
+        "Set-design"
+      ]
+    }
+  ],
+  "partners": [
+    {
+      "id": "p_circus",
+      "name_en": "Palestine Circus School",
+      "name_ar": "\u0645\u062f\u0631\u0633\u0629 \u0633\u064a\u0631\u0643 \u0641\u0644\u0633\u0637\u064a\u0646",
+      "contact": "Mohammad Rabbah",
+      "workshop": "Camera movement using circus tools + body capability",
+      "lat": 31.9716,
+      "lon": 35.1991,
+      "note": "Old town, walking distance"
+    },
+    {
+      "id": "p_rednoses",
+      "name_en": "Red Noses",
+      "name_ar": "\u0627\u0644\u0623\u0646\u0648\u0641 \u0627\u0644\u062d\u0645\u0631",
+      "contact": "Daoud (\u0632\u0639\u062a\u0631), Ezzat Natsheh (\u0633\u0645\u0633\u0645)",
+      "workshop": "Silent film / mime \u2014 no dialogue",
+      "lat": 31.9705,
+      "lon": 35.1985,
+      "note": "Old town, walking distance"
+    },
+    {
+      "id": "p_ashtar",
+      "name_en": "Ashtar Theatre",
+      "name_ar": "\u0645\u0633\u0631\u062d \u0639\u0634\u062a\u0627\u0631",
+      "contact": "Iman Aoun / Emile Saba",
+      "workshop": "TBD \u2014 same Edward Said compound; verify renovation timing for August",
+      "co_located": true,
+      "lat": 31.971,
+      "lon": 35.1962,
+      "note": "Same Edward Said compound"
+    },
+    {
+      "id": "p_rozana",
+      "name_en": "Al-Rozana",
+      "name_ar": "\u0645\u0624\u0633\u0633\u0629 \u0627\u0644\u0631\u0648\u0632\u0646\u0627",
+      "contact": "Raed Saadeh",
+      "workshop": "Building access \u2014 currently inactive, custodianship transferred",
+      "lat": 31.9712,
+      "lon": 35.1978,
+      "note": "Walking distance, custodianship Raed Saadeh"
+    },
+    {
+      "id": "p_nayzak",
+      "name_en": "Al-Nayzak",
+      "name_ar": "\u0627\u0644\u0646\u064a\u0632\u0643",
+      "contact": "Raed Saadeh",
+      "workshop": "Building access \u2014 opposite Al-Rozana",
+      "lat": 31.9714,
+      "lon": 35.1978,
+      "note": "Opposite Al-Rozana"
+    }
+  ],
+  "references": {
+    "satellite_wide": "./assets/satellite/satellite_birzeit_wide.png",
+    "satellite_zoom": "./assets/satellite/satellite_birzeit_zoom.jpg",
+    "sunpath": [
+      "./assets/satellite/sunpath_wide.jpg",
+      "./assets/satellite/sunpath_mid.jpg",
+      "./assets/satellite/sunpath_zoomed.jpg"
+    ],
+    "annotation_circle": "./assets/satellite/annotation_circle.jpg"
+  },
+  "meta": {
+    "generated_at": "2026-05-11",
+    "photo_count": 82,
+    "discarded_count": 4
+  }
+}

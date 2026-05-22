@@ -1,0 +1,24 @@
+# Cloudflare wrangler
+.wrangler/
+.dev.vars
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Playwright
+tests/results/
+playwright-report/
+test-results/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log

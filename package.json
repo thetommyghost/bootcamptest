@@ -1,0 +1,17 @@
+{
+  "name": "bootcamp-interactive-map",
+  "version": "0.1.0",
+  "private": true,
+  "description": "KAWADER Bootcamp 2026 — interactive scouting map and venue-twin game (Edward Said Cultural Institute, Birzeit).",
+  "scripts": {
+    "serve": "python3 -m http.server 8765",
+    "deploy": "wrangler pages deploy . --project-name $(grep '^name' wrangler.toml | head -1 | sed 's/.*\"\\(.*\\)\".*/\\1/')",
+    "dev": "wrangler pages dev . --kv NOTES_KV",
+    "smoke": "node tests/smoke.mjs",
+    "whoami": "wrangler whoami"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0",
+    "playwright": "^1.40.0"
+  }
+}
