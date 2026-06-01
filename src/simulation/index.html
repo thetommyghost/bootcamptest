@@ -9,8 +9,8 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230b0d10'/%3E%3Crect x='14' y='14' width='36' height='36' fill='none' stroke='%23ffb547' stroke-width='4'/%3E%3Crect x='26' y='26' width='12' height='12' fill='%23ffb547'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="image" href="../assets/venue/venue_painted_v1.webp" fetchpriority="high" />
-<link rel="preload" as="image" href="../assets/venue/venue_walkable_v1.png" />
+<link rel="preload" as="image" href="../../assets/venue/venue_painted_v1.webp" fetchpriority="high" />
+<link rel="preload" as="image" href="../../assets/venue/venue_walkable_v1.png" />
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
 <style>
@@ -727,7 +727,7 @@ button.hud-block.hud-notes:focus-visible{ outline:2px solid var(--signal-amber);
 }
 .minimap .mm-bg{
   width:100%; aspect-ratio:1/1;
-  background-image:url('../assets/venue/venue_painted_v1.webp');
+  background-image:url('../../assets/venue/venue_painted_v1.webp');
   background-size:cover; background-position:center;
   filter:saturate(0.5) brightness(0.5);
   position:relative;
@@ -1267,7 +1267,7 @@ button:focus-visible{outline:1px solid var(--signal-amber); outline-offset:1px;}
 <body>
 
 <div class="game-stage" id="gameStage">
-  <img class="game-bg" id="gameBg" src="../assets/venue/venue_painted_v1.webp" alt="Edward Said Cultural Institute — painted venue map" />
+  <img class="game-bg" id="gameBg" src="../../assets/venue/venue_painted_v1.webp" alt="Edward Said Cultural Institute — painted venue map" />
   <div class="game-canvas" id="gameCanvas"></div>
   <canvas id="fxCanvas" aria-hidden="true"></canvas>
   <div class="zoom-indicator" id="zoomIndicator" aria-hidden="true">1.0×</div>
@@ -1300,6 +1300,10 @@ button:focus-visible{outline:1px solid var(--signal-amber); outline-offset:1px;}
   <div class="hud-block hud-timer">
     <span class="hb-label">SESSION</span>
     <span class="hb-value mono" id="hudTimer">00:00</span>
+  </div>
+  <div class="hud-block hud-user" style="min-width:0;border-left-color:var(--tactical);">
+    <span class="hb-label">USER</span>
+    <span class="hb-value mono" id="hudUser" style="font-size:11px;color:var(--tactical);">—</span>
   </div>
   <button class="hud-btn" id="muteBtn" title="Mute / unmute audio" aria-pressed="false">
     <span class="hb-glyph" id="muteIcon">♪</span> AUDIO
@@ -1486,13 +1490,13 @@ function estimateWallNormal(xPct, yPct){
 /* ---------- SFX engine (Phase 4) ---------- */
 const AUDIO_KEY = 'kawader_sim_audio_v3';  // values: 'on' | 'off'
 const SFX_FILES = {
-  footstep_01: '../assets/audio/sfx/footstep_01.mp3',
-  footstep_02: '../assets/audio/sfx/footstep_02.mp3',
-  hover:       '../assets/audio/sfx/hover.mp3',
-  teleport:    '../assets/audio/sfx/teleport.mp3',
-  briefing_open:  '../assets/audio/sfx/briefing_open.mp3',
-  briefing_close: '../assets/audio/sfx/briefing_close.mp3',
-  mission_chime:  '../assets/audio/sfx/mission_chime.mp3',
+  footstep_01: '../../assets/audio/sfx/footstep_01.mp3',
+  footstep_02: '../../assets/audio/sfx/footstep_02.mp3',
+  hover:       '../../assets/audio/sfx/hover.mp3',
+  teleport:    '../../assets/audio/sfx/teleport.mp3',
+  briefing_open:  '../../assets/audio/sfx/briefing_open.mp3',
+  briefing_close: '../../assets/audio/sfx/briefing_close.mp3',
+  mission_chime:  '../../assets/audio/sfx/mission_chime.mp3',
 };
 const SFX_VOL = {
   footstep_01: 0.32, footstep_02: 0.32,
@@ -1504,7 +1508,7 @@ const sfxBuffers = {};
 let sfxMuted = null;  // null = not yet decided; populated by setupAudio()
 
 // Round 4 / Item D — ambient bed
-const AMBIENT_SRC = '../assets/audio/ambient/ambient_bed.mp3';
+const AMBIENT_SRC = '../../assets/audio/ambient/ambient_bed.mp3';
 const AMBIENT_BASE_VOL = 0.18;
 const AMBIENT_DUCK_VOL = 0.10;
 let ambientEl = null;
@@ -1728,7 +1732,7 @@ window._fxState = fxState;
       maskOverlay.className = 'director-mask-overlay';
       maskOverlay.style.setProperty(
         '--mask-image',
-        "url('../assets/venue/venue_walkable_v1.png')"
+        "url('../../assets/venue/venue_walkable_v1.png')"
       );
       cv.appendChild(maskOverlay);
     }
@@ -1791,14 +1795,14 @@ window._fxState = fxState;
 
 async function bootstrap(){
   const [d, layout, mockupsManifest, _mask] = await Promise.all([
-    fetch('../assets/data.json').then(r => r.json()),
-    fetch('../assets/venue/layout.json').then(r => r.json()),
-    fetch('../assets/mockups/manifest.json').then(r => r.ok ? r.json() : null).catch(() => null),
-    loadWalkableMask('../assets/venue/venue_walkable_v1.png'),
+    fetch('../../assets/data.json').then(r => r.json()),
+    fetch('../../assets/venue/layout.json').then(r => r.json()),
+    fetch('../../assets/mockups/manifest.json').then(r => r.ok ? r.json() : null).catch(() => null),
+    loadWalkableMask('../../assets/venue/venue_walkable_v1.png'),
   ]);
 
   // Rebase photo paths (data.json paths are relative to map/, we're in map/simulation/)
-  const fix = (p) => (typeof p === 'string' && p.startsWith('./assets/')) ? '..' + p.slice(1) : p;
+  const fix = (p) => (typeof p === 'string' && p.startsWith('./assets/')) ? '../..' + p.slice(1) : p;
   for (const z of (d.zones || [])){
     for (const ph of (z.photos || [])){
       ph.thumb = fix(ph.thumb); ph.full = fix(ph.full);
@@ -1916,13 +1920,42 @@ function setupOnboarding(){
   });
 }
 
-bootstrap().catch(err => {
-  console.error('Bootstrap failed:', err);
+async function boot(){
+  const token = localStorage.getItem('kawader_session');
+  if (!token){
+    window.location.href = '../auth/login.html';
+    return;
+  }
+  try {
+    const res = await fetch('/api/auth/me', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (!res.ok){
+      localStorage.removeItem('kawader_session');
+      localStorage.removeItem('kawader_user');
+      window.location.href = '../auth/login.html';
+      return;
+    }
+    window.__user = await res.json();
+  } catch {
+    window.location.href = '../auth/login.html';
+    return;
+  }
+  bootstrap();
+}
+
+boot().catch(err => {
+  console.error('Boot failed:', err);
   document.body.innerHTML = '<div style="color:#fff;padding:24px;font:14px/1.5 system-ui">Failed to load venue. Check console.</div>';
 });
 
 /* ---------- init ---------- */
 function init(){
+  /* Show logged-in user */
+  const u = window.__user;
+  if (u) {
+    $('hudUser').textContent = u.name + ' · ' + u.role;
+  }
   /* ---------- game stage sizing ----------
      The painted bg uses object-fit:contain inside .game-stage. We size the
      .game-canvas overlay to match the rendered bg dimensions on every layout
@@ -3308,6 +3341,10 @@ function init(){
   const AUTHOR_KEY = 'kawader_scout_author_v1';
   let authorName = '';
   try { authorName = localStorage.getItem(AUTHOR_KEY) || ''; } catch(e){}
+  if (!authorName && window.__user && window.__user.name){
+    authorName = window.__user.name.slice(0, 40);
+    try { localStorage.setItem(AUTHOR_KEY, authorName); } catch(e){}
+  }
   let _lastSyncTs = 0;
   let _syncTimer = null;
   let _syncInFlight = false;
