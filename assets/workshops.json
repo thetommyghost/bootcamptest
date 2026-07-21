@@ -1,0 +1,56 @@
+[
+  {
+    "id": "w01",
+    "title": "Instrument Building Workshop",
+    "description": "Build your own musical instrument from recycled materials. Led by Sammer in his ground-floor workshop.",
+    "date": "2026-08-04",
+    "time": "09:00 - 11:00",
+    "location": "Sammer's Instrument Workshop",
+    "instructor": "Sammer"
+  },
+  {
+    "id": "w02",
+    "title": "Circus Skills 101",
+    "description": "Introduction to juggling, balance, and movement. Palestine Circus School instructors.",
+    "date": "2026-08-04",
+    "time": "11:30 - 13:00",
+    "location": "Outdoor Courtyard & Garden",
+    "instructor": "Palestine Circus School"
+  },
+  {
+    "id": "w03",
+    "title": "Sound & Space",
+    "description": "Explore how sound travels through the Grand Piano Hall. Record ambient audio and build a soundscape.",
+    "date": "2026-08-05",
+    "time": "09:00 - 11:00",
+    "location": "Grand Piano Hall",
+    "instructor": "KAWADER Team"
+  },
+  {
+    "id": "w04",
+    "title": "Visual Storytelling",
+    "description": "Document the venue through photography and short video. Learn composition using the building's textures and light.",
+    "date": "2026-08-05",
+    "time": "14:00 - 16:00",
+    "location": "Rooftop",
+    "instructor": "KAWADER Team"
+  },
+  {
+    "id": "w05",
+    "title": "Red Noses Comedy Workshop",
+    "description": "Improv comedy and clowning with Red Noses. Finding humor in unexpected places.",
+    "date": "2026-08-06",
+    "time": "10:00 - 12:30",
+    "location": "Dining Hall",
+    "instructor": "Red Noses"
+  },
+  {
+    "id": "w06",
+    "title": "Final Showcase Preparation",
+    "description": "Work together to prepare your collective showcase piece. Combine music, circus, visual art, and storytelling.",
+    "date": "2026-08-07",
+    "time": "09:00 - 15:00",
+    "location": "Practice & Small Studios",
+    "instructor": "All Mentors"
+  }
+]

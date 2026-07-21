@@ -1,0 +1,50 @@
+[
+  {
+    "id": "c001",
+    "name": "Lina Khaled",
+    "email": "lina@test.com",
+    "password": "camp2026",
+    "role": "camper",
+    "member_no": "C-001"
+  },
+  {
+    "id": "c002",
+    "name": "Omar Hashem",
+    "email": "omar@test.com",
+    "password": "camp2026",
+    "role": "camper",
+    "member_no": "C-002"
+  },
+  {
+    "id": "c003",
+    "name": "Sara Nasser",
+    "email": "sara@test.com",
+    "password": "camp2026",
+    "role": "camper",
+    "member_no": "C-003"
+  },
+  {
+    "id": "c004",
+    "name": "Yusuf Dweik",
+    "email": "yusuf@test.com",
+    "password": "camp2026",
+    "role": "camper",
+    "member_no": "C-004"
+  },
+  {
+    "id": "c005",
+    "name": "Mariam Saleh",
+    "email": "mariam@test.com",
+    "password": "camp2026",
+    "role": "camper",
+    "member_no": "C-005"
+  },
+  {
+    "id": "a001",
+    "name": "Admin User",
+    "email": "admin@test.com",
+    "password": "admin2026",
+    "role": "admin",
+    "member_no": "A-001"
+  }
+]

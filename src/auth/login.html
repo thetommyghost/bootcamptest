@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0d10" />
-  <title>KAWADER · BOOTCAMP · WELCOME</title>
+  <title>KAWADER · Login</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
@@ -25,12 +25,9 @@
       --tactical:#6dd58c;
       --film-red:#d4574f;
       --film-red-dim:#7e342f;
-      
       --font-mono:'JetBrains Mono','IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
       --font-display:'Bebas Neue','Oswald','Impact',sans-serif;
       --font-body:'Inter Tight','IBM Plex Sans',system-ui,-apple-system,sans-serif;
-      --font-ar:'IBM Plex Sans Arabic','Tajawal',sans-serif;
-      
       --safe-top:env(safe-area-inset-top, 0px);
       --safe-bottom:env(safe-area-inset-bottom, 0px);
     }
@@ -41,90 +38,214 @@
       font-family:var(--font-body); font-size:14px; line-height:1.5;
       -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
       overflow:hidden; overscroll-behavior:none;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display:flex; align-items:center; justify-content:center;
     }
-    .welcome-container{
+
+    .login-card{
+      background:var(--bg-panel);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:40px 32px;
+      width:100%; max-width:380px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .login-brand{
+      text-align:center; margin-bottom:32px;
+    }
+    .login-brand h1{
+      font-family:var(--font-display);
+      font-size:36px; letter-spacing:2px;
+      color:var(--signal-amber);
+      margin:0 0 4px 0;
+    }
+    .login-brand p{
+      font-size:12px; color:var(--ink-muted);
+      margin:0; text-transform:uppercase; letter-spacing:1px;
+    }
+
+    .form-group{ margin-bottom:20px; }
+    .form-group label{
+      display:block;
+      font-size:11px; font-weight:600;
+      text-transform:uppercase; letter-spacing:0.8px;
+      color:var(--ink-muted);
+      margin-bottom:6px;
+    }
+    .form-group input{
+      width:100%;
+      background:var(--bg-elev);
+      border:1px solid var(--line);
+      border-radius:6px;
+      padding:12px 14px;
+      color:var(--ink);
+      font-family:var(--font-body);
+      font-size:14px;
+      outline:none;
+      transition:border-color 0.2s;
+    }
+    .form-group input:focus{
+      border-color:var(--signal-amber);
+    }
+    .form-group input::placeholder{
+      color:var(--ink-dim);
+    }
+
+    .login-btn{
+      width:100%;
+      padding:12px;
+      background:var(--signal-amber);
+      color:var(--bg-deep);
+      border:none; border-radius:6px;
+      font-family:var(--font-display);
+      font-size:18px; letter-spacing:1.5px;
+      cursor:pointer;
+      transition:opacity 0.2s;
+    }
+    .login-btn:hover{ opacity:0.85; }
+    .login-btn:disabled{ opacity:0.4; cursor:not-allowed; }
+
+    .error-msg{
+      display:none;
+      background:rgba(212,87,79,0.12);
+      border:1px solid var(--film-red-dim);
+      border-radius:6px;
+      padding:10px 14px;
+      margin-bottom:16px;
+      color:var(--film-red);
+      font-size:13px;
       text-align:center;
-      padding:20px;
     }
-    .welcome-image{
-      max-width:90vw;
-      max-height:80vh;
-      border-radius:8px;
-      box-shadow:0 4px 20px rgba(0,0,0,0.5);
-      opacity:0;
-      transform:scale(0.8);
-      transition:opacity 1.5s ease, transform 1.5s ease;
+    .error-msg.show{ display:block; }
+
+    .test-hint{
+      margin-top:24px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      font-size:11px;
+      color:var(--ink-dim);
+      text-align:center;
+      line-height:1.6;
     }
-    .welcome-image.visible{
-      opacity:1;
-      transform:scale(1);
-    }
+    .test-hint strong{ color:var(--ink-muted); }
+
     @media (prefers-reduced-motion: reduce){
-      .welcome-image{
-        transition:none;
-      }
-      .welcome-image.visible{
-        opacity:1;
-        transform:scale(1);
-      }
+      *{ transition:none !important; animation:none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="welcome-container">
-    <img src="../../assets/venue/venue_painted_v1.jpg" 
-         alt="KAWADER Bootcamp 2026 - Edward Said Cultural Institute" 
-         class="welcome-image"
-         id="welcomeImage">
+  <div class="login-card">
+    <div class="login-brand">
+      <h1>KAWADER</h1>
+      <p>Bootcamp 2026</p>
+    </div>
+
+    <div class="error-msg" id="errorMsg">Invalid username or password</div>
+
+    <form id="loginForm" autocomplete="off">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username" required autofocus />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn">LOGIN</button>
+    </form>
+
+    <div class="test-hint">
+      <strong>Test accounts:</strong><br>
+      camper: <strong>lina</strong> / camp2026<br>
+      admin: <strong>admin</strong> / admin2026
+    </div>
   </div>
-  
+
   <script>
-    // Wait for image to load, then show animation
-    const welcomeImage = document.getElementById('welcomeImage');
-    
-    // Function to handle image load
-    function handleImageLoad() {
-      // Add slight delay then show image
-      setTimeout(() => {
-        welcomeImage.classList.add('visible');
-      }, 100);
-      
-      // After animation completes, proceed with login and redirect
-      setTimeout(() => {
-        // Auto-login for development - create mock user and redirect to simulation
-        window.__user = {
-          name: 'Participant',
-          role: 'camper'
-        };
-        
-        // Store mock user data
-        localStorage.setItem('kawader_session', 'mock-token-for-development');
-        localStorage.setItem('kawader_user', JSON.stringify(window.__user));
-        
-        // Redirect to simulation
-        window.location.href = '../simulation/index.html';
-      }, 3000); // 3 seconds for animation to complete
-    }
-    
-    // Handle image loading
-    if (welcomeImage.complete) {
-      handleImageLoad();
-    } else {
-      welcomeImage.onload = handleImageLoad;
-      welcomeImage.onerror = () => {
-        // If image fails to load, proceed directly to login
-        window.__user = {
-          name: 'Participant',
-          role: 'camper'
-        };
-        localStorage.setItem('kawader_session', 'mock-token-for-development');
-        localStorage.setItem('kawader_user', JSON.stringify(window.__user));
-        window.location.href = '../simulation/index.html';
-      };
-    }
+    (function(){
+      var session = localStorage.getItem('kawader_session');
+      var user = localStorage.getItem('kawader_user');
+      if(session && user){
+        try{
+          var u = JSON.parse(user);
+          if(u.role === 'admin'){
+            window.location.href = '../admin/attendance.html';
+          } else {
+            window.location.href = '../workshops/index.html';
+          }
+          return;
+        }catch(e){}
+      }
+
+      var form = document.getElementById('loginForm');
+      var errorMsg = document.getElementById('errorMsg');
+      var loginBtn = document.getElementById('loginBtn');
+      var campers = [];
+
+      fetch('../../assets/campers-test.json')
+        .then(function(r){ return r.json(); })
+        .then(function(data){ campers = data; })
+        .catch(function(){});
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        errorMsg.classList.remove('show');
+
+        var username = document.getElementById('username').value.trim().toLowerCase();
+        var password = document.getElementById('password').value;
+
+        if(!username || !password){
+          errorMsg.textContent = 'Please fill in both fields';
+          errorMsg.classList.add('show');
+          return;
+        }
+
+        var found = null;
+        for(var i = 0; i < campers.length; i++){
+          var c = campers[i];
+          if((c.email.split('@')[0] === username || c.name.split(' ')[0].toLowerCase() === username) && c.password === password){
+            found = c;
+            break;
+          }
+        }
+
+        if(!found){
+          errorMsg.textContent = 'Invalid username or password';
+          errorMsg.classList.add('show');
+          return;
+        }
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'LOGGING IN...';
+
+        var token = btoa(JSON.stringify({
+          uid: found.id,
+          sub: found.email,
+          name: found.name,
+          role: found.role,
+          member_no: found.member_no,
+          exp: Date.now() + 86400000
+        }));
+
+        localStorage.setItem('kawader_session', token);
+        localStorage.setItem('kawader_user', JSON.stringify({
+          id: found.id,
+          name: found.name,
+          email: found.email,
+          role: found.role,
+          member_no: found.member_no
+        }));
+
+        setTimeout(function(){
+          if(found.role === 'admin'){
+            window.location.href = '../admin/attendance.html';
+          } else {
+            window.location.href = '../workshops/index.html';
+          }
+        }, 300);
+      });
+    })();
   </script>
 </body>
 </html>

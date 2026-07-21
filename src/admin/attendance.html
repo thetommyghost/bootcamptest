@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0d10" />
+  <title>KAWADER · Admin · Attendance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
+  <style>
+    :root{
+      --bg-deep:#0b0d10;
+      --bg-panel:#14181d;
+      --bg-elev:#1c2128;
+      --line:#2a313a;
+      --line-strong:#3a4250;
+      --ink:#e6ebf2;
+      --ink-muted:#8a93a0;
+      --ink-dim:#5a6370;
+      --signal-amber:#ffb547;
+      --signal-amber-dim:#9e6f2c;
+      --tactical:#6dd58c;
+      --tactical-dim:#2d6b42;
+      --film-red:#d4574f;
+      --film-red-dim:#7e342f;
+      --font-mono:'JetBrains Mono','IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+      --font-display:'Bebas Neue','Oswald','Impact',sans-serif;
+      --font-body:'Inter Tight','IBM Plex Sans',system-ui,-apple-system,sans-serif;
+      --safe-top:env(safe-area-inset-top, 0px);
+      --safe-bottom:env(safe-area-inset-bottom, 0px);
+    }
+    *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+    html,body{height:100%; margin:0;}
+    body{
+      color:var(--ink); background:var(--bg-deep);
+      font-family:var(--font-body); font-size:14px; line-height:1.5;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      overflow-y:auto; overscroll-behavior:none;
+    }
+
+    .topbar{
+      position:sticky; top:0; z-index:100;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 20px;
+      background:var(--bg-panel);
+      border-bottom:1px solid var(--line);
+      padding-top:calc(12px + var(--safe-top));
+    }
+    .topbar-brand{
+      font-family:var(--font-display);
+      font-size:20px; letter-spacing:1.5px;
+      color:var(--signal-amber);
+    }
+    .topbar-user{ display:flex; align-items:center; gap:12px; }
+    .topbar-user .name{ font-size:13px; color:var(--ink-muted); }
+    .topbar-user .role-badge{
+      font-size:10px; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.5px;
+      padding:3px 8px; border-radius:4px;
+      background:rgba(255,181,71,0.12);
+      color:var(--signal-amber);
+      border:1px solid var(--signal-amber-dim);
+    }
+    .nav-link{
+      color:var(--signal-amber); text-decoration:none;
+      font-size:12px; border:1px solid var(--signal-amber-dim);
+      padding:5px 10px; border-radius:4px;
+    }
+    .nav-link:hover{ background:rgba(255,181,71,0.08); }
+    .logout-btn{
+      background:none; border:1px solid var(--line);
+      color:var(--ink-muted); border-radius:4px;
+      padding:6px 12px; font-size:12px;
+      cursor:pointer; font-family:var(--font-body);
+      transition:border-color 0.2s, color 0.2s;
+    }
+    .logout-btn:hover{ border-color:var(--film-red); color:var(--film-red); }
+
+    .page{ padding:24px 20px; max-width:800px; margin:0 auto; }
+
+    .page-title{
+      font-family:var(--font-display);
+      font-size:28px; letter-spacing:1px;
+      margin:0 0 4px 0; color:var(--ink);
+    }
+    .page-subtitle{
+      font-size:13px; color:var(--ink-muted);
+      margin:0 0 24px 0;
+    }
+
+    .select-group{
+      background:var(--bg-panel);
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:20px;
+      margin-bottom:24px;
+    }
+    .select-group label{
+      display:block;
+      font-size:11px; font-weight:600;
+      text-transform:uppercase; letter-spacing:0.8px;
+      color:var(--ink-muted);
+      margin-bottom:8px;
+    }
+    .select-group select{
+      width:100%;
+      background:var(--bg-elev);
+      border:1px solid var(--line);
+      border-radius:6px;
+      padding:12px 14px;
+      color:var(--ink);
+      font-family:var(--font-body);
+      font-size:14px;
+      outline:none;
+      cursor:pointer;
+      appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%238a93a0' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:right 14px center;
+    }
+    .select-group select:focus{ border-color:var(--signal-amber); }
+
+    .ws-info-bar{
+      display:none;
+      margin-top:12px;
+      padding:12px;
+      background:var(--bg-elev);
+      border-radius:6px;
+      font-size:13px; color:var(--ink-muted);
+      line-height:1.5;
+    }
+    .ws-info-bar.show{ display:block; }
+    .ws-info-bar strong{ color:var(--ink); }
+
+    .camper-list-header{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:12px;
+    }
+    .camper-list-header h2{
+      font-family:var(--font-display);
+      font-size:20px; letter-spacing:1px;
+      margin:0; color:var(--ink);
+    }
+    .camper-count{
+      font-size:12px; color:var(--ink-dim);
+    }
+    .camper-count .num{
+      font-family:var(--font-mono);
+      color:var(--tactical);
+    }
+
+    .camper-row{
+      background:var(--bg-panel);
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:14px 20px;
+      margin-bottom:6px;
+      display:flex; align-items:center; gap:14px;
+      cursor:pointer;
+      transition:border-color 0.15s, background 0.15s;
+      user-select:none;
+      -webkit-user-select:none;
+    }
+    .camper-row:hover{ border-color:var(--line-strong); }
+    .camper-row.checked{
+      border-color:var(--tactical-dim);
+      background:rgba(109,213,140,0.04);
+    }
+
+    .cp-check{
+      flex-shrink:0;
+      width:24px; height:24px;
+      border-radius:6px;
+      border:2px solid var(--line-strong);
+      display:flex; align-items:center; justify-content:center;
+      transition:border-color 0.15s, background 0.15s;
+      font-size:14px; color:transparent;
+    }
+    .camper-row.checked .cp-check{
+      border-color:var(--tactical);
+      background:var(--tactical);
+      color:var(--bg-deep);
+    }
+
+    .cp-info{ flex:1; min-width:0; }
+    .cp-info .name{ font-weight:600; font-size:14px; color:var(--ink); margin:0; }
+    .cp-info .meta{ font-size:11px; color:var(--ink-dim); margin-top:1px; }
+
+    .cp-member-no{
+      flex-shrink:0;
+      font-family:var(--font-mono);
+      font-size:12px; color:var(--ink-dim);
+    }
+
+    .save-status{
+      position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+      background:var(--bg-panel);
+      border:1px solid var(--tactical-dim);
+      color:var(--tactical);
+      padding:10px 20px; border-radius:8px;
+      font-size:13px; font-weight:600;
+      opacity:0; transition:opacity 0.3s;
+      pointer-events:none; z-index:200;
+      box-shadow:0 4px 16px rgba(0,0,0,0.3);
+    }
+    .save-status.show{ opacity:1; }
+
+    .empty-state{
+      text-align:center; padding:40px 20px;
+      color:var(--ink-dim); font-size:14px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; animation:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-brand">KAWADER</div>
+    <div class="topbar-user">
+      <a href="../workshops/index.html" class="nav-link">Workshops</a>
+      <span class="name" id="userName"></span>
+      <span class="role-badge">ADMIN</span>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <div class="page">
+    <h1 class="page-title">ATTENDANCE</h1>
+    <p class="page-subtitle">Pick a workshop, then mark who showed up</p>
+
+    <div class="select-group">
+      <label for="workshopSelect">Workshop</label>
+      <select id="workshopSelect">
+        <option value="">-- Select a workshop --</option>
+      </select>
+      <div class="ws-info-bar" id="wsInfoBar"></div>
+    </div>
+
+    <div id="camperSection" style="display:none;">
+      <div class="camper-list-header">
+        <h2>CAMPERS</h2>
+        <div class="camper-count"><span class="num" id="attendCount">0</span> / <span id="totalCampers">0</span> present</div>
+      </div>
+      <div id="camperList"></div>
+    </div>
+
+    <div id="emptyState" class="empty-state">Select a workshop above to see campers</div>
+  </div>
+
+  <div class="save-status" id="saveStatus">Saved</div>
+
+  <script>
+    (function(){
+      var token = localStorage.getItem('kawader_session');
+      var userStr = localStorage.getItem('kawader_user');
+      if(!token || !userStr){
+        window.location.href = '../auth/login.html';
+        return;
+      }
+      var user;
+      try{ user = JSON.parse(userStr); }catch(e){
+        window.location.href = '../auth/login.html';
+        return;
+      }
+      if(user.role !== 'admin'){
+        window.location.href = '../workshops/index.html';
+        return;
+      }
+
+      document.getElementById('userName').textContent = user.name;
+
+      document.getElementById('logoutBtn').addEventListener('click', function(){
+        localStorage.removeItem('kawader_session');
+        localStorage.removeItem('kawader_user');
+        window.location.href = '../auth/login.html';
+      });
+
+      var campers = [];
+      var workshops = [];
+      var attendance = {};
+      var selectedWsId = null;
+      var saveTimeout = null;
+
+      Promise.all([
+        fetch('../../assets/campers-test.json').then(function(r){ return r.json(); }),
+        fetch('../../assets/workshops.json').then(function(r){ return r.json(); }),
+        fetch('../../assets/attendance-test.json').then(function(r){ return r.json(); })
+      ]).then(function(results){
+        campers = results[0].filter(function(c){ return c.role === 'camper'; });
+        workshops = results[1];
+        attendance = results[2];
+
+        var stored = localStorage.getItem('kawader_attendance');
+        if(stored){
+          try{ attendance = JSON.parse(stored); }catch(e){}
+        }
+
+        var select = document.getElementById('workshopSelect');
+        for(var i = 0; i < workshops.length; i++){
+          var ws = workshops[i];
+          var dateObj = new Date(ws.date + 'T00:00:00');
+          var dateStr = dateObj.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+          var opt = document.createElement('option');
+          opt.value = ws.id;
+          opt.textContent = ws.title + ' \u2014 ' + dateStr + ', ' + ws.time;
+          select.appendChild(opt);
+        }
+      });
+
+      document.getElementById('workshopSelect').addEventListener('change', function(){
+        selectedWsId = this.value;
+        var infoBar = document.getElementById('wsInfoBar');
+        var section = document.getElementById('camperSection');
+        var empty = document.getElementById('emptyState');
+
+        if(!selectedWsId){
+          infoBar.classList.remove('show');
+          section.style.display = 'none';
+          empty.style.display = 'block';
+          empty.textContent = 'Select a workshop above to see campers';
+          return;
+        }
+
+        var ws = null;
+        for(var i = 0; i < workshops.length; i++){
+          if(workshops[i].id === selectedWsId){ ws = workshops[i]; break; }
+        }
+        if(!ws) return;
+
+        var dateObj = new Date(ws.date + 'T00:00:00');
+        var dateStr = dateObj.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+
+        infoBar.innerHTML = '<strong>' + escapeHtml(ws.title) + '</strong><br>' +
+          dateStr + ' &middot; ' + escapeHtml(ws.time) + '<br>' +
+          escapeHtml(ws.location) + ' &middot; ' + escapeHtml(ws.instructor);
+        infoBar.classList.add('show');
+
+        section.style.display = 'block';
+        empty.style.display = 'none';
+
+        renderCampers();
+      });
+
+      function renderCampers(){
+        if(!selectedWsId) return;
+
+        var attended = 0;
+        var html = '';
+        for(var i = 0; i < campers.length; i++){
+          var c = campers[i];
+          var isChecked = false;
+          if(attendance[c.id] && attendance[c.id].indexOf(selectedWsId) !== -1){
+            isChecked = true;
+            attended++;
+          }
+
+          html += '<div class="camper-row' + (isChecked ? ' checked' : '') + '" data-camper-id="' + c.id + '">';
+          html += '  <div class="cp-check">' + (isChecked ? '&#10003;' : '') + '</div>';
+          html += '  <div class="cp-info">';
+          html += '    <p class="name">' + escapeHtml(c.name) + '</p>';
+          html += '    <div class="meta">' + escapeHtml(c.email) + '</div>';
+          html += '  </div>';
+          html += '  <div class="cp-member-no">' + escapeHtml(c.member_no) + '</div>';
+          html += '</div>';
+        }
+
+        document.getElementById('camperList').innerHTML = html;
+        document.getElementById('attendCount').textContent = attended;
+        document.getElementById('totalCampers').textContent = campers.length;
+
+        var rows = document.querySelectorAll('.camper-row');
+        for(var j = 0; j < rows.length; j++){
+          rows[j].addEventListener('click', handleToggle);
+        }
+      }
+
+      function handleToggle(e){
+        var row = e.currentTarget;
+        var camperId = row.getAttribute('data-camper-id');
+        if(!selectedWsId || !camperId) return;
+
+        if(!attendance[camperId]) attendance[camperId] = [];
+
+        var arr = attendance[camperId];
+        var idx = arr.indexOf(selectedWsId);
+        if(idx === -1){
+          arr.push(selectedWsId);
+          row.classList.add('checked');
+          row.querySelector('.cp-check').innerHTML = '&#10003;';
+        } else {
+          arr.splice(idx, 1);
+          row.classList.remove('checked');
+          row.querySelector('.cp-check').innerHTML = '';
+        }
+
+        localStorage.setItem('kawader_attendance', JSON.stringify(attendance));
+
+        var status = document.getElementById('saveStatus');
+        status.classList.add('show');
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(function(){ status.classList.remove('show'); }, 1500);
+
+        renderCampers();
+      }
+
+      function escapeHtml(s){
+        return String(s)
+          .replace(/&/g,'&amp;')
+          .replace(/</g,'&lt;')
+          .replace(/>/g,'&gt;')
+          .replace(/"/g,'&quot;')
+          .replace(/'/g,'&#39;');
+      }
+    })();
+  </script>
+</body>
+</html>
